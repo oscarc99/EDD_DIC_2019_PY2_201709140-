@@ -1,4 +1,4 @@
-package Class;
+package Object;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,11 +11,20 @@ public class User {
 
     String Name;
     String Apellido;
-    String carnet;
+    int carnet;
     String pass;
     String Password;  //encriptada
+    int estado = 0;
 
-    public User(String Name, String Apellido, String carnet, String pass) {
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+
+    public User(String Name, String Apellido, int carnet, String pass) {
         this.Name = Name;
         this.Apellido = Apellido;
         this.carnet = carnet;
@@ -31,7 +40,7 @@ public class User {
         return Apellido;
     }
 
-    public String getCarnet() {
+    public int getCarnet() {
         return carnet;
     }
 
@@ -51,7 +60,7 @@ public class User {
         this.Apellido = Apellido;
     }
 
-    public void setCarnet(String carnet) {
+    public void setCarnet(int carnet) {
         this.carnet = carnet;
     }
 
@@ -59,8 +68,6 @@ public class User {
         this.pass = pass;
         this.Password = convertirSHA256(pass);
     }
-
-
 
     public static String convertirSHA256(String password) {
         MessageDigest md = null;

@@ -40,6 +40,7 @@ public class Proyecto_2 {
         b.Agregar(6, 6);
         b.Agregar(7, 7);
         b.Agregar(8, 8);
+        
         b.report();
         
         
