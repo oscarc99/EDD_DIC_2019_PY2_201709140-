@@ -36,8 +36,8 @@ public class Admin extends javax.swing.JFrame {
         jButtonCerrar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemMod = new javax.swing.JMenuItem();
+        jMenuItemDelete = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
@@ -63,21 +63,21 @@ public class Admin extends javax.swing.JFrame {
 
         jMenu1.setText("Usuarios");
 
-        jMenuItem1.setText("Modificar");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemMod.setText("Modificar");
+        jMenuItemMod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemModActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuItemMod);
 
-        jMenuItem2.setText("Eliminar");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemDelete.setText("Eliminar");
+        jMenuItemDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jMenuItemDeleteActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(jMenuItemDelete);
 
         jMenuItem3.setText("Reporte");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
@@ -135,13 +135,17 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void jMenuItemModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModActionPerformed
+        UserAdmin ventanA = new UserAdmin();
+        this.setVisible(false);
+        ventanA.setVisible(true);
+    }//GEN-LAST:event_jMenuItemModActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    private void jMenuItemDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeleteActionPerformed
+        UserAdmin ventanA = new UserAdmin();
+        this.setVisible(false);
+        ventanA.setVisible(true);
+    }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
            Proyecto_2.readUser(jTextFieldAdd.getText());
@@ -201,9 +205,9 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItemDelete;
+    private javax.swing.JMenuItem jMenuItemMod;
     private javax.swing.JTextField jTextFieldAdd;
     // End of variables declaration//GEN-END:variables
 }
