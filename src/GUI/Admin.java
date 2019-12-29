@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 package GUI;
+
+import EDD.Node;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -11,13 +15,24 @@ import proyecto_2.Proyecto_2;
  * @author Oscar C
  */
 public class Admin extends javax.swing.JFrame {
-
+    
+    DefaultTableModel md;
+    String data [][]= {};
+    String cabeza []={"Carmet", "Nombre", "Apellido", "Password","Motivo"};
     /**
      * Creates new form Admin
      */
     public Admin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        md = new DefaultTableModel(data, cabeza);
+        jTable.setModel(md);
+        Node temp = Proyecto_2.err.getFirst();
+        while(temp != null){
+            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
+            md.addRow(datos);
+            temp = temp.getNext();
+        } 
     }
 
     /**
@@ -34,6 +49,9 @@ public class Admin extends javax.swing.JFrame {
         jTextFieldAdd = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButtonCerrar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemMod = new javax.swing.JMenuItem();
@@ -60,6 +78,21 @@ public class Admin extends javax.swing.JFrame {
                 jButtonCerrarActionPerformed(evt);
             }
         });
+
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable);
+
+        jLabel3.setText("Usuarios no guardados");
 
         jMenu1.setText("Usuarios");
 
@@ -100,36 +133,43 @@ public class Admin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonCerrar)
-                .addGap(126, 126, 126))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(150, 150, 150)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextFieldAdd))
-                .addGap(178, 178, 178))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(119, 119, 119)
+                                        .addComponent(jTextFieldAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonAdd)
+                                    .addComponent(jButtonCerrar))))
+                        .addGap(45, 45, 45))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButtonCerrar))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(125, 125, 125)
-                        .addComponent(jButtonAdd))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAdd))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel3)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
@@ -148,8 +188,15 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-           Proyecto_2.readUser(jTextFieldAdd.getText());
-        
+        Proyecto_2.readUser(jTextFieldAdd.getText());
+        Node temp = Proyecto_2.err.getFirst();
+        while(temp != null){
+            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
+            md.addRow(datos);
+            temp = temp.getNext();
+        } 
+        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+
     }//GEN-LAST:event_jButtonAddActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -158,8 +205,8 @@ public class Admin extends javax.swing.JFrame {
 
     private void jButtonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCerrarActionPerformed
         Login ventanA = new Login();
-            this.setVisible(false);
-            ventanA.setVisible(true);      
+        this.setVisible(false);
+        ventanA.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     /**
@@ -202,12 +249,15 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCerrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemDelete;
     private javax.swing.JMenuItem jMenuItemMod;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldAdd;
     // End of variables declaration//GEN-END:variables
 }

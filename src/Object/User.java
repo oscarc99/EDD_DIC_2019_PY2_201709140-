@@ -15,6 +15,15 @@ public class User {
     String pass;
     String Password;  //encriptada
     int estado = 0;
+    String motivo;
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
 
     public int getEstado() {
         return estado;
@@ -26,6 +35,14 @@ public class User {
 
     public User(String Name, String Apellido, int carnet, String pass) {
         this.Name = Name;
+        this.Apellido = Apellido;
+        this.carnet = carnet;
+        this.pass = pass;
+        this.Password = convertirSHA256(pass);
+    }
+        public User(String Name, String Apellido, int carnet, String pass, String mot) {
+        this.motivo= mot;
+            this.Name = Name;
         this.Apellido = Apellido;
         this.carnet = carnet;
         this.pass = pass;

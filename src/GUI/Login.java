@@ -106,6 +106,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBottonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBottonLoginActionPerformed
+        
         if (this.jTextUser.getText().equals("admin")  && this.jPassword.getText().equals("123")){
             Admin ventanA = new Admin();
             this.setVisible(false);
@@ -113,7 +114,8 @@ public class Login extends javax.swing.JFrame {
             
             
         }else if(Proyecto_2.usuarios.login( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
-            Admin ventanA = new Admin();
+            
+            Usuario ventanA = new Usuario(Proyecto_2.usuarios.log(Integer.parseInt(this.jTextUser.getText())));
             this.setVisible(false);
             ventanA.setVisible(true);
         }else{

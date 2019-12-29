@@ -2,6 +2,7 @@ package proyecto_2;
 
 import EDD.*;
 import GUI.Login;
+import Object.User;
 import java.io.*;
 
 import org.json.simple.JSONObject;
@@ -18,30 +19,26 @@ public class Proyecto_2 {
     /**
      * @param args the command line arguments
      */
+    
     public static Hash usuarios = new Hash(37);
+    public static ListaUNG err = new ListaUNG();
+    
 
     public static void main(String[] args) {
         System.out.println("pruebas");
         AVLTree arbol = new AVLTree();
         arbol.insert(1);
         arbol.insert(2);
-        arbol.insert(3);
-        arbol.insert(4);
-        arbol.insert(5);
-        arbol.delete(4);
-        arbol.report();
+        arbol.delete(1);
+        //arbol.report();
 
         BTree b = new BTree();
         b.Agregar(1, 1);
         b.Agregar(2, 2);
         b.Agregar(3, 3);
-        b.Agregar(4, 4);
-        b.Agregar(5, 5);
-        b.Agregar(6, 6);
-        b.Agregar(7, 7);
-        b.Agregar(8, 8);
 
-        b.report();
+
+        //b.report();
         //readUser("Usuarios.json");
         Login log;
         log = new Login();
@@ -69,17 +66,29 @@ public class Proyecto_2 {
                 Carnet= (String) jsonObject.get("Carnet");
                 car = carnet(Carnet);
                 pass = (String) jsonObject.get("Password");
-                if (pass.length() >= 8  && !usuarios.exist(car)){
-                    //condiciones para guardar
-                    System.out.println(Name);
-                    System.out.println(Apellido);
-                    System.out.println(car);
-                    System.out.println(pass);
-                    usuarios.insertarHash(Name, Apellido, car, pass);
+                if (!usuarios.exist(car)){
+                    if (pass.length() >= 8){
+                        usuarios.insertarHash(Name, Apellido, car, pass);
+                    }else{
+                        err.add_last(new User(Name, Apellido, car, pass,"Contraseña menor a 8"));
+                    }
+                    
+                }else{
+                    err.add_last(new User(Name, Apellido, car, pass,"Usuario ya existe"));
                 }
                 
 
             }
+            Node n = err.getFirst();
+            System.out.println(n.getDato().getMotivo());
+            err.report();
+            
+            
+            
+            
+            
+            
+            
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();

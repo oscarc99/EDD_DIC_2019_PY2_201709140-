@@ -1,0 +1,19 @@
+digraph G { 
+
+rankdir = LR;
+
+node [shape=rectangle, height=0.5, width=0.5];
+
+graph[ nodesep = 0.5]; 
+
+node0[label = " 538377039 , Contraseña menor a 8 "]  
+node1[label = " 578151498 , Contraseña menor a 8 "]  
+node2[label = " 961531768 , Contraseña menor a 8 "]  
+node3[label = " 473423160 , Contraseña menor a 8 "]  
+node4[label = " 392606317 , Contraseña menor a 8 "]  
+node5[label = " 770697285 , Contraseña menor a 8 "]  
+node6[label = " 314056742 , Usuario ya existe "]  
+ node0 ->  node1 ->  node2 ->  node3 ->  node4 ->  node5 ->  node6 [dir=both]; 
+
+}
+

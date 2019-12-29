@@ -8,6 +8,7 @@ package GUI;
 import proyecto_2.Proyecto_2;
 import Object.User;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,7 +24,7 @@ public class UserAdmin extends javax.swing.JFrame {
 
     public UserAdmin() {
         initComponents();
-
+        this.setLocationRelativeTo(null);
         lista = new DefaultListModel();
         for (int i = 0; i < Proyecto_2.usuarios.tabla.length; i++) {
             if (Proyecto_2.usuarios.tabla[i] != null) {
@@ -109,6 +110,11 @@ public class UserAdmin extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 124, Short.MAX_VALUE)
+                        .addComponent(jButtonDelete)
+                        .addGap(78, 78, 78)
+                        .addComponent(jButtonMod))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -117,17 +123,12 @@ public class UserAdmin extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonBack)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jTextFieldName, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jTextFieldApellido, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextFieldPass)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonBack))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 93, Short.MAX_VALUE)
-                        .addComponent(jButtonDelete)
-                        .addGap(78, 78, 78)
-                        .addComponent(jButtonMod)))
+                            .addComponent(jTextFieldPass))))
                 .addGap(50, 50, 50))
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
@@ -146,9 +147,9 @@ public class UserAdmin extends javax.swing.JFrame {
                     .addComponent(jButtonMod))
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(20, 20, 20)
                 .addComponent(jButtonBack)
-                .addGap(37, 37, 37)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -174,6 +175,7 @@ public class UserAdmin extends javax.swing.JFrame {
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
         Proyecto_2.usuarios.eliminar(userM.getCarnet());
+        JOptionPane.showMessageDialog(this, "Eliminacion realizado con exitos");
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void jButtonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSelectActionPerformed
@@ -186,7 +188,13 @@ public class UserAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSelectActionPerformed
 
     private void jButtonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModActionPerformed
-        Proyecto_2.usuarios.modificar(userM.getCarnet(),jTextFieldName.getText(),jTextFieldApellido.getText(), jTextFieldPass.getText());
+        if ( jTextFieldPass.getText().length() >= 8  ){
+            Proyecto_2.usuarios.modificar(userM.getCarnet(),jTextFieldName.getText(),jTextFieldApellido.getText(), jTextFieldPass.getText());
+        JOptionPane.showMessageDialog(this, "Cambio realizado con exito");
+        }else{
+        JOptionPane.showMessageDialog(this, "No se realizo el ");    
+        }
+        
     }//GEN-LAST:event_jButtonModActionPerformed
 
     /**
