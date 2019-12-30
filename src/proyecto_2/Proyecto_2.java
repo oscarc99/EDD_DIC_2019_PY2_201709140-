@@ -22,6 +22,12 @@ public class Proyecto_2 {
     
     public static Hash usuarios = new Hash(37);
     public static ListaUNG err = new ListaUNG();
+    //Estructuras para el graficado
+    public static AVLTree avl = new AVLTree();
+    public static BTree b = new BTree();
+    //Edd para llenar
+    public static Linked_List doble = new Linked_List();
+    
     
 
     public static void main(String[] args) {

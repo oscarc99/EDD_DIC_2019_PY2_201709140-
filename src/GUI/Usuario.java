@@ -16,11 +16,13 @@ public class Usuario extends javax.swing.JFrame {
     /**
      * Creates new form Usuario
      */
-    User U;
+    User u;
 
     public Usuario(User X) {
         initComponents();
-        this.U = X;
+        this.setLocationRelativeTo(null);
+        this.u = X;
+        
         jLabelUsuario.setText(X.getName() + " " + X.getApellido());
     }
 
@@ -33,13 +35,14 @@ public class Usuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSpinner1 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
         jButtonClose = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jButtonAVL = new javax.swing.JButton();
+        jButtonB = new javax.swing.JButton();
+        jButtonGraph = new javax.swing.JButton();
+        jButtonOrden = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,18 +55,33 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Arbol AVL");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAVL.setText("Arbol AVL");
+        jButtonAVL.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonAVLActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Arbol B");
+        jButtonB.setText("Arbol B");
+        jButtonB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Grafos");
+        jButtonGraph.setText("Grafos");
+        jButtonGraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGraphActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Ordanamiento");
+        jButtonOrden.setText("Ordanamiento");
+        jButtonOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOrdenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,13 +98,13 @@ public class Usuario extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAVL, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonGraph, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(153, 153, 153))
+                    .addComponent(jButtonOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(150, 150, 150))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,13 +120,13 @@ public class Usuario extends javax.swing.JFrame {
                         .addComponent(jButtonClose)))
                 .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonAVL)
+                    .addComponent(jButtonB))
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
-                .addContainerGap(70, Short.MAX_VALUE))
+                    .addComponent(jButtonOrden)
+                    .addComponent(jButtonGraph))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,9 +138,31 @@ public class Usuario extends javax.swing.JFrame {
         ventanA.setVisible(true);
     }//GEN-LAST:event_jButtonCloseActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButtonAVLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAVLActionPerformed
+        
+        AVLTree ventanA = new AVLTree(this.u);
+        
+        this.setVisible(false);
+        ventanA.setVisible(true);
+    }//GEN-LAST:event_jButtonAVLActionPerformed
+
+    private void jButtonBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBActionPerformed
+        BTree ventanA = new BTree(this.u);
+        this.setVisible(false);
+        ventanA.setVisible(true);
+    }//GEN-LAST:event_jButtonBActionPerformed
+
+    private void jButtonGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGraphActionPerformed
+        Grafos ventanA = new Grafos(this.u);
+        this.setVisible(false);
+        ventanA.setVisible(true);
+    }//GEN-LAST:event_jButtonGraphActionPerformed
+
+    private void jButtonOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOrdenActionPerformed
+        Ordenamiento ventanA = new Ordenamiento(this.u);
+        this.setVisible(false);
+        ventanA.setVisible(true);
+    }//GEN-LAST:event_jButtonOrdenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,12 +200,13 @@ public class Usuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonAVL;
+    private javax.swing.JButton jButtonB;
     private javax.swing.JButton jButtonClose;
+    private javax.swing.JButton jButtonGraph;
+    private javax.swing.JButton jButtonOrden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelUsuario;
+    private javax.swing.JSpinner jSpinner1;
     // End of variables declaration//GEN-END:variables
 }

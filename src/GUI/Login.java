@@ -7,6 +7,10 @@ package GUI;
 import javax.swing.JOptionPane;
 import proyecto_2.Proyecto_2;
 
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -15,7 +19,7 @@ import java.awt.Toolkit;
  *
  * @author Oscar C
  */
-public class Login extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame implements KeyListener {
 
     /**
      * Creates new form Login
@@ -79,6 +83,11 @@ public class Login extends javax.swing.JFrame {
                 jPasswordActionPerformed(evt);
             }
         });
+        jPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordKeyPressed(evt);
+            }
+        });
         getContentPane().add(jPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 420, 140, -1));
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,6 +148,26 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextUserActionPerformed
 
+    private void jPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordKeyPressed
+        int KeyCode = evt.getKeyCode();
+        if( KeyCode == KeyEvent.VK_ENTER){
+            if (this.jTextUser.getText().equals("admin")  && this.jPassword.getText().equals("123")){
+            Admin ventanA = new Admin();
+            this.setVisible(false);
+            ventanA.setVisible(true);
+            
+            
+        }else if(Proyecto_2.usuarios.login( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
+            
+            Usuario ventanA = new Usuario(Proyecto_2.usuarios.log(Integer.parseInt(this.jTextUser.getText())));
+            this.setVisible(false);
+            ventanA.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"Usuario no existe");
+        }
+        }
+    }//GEN-LAST:event_jPasswordKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -184,4 +213,35 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextUser;
     private javax.swing.JLabel juse;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int KeyCode = e.getKeyCode();
+        if( KeyCode == KeyEvent.VK_ENTER){
+            if (this.jTextUser.getText().equals("admin")  && this.jPassword.getText().equals("123")){
+            Admin ventanA = new Admin();
+            this.setVisible(false);
+            ventanA.setVisible(true);
+            
+            
+        }else if(Proyecto_2.usuarios.login( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
+            
+            Usuario ventanA = new Usuario(Proyecto_2.usuarios.log(Integer.parseInt(this.jTextUser.getText())));
+            this.setVisible(false);
+            ventanA.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null,"Usuario no existe");
+        }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

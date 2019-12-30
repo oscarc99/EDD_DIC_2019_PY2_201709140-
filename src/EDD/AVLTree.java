@@ -9,7 +9,11 @@ import java.io.*;
 public class AVLTree {
 
     private NodeAVL root;
-
+    
+    public void clear(){
+        this.root = null;
+    }
+    
     boolean isEmpty() {
         return root == null;
     }

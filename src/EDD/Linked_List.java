@@ -15,6 +15,12 @@ public class Linked_List {
         last = null;
         size = 0;
     }
+    
+    public void clear(){
+        first = null;
+        last = null;
+        size = 0;
+    }
 
     boolean isEmpty() {
         return size == 0;

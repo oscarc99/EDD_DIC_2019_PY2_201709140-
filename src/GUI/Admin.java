@@ -6,6 +6,8 @@
 package GUI;
 
 import EDD.Node;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyecto_2.Proyecto_2;
@@ -14,7 +16,7 @@ import proyecto_2.Proyecto_2;
  *
  * @author Oscar C
  */
-public class Admin extends javax.swing.JFrame {
+public class Admin extends javax.swing.JFrame implements KeyListener {
     
     DefaultTableModel md;
     String data [][]= {};
@@ -67,6 +69,17 @@ public class Admin extends javax.swing.JFrame {
         jButtonAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddActionPerformed(evt);
+            }
+        });
+        jButtonAdd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButtonAddKeyPressed(evt);
+            }
+        });
+
+        jTextFieldAdd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldAddKeyPressed(evt);
             }
         });
 
@@ -209,6 +222,34 @@ public class Admin extends javax.swing.JFrame {
         ventanA.setVisible(true);
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
+    private void jButtonAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAddKeyPressed
+        int KeyCode = evt.getKeyCode();
+        if( KeyCode == KeyEvent.VK_ENTER){ 
+        Proyecto_2.readUser(jTextFieldAdd.getText());
+        Node temp = Proyecto_2.err.getFirst();
+        while(temp != null){
+            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
+            md.addRow(datos);
+            temp = temp.getNext();
+        } 
+        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+        }
+    }//GEN-LAST:event_jButtonAddKeyPressed
+
+    private void jTextFieldAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAddKeyPressed
+        int KeyCode = evt.getKeyCode();
+        if( KeyCode == KeyEvent.VK_ENTER){ 
+        Proyecto_2.readUser(jTextFieldAdd.getText());
+        Node temp = Proyecto_2.err.getFirst();
+        while(temp != null){
+            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
+            md.addRow(datos);
+            temp = temp.getNext();
+        } 
+        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+        }
+    }//GEN-LAST:event_jTextFieldAddKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -260,4 +301,29 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTable jTable;
     private javax.swing.JTextField jTextFieldAdd;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int KeyCode = e.getKeyCode();
+        if( KeyCode == KeyEvent.VK_ENTER){ 
+        Proyecto_2.readUser(jTextFieldAdd.getText());
+        Node temp = Proyecto_2.err.getFirst();
+        while(temp != null){
+            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
+            md.addRow(datos);
+            temp = temp.getNext();
+        } 
+        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

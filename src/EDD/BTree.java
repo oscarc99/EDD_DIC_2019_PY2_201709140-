@@ -10,7 +10,11 @@ import java.io.PrintWriter;
 public class BTree {
 
     public NodeB[] Raiz = new NodeB[5];
-
+    
+    public void clear(){
+        this.Raiz = new NodeB[5];
+    }
+    
     public void Agregar(int Clave, int Contenido) {
         if (Raiz[0] == null) {
             Raiz[0] = new NodeB(Clave, Contenido);
