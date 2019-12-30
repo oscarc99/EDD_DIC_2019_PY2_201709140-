@@ -17,10 +17,11 @@ import proyecto_2.Proyecto_2;
  * @author Oscar C
  */
 public class Admin extends javax.swing.JFrame implements KeyListener {
-    
+
     DefaultTableModel md;
-    String data [][]= {};
-    String cabeza []={"Carmet", "Nombre", "Apellido", "Password","Motivo"};
+    String data[][] = {};
+    String cabeza[] = {"Carmet", "Nombre", "Apellido", "Password", "Motivo"};
+
     /**
      * Creates new form Admin
      */
@@ -30,11 +31,11 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
         md = new DefaultTableModel(data, cabeza);
         jTable.setModel(md);
         Node temp = Proyecto_2.err.getFirst();
-        while(temp != null){
-            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
+        while (temp != null) {
+            Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
             md.addRow(datos);
             temp = temp.getNext();
-        } 
+        }
     }
 
     /**
@@ -201,14 +202,19 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        Proyecto_2.readUser(jTextFieldAdd.getText());
-        Node temp = Proyecto_2.err.getFirst();
-        while(temp != null){
-            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
-            md.addRow(datos);
-            temp = temp.getNext();
-        } 
-        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+        try {
+            Proyecto_2.readUser(jTextFieldAdd.getText());
+            Node temp = Proyecto_2.err.getFirst();
+            while (temp != null) {
+                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
+                md.addRow(datos);
+                temp = temp.getNext();
+            }
+            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
+        } catch (Exception e) {
+            System.out.println("ERROR EN CARGA" + e);
+        }
+
 
     }//GEN-LAST:event_jButtonAddActionPerformed
 
@@ -224,29 +230,29 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
 
     private void jButtonAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAddKeyPressed
         int KeyCode = evt.getKeyCode();
-        if( KeyCode == KeyEvent.VK_ENTER){ 
-        Proyecto_2.readUser(jTextFieldAdd.getText());
-        Node temp = Proyecto_2.err.getFirst();
-        while(temp != null){
-            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
-            md.addRow(datos);
-            temp = temp.getNext();
-        } 
-        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+        if (KeyCode == KeyEvent.VK_ENTER) {
+            Proyecto_2.readUser(jTextFieldAdd.getText());
+            Node temp = Proyecto_2.err.getFirst();
+            while (temp != null) {
+                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
+                md.addRow(datos);
+                temp = temp.getNext();
+            }
+            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
         }
     }//GEN-LAST:event_jButtonAddKeyPressed
 
     private void jTextFieldAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAddKeyPressed
         int KeyCode = evt.getKeyCode();
-        if( KeyCode == KeyEvent.VK_ENTER){ 
-        Proyecto_2.readUser(jTextFieldAdd.getText());
-        Node temp = Proyecto_2.err.getFirst();
-        while(temp != null){
-            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
-            md.addRow(datos);
-            temp = temp.getNext();
-        } 
-        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+        if (KeyCode == KeyEvent.VK_ENTER) {
+            Proyecto_2.readUser(jTextFieldAdd.getText());
+            Node temp = Proyecto_2.err.getFirst();
+            while (temp != null) {
+                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
+                md.addRow(datos);
+                temp = temp.getNext();
+            }
+            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
         }
     }//GEN-LAST:event_jTextFieldAddKeyPressed
 
@@ -304,21 +310,21 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        
+
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
         int KeyCode = e.getKeyCode();
-        if( KeyCode == KeyEvent.VK_ENTER){ 
-        Proyecto_2.readUser(jTextFieldAdd.getText());
-        Node temp = Proyecto_2.err.getFirst();
-        while(temp != null){
-            Object datos[]= {temp.getDato().getCarnet(),temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo() };
-            md.addRow(datos);
-            temp = temp.getNext();
-        } 
-        JOptionPane.showMessageDialog(null,"Carga realizada con exito");
+        if (KeyCode == KeyEvent.VK_ENTER) {
+            Proyecto_2.readUser(jTextFieldAdd.getText());
+            Node temp = Proyecto_2.err.getFirst();
+            while (temp != null) {
+                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
+                md.addRow(datos);
+                temp = temp.getNext();
+            }
+            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
         }
     }
 

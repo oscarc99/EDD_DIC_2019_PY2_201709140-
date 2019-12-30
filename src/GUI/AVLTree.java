@@ -5,7 +5,17 @@
  */
 package GUI;
 
+import EDD.NodeAVL;
+import EDD.NodeLD;
 import Object.User;
+import java.awt.Image;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import proyecto_2.Proyecto_2;
 
 /**
  *
@@ -17,11 +27,25 @@ public class AVLTree extends javax.swing.JFrame {
      * Creates new form AVLTree
      */
     User u;
-    int velocidad = 3000;
+    NodeLD as;
+
     public AVLTree(User X) {
         initComponents();
         this.u = X;
         this.setLocationRelativeTo(null);
+
+        /*
+         String path = "C:/Users/Oscar C/Desktop/AVLTree.png";
+         URL url = this.getClass().getResource(path);
+         ImageIcon icon = new ImageIcon(url);
+
+        
+         jLabelImage.setIcon(icon);
+        
+         ImageIcon im = new ImageIcon(getClass().getResource("report\\AVLTree.png"));
+         ImageIcon icono = new ImageIcon(im.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_DEFAULT));
+         jLabelImage.setIcon(icono);
+         */
     }
 
     /**
@@ -41,6 +65,9 @@ public class AVLTree extends javax.swing.JFrame {
         jButtonDelete = new javax.swing.JButton();
         jTextFieldDelete = new javax.swing.JTextField();
         jLabelImage = new javax.swing.JLabel();
+        Cargar = new javax.swing.JButton();
+        jCBTipo = new javax.swing.JComboBox();
+        jLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,6 +98,11 @@ public class AVLTree extends javax.swing.JFrame {
         });
 
         jButtonInsert.setText("Insertar");
+        jButtonInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInsertActionPerformed(evt);
+            }
+        });
 
         jButtonDelete.setText("Eliminar");
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -85,32 +117,47 @@ public class AVLTree extends javax.swing.JFrame {
             }
         });
 
+        Cargar.setText("Carga");
+        Cargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CargarActionPerformed(evt);
+            }
+        });
+
+        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Automatico", "Manual" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jTextFieldInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jButtonInsert)
-                .addGap(34, 34, 34)
-                .addComponent(jTextFieldDelete)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonDelete)
-                .addGap(39, 39, 39)
-                .addComponent(jButtonBack)
-                .addGap(42, 42, 42))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
-                .addComponent(jLabel1)
-                .addGap(37, 37, 37)
-                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
-                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(Cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextFieldDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,16 +166,22 @@ public class AVLTree extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBack)
                     .addComponent(jTextFieldInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonInsert)
+                    .addComponent(jTextFieldDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cargar)
                     .addComponent(jButtonDelete)
-                    .addComponent(jTextFieldDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButtonInsert))
                 .addGap(37, 37, 37)
-                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(41, 41, 41))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel))
+                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -155,6 +208,46 @@ public class AVLTree extends javax.swing.JFrame {
     private void jTextFieldInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInsertActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldInsertActionPerformed
+
+    private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
+        Proyecto_2.avl.clear();
+        Proyecto_2.listTree(jTextFieldInsert.getText());
+        if (jCBTipo.getSelectedItem() == "Manual") {
+            System.out.println("Manual");
+            as = Proyecto_2.doble.getFirst();
+        } else if (jCBTipo.getSelectedItem() == "Automatico") {
+            System.out.println("Automatico");
+            NodeLD s = Proyecto_2.doble.getFirst();
+            while (s != null) {
+                try {
+                    TimeUnit.MILLISECONDS.sleep(jSlider.getValue());
+                    //Thread.sleep(jSlider.getValue());
+                    jLabel.setText("Insertando:  " + s.getDato());
+                    Proyecto_2.avl.insert(s.getDato());
+                    Proyecto_2.avl.report();
+                    jLabelImage.setIcon(new ImageIcon("report\\AVLTree.png"));
+                    s = s.getNext();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(AVLTree.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+            JOptionPane.showMessageDialog(null, "Arbol terminado");
+        }
+    }//GEN-LAST:event_CargarActionPerformed
+
+    private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
+        //Inserta de uno en uno
+        if (as != null) {
+            jLabel.setText("Insertando:  " + as.getDato());
+            Proyecto_2.avl.insert(as.getDato());
+            Proyecto_2.avl.report();
+            jLabelImage.setIcon(new ImageIcon("report\\AVLTree.png"));
+            as = as.getNext();
+        } else {
+            JOptionPane.showMessageDialog(null, "Arbol terminado");
+        }
+    }//GEN-LAST:event_jButtonInsertActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,15 +279,18 @@ public class AVLTree extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cargar;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonInsert;
+    private javax.swing.JComboBox jCBTipo;
+    private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelImage;
     private javax.swing.JSlider jSlider;

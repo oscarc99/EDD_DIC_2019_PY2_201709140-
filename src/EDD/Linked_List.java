@@ -50,7 +50,7 @@ public class Linked_List {
         this.size = size;
     }
 
-    void add_first(int dato) {
+    public void add_first(int dato) {
         NodeLD n = new NodeLD(dato);
         if (isEmpty()) {
             first = n;
@@ -66,21 +66,21 @@ public class Linked_List {
         }
     }
 
-    void add_last(int dato) {
+    public void add_last(int dato) {
         if (isEmpty()) {
             add_first(dato);
 
         } else {
             NodeLD n = new NodeLD(dato);
-            last.setNext(n);
+            this.last.setNext(n);
             n.setBefore(last);
-            last = n;
+            this.last = n;
             size++;
 
         }
     }
 
-    void add_at(int dato, int index) {
+    public void add_at(int dato, int index) {
         if (index >= 0 && index <= size) {
             if (index == 0) {
                 add_first(dato);
@@ -109,7 +109,7 @@ public class Linked_List {
         }
     }
 
-    int get_element_at(int index) {
+    public int get_element_at(int index) {
         if (index >= 0 && index < size) {
             NodeLD iterador = this.getFirst();
             int x = 0;
@@ -125,7 +125,7 @@ public class Linked_List {
 
     }
 
-    void remove_at(int index) {
+    public void remove_at(int index) {
         if (index >= 0 && index < size) {
             NodeLD aux = this.getFirst();
             int x = 0;
@@ -156,7 +156,7 @@ public class Linked_List {
         }
     }
 
-    void insertOrdenado(int art) {
+    public void insertOrdenado(int art) {
         if (this.isEmpty()) {
             this.add_first(art);
             return;

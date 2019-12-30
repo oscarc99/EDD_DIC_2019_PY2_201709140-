@@ -251,6 +251,7 @@ public class AVLTree {
         }
         try{
             Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng report\\AVLTree.dot -o report\\AVLTree.png");
+            //Process pa = Runtime.getRuntime().exec("cmd /c report\\AVLTree.png");
         }catch(Exception e2){
                             e2.printStackTrace();
         }

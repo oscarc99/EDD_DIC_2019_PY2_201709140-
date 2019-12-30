@@ -4,6 +4,7 @@ import EDD.*;
 import GUI.Login;
 import Object.User;
 import java.io.*;
+import java.util.Iterator;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -31,6 +32,7 @@ public class Proyecto_2 {
     
 
     public static void main(String[] args) {
+        
         System.out.println("pruebas");
         AVLTree arbol = new AVLTree();
         arbol.insert(1);
@@ -45,11 +47,55 @@ public class Proyecto_2 {
 
 
         //b.report();
-        //readUser("Usuarios.json");
+        readUser("Usuarios.json");
         Login log;
         log = new Login();
         log.setVisible(true);
+        //listTree("Arbols.json");
 
+    }
+    
+    public static void listTree(String ruta){
+        doble.clear();
+        
+        JSONParser parser = new JSONParser();
+        try{
+            Object obj = parser.parse(new FileReader(ruta));
+            JSONObject  jsonObject = (JSONObject) obj;
+            JSONArray jsonA = (JSONArray) jsonObject.get("Input");
+            
+            int num;
+            
+            for (Object j : jsonA) {
+                jsonObject = (JSONObject) j;
+                num =toIntExact((long) jsonObject.get("num"));
+                
+                
+                
+                doble.add_last(num);
+                
+                
+                
+                
+            }
+            
+           
+                
+                
+            
+            
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       
+        
+        
     }
 
     public static void readUser(String ruta) {
@@ -116,5 +162,14 @@ public class Proyecto_2 {
         }
         return Integer.parseInt(c);
     }
+    
+    public static int toIntExact(long value) {
+    if ((int)value != value) {
+        throw new ArithmeticException("integer overflow");
+    }
+    return (int)value;
+}
+
+    
 
 }
