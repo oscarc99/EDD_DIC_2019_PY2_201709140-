@@ -1,0 +1,8 @@
+ digraph G{ 
+ node [shape=circle]; 
+A -> B[penwidth=2, arrowhead=none] ; 
+A -> E[penwidth=2, arrowhead=none] ; 
+B -> E[penwidth=2, arrowhead=none] ; 
+C -> E[penwidth=2, arrowhead=none] ; 
+
+}

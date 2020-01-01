@@ -33,6 +33,12 @@ public class Graph {
         }
     }
 
+    public void clear() {
+        V = 0;
+        adjList = null;
+        indice = null;
+    }
+
     public int getV() {
         return V;
     }
@@ -90,45 +96,119 @@ public class Graph {
         }
 
     }
-    
+
     public String Graficar() {
-        return " digraph G{ \n node [shape=rectangle]; \n" + Graf() + "\n}";
+        return " digraph G{ \n node [shape=rectangle]; \n" + G() + "\n}";
     }
 
-    private String Graf() {
-        String nod="";
+    private String G() {
+        String nod = "";
         String dir = "";
-        String rank="";
+        String rank = "";
+        int c = 0;
+        int contador = 0;
+
         Nodo temp;
         for (int i = 0; i < adjList.length; i++) {
             temp = adjList[i].getFirst();
-            nod += "node"+i+ " [label=\" " +indice[i] + "\" ];\n";
-            
-            rank += "{rank= same;  node"+i+"; ";
-            if(temp != null){
-                dir+= "node"+i+ "-> node"+i+temp.getDato()+" \n";
-            } 
-            while(temp.getNext() != null){
-                dir += "node"+i+temp.getDato()+" -> node"+i+temp.getNext().getDato() +"\n";
-                rank += "node"+i+temp.getDato()+";";
-                nod += "node"+i+temp.getDato()+ " [label=\"" + temp.getDato() + "\" ];\n";
-                
-                temp = temp.getNext();
-                if(temp.getNext() == null){
-                    rank += "node"+i+temp.getDato()+"; ";
-                    nod += "node"+i+temp.getDato()+ " [label=\"" + temp.getDato() + "\" ];\n";
+            if (contador == 0) {
+
+            } else {
+                if (temp != null) {
+                    dir += "node" + i + "-> node" + c + " [penwidth=2, arrowhead=none];\n";
                 }
             }
+            if (temp != null) {
+
+                nod += "node" + i + " [label=\" " + indice[i] + "\" ];\n";
+
+                dir += "node" + i + "-> node" + i + temp.getDato() + " \n";
+                nod += "node" + i + temp.getDato() + " [label=\"" + temp.getDato() + "\" ];\n";
+                rank += "{rank= same;  node" + i + "; node" + i + temp.getDato() + ";} \n";;
+            }
+            rank += "{rank= same;  ";
+            if (temp != null) {
+                while (temp.getNext() != null) {
+                    dir += "node" + i + temp.getDato() + " -> node" + i + temp.getNext().getDato() + "\n";
+                    rank += "node" + i + "; node" + i + temp.getDato() + ";";
+                    nod += "node" + i + temp.getDato() + " [label=\"" + temp.getDato() + "\" ];\n";
+
+                    temp = temp.getNext();
+                    if (temp.getNext() == null) {
+                        rank += "node" + i + temp.getDato() + "; ";
+                        nod += "node" + i + temp.getDato() + " [label=\"" + temp.getDato() + "\" ];\n";
+                    }
+                }
+                //Tengo que enlazar
+
+                c = i;
+                contador++;
+            }
+
             rank += "} \n";
             //Si no es el ultimo (enlazo vertical)
-            if(i != (adjList.length-1)){
-                dir += "node"+i+"-> node"+(i+1)+" [penwidth=2, arrowhead=none];\n";
+
+        }
+
+        return nod + dir + rank;
+    }
+
+    public String Grafo() {
+        return " digraph G{ \n node [shape=circle]; \n" + Graf() + "\n}";
+    }
+
+    private String Graf() {
+        String g = "";
+        int c=100;
+        boolean visitados[] = new boolean[adjList.length];
+        Nodo temp;
+        for (int i = 0; i < adjList.length; i++) {
+            temp = adjList[i].getFirst();
+            while (temp != null) {
+                for (int j = 0; j < indice.length; j++) {
+                    c =j;
+                    if(indice[j].equals(temp.dato)) {
+                                                break;
+                    }
+                }
+                if(!visitados[c]) 
+                g += indice[i] + " -> " + temp.getDato()+"[penwidth=2, arrowhead=none] ; \n";
+                //grafica no ha sido graficado
+                temp = temp.getNext();
+            }
+            visitados[i] = true;
+        }
+        return g;
+    }
+
+    public void GrafoR() {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("report\\GrafoNodos.dot");
+
+            pw = new PrintWriter(fichero);
+
+            pw.println(Grafo());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
         }
-            
-        
-        return nod +dir+ rank;
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng report\\GrafoNodos.dot -o report\\GrafoNodos.png");
+            Process ap = Runtime.getRuntime().exec("cmd /c  report\\GrafoNodos.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+
     }
 
 }
-
