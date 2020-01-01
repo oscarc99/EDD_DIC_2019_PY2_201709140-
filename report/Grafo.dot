@@ -1,0 +1,42 @@
+ digraph G{ 
+ node [shape=rectangle]; 
+node0 [label=" A" ];
+node0B [label="B" ];
+node0C [label="C" ];
+node0E [label="E" ];
+node0D [label="D" ];
+node1 [label=" B" ];
+node1A [label="A" ];
+node1E [label="E" ];
+node2 [label=" C" ];
+node2A [label="A" ];
+node2D [label="D" ];
+node3 [label=" D" ];
+node3A [label="A" ];
+node3C [label="C" ];
+node4 [label=" E" ];
+node4A [label="A" ];
+node4B [label="B" ];
+node0-> node0B 
+node0B -> node0C
+node0C -> node0E
+node0E -> node0D
+node0-> node1 [penwidth=2, arrowhead=none];
+node1-> node1A 
+node1A -> node1E
+node1-> node2 [penwidth=2, arrowhead=none];
+node2-> node2A 
+node2A -> node2D
+node2-> node3 [penwidth=2, arrowhead=none];
+node3-> node3A 
+node3A -> node3C
+node3-> node4 [penwidth=2, arrowhead=none];
+node4-> node4A 
+node4A -> node4B
+{rank= same;  node0; node0B;node0C;node0E;node0D; } 
+{rank= same;  node1; node1A;node1E; } 
+{rank= same;  node2; node2A;node2D; } 
+{rank= same;  node3; node3A;node3C; } 
+{rank= same;  node4; node4A;node4B; } 
+
+}

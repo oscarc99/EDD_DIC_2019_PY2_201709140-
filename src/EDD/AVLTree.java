@@ -9,11 +9,11 @@ import java.io.*;
 public class AVLTree {
 
     private NodeAVL root;
-    
-    public void clear(){
+
+    public void clear() {
         this.root = null;
     }
-    
+
     boolean isEmpty() {
         return root == null;
     }
@@ -84,7 +84,7 @@ public class AVLTree {
 
     public void insert(int dato) {
         root = insert(root, dato);
-        
+
     }
 
     private NodeAVL insert(NodeAVL node, int dato) {
@@ -138,6 +138,10 @@ public class AVLTree {
     }
 
     private NodeAVL deleteN(int data, NodeAVL node) {
+        if (data == node.getData() && node.getLeft() == null && node.getRight()==null){
+            return null;
+        }
+            
         if (node == null) {
             return node;
         }
@@ -210,7 +214,7 @@ public class AVLTree {
             Retorno += Graph(Raiz.getRight());
             Retorno += Raiz.getData() + "->" + Raiz.getRight().getData() + "; \n";
         }
-        return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + "\" ];\n";
+        return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + " Altura: " + Raiz.getHeight() + "\" ];\n";
 
     }
 
@@ -226,7 +230,7 @@ public class AVLTree {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter("report\\AVLTree.dot");
+            fichero = new FileWriter("src\\Imagenes\\AVLTree.dot");
 
             pw = new PrintWriter(fichero);
 
@@ -240,7 +244,7 @@ public class AVLTree {
             e.printStackTrace();
         } finally {
             try {
-           // Nuevamente aprovechamos el finally para 
+                // Nuevamente aprovechamos el finally para 
                 // asegurarnos que se cierra el fichero.
                 if (null != fichero) {
                     fichero.close();
@@ -249,14 +253,105 @@ public class AVLTree {
                 e2.printStackTrace();
             }
         }
-        try{
-            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng report\\AVLTree.dot -o report\\AVLTree.png");
-            //Process pa = Runtime.getRuntime().exec("cmd /c report\\AVLTree.png");
-        }catch(Exception e2){
-                            e2.printStackTrace();
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\AVLTree.dot -o src\\Imagenes\\AVLTree.png");
+            Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
         }
-        
 
+    }
+
+    private String graficar(int dato) {
+        if (root == null) {
+            return "\n\n";
+        } else {
+            return "\n  \n" + Graph(root) + "\n" + G(dato) + "\n";
+        }
+    }
+
+    public void buscar(int dato) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("src\\Imagenes\\AVLTree.dot");
+
+            pw = new PrintWriter(fichero);
+
+            pw.println("digraph G { \n");
+            pw.println("nodesep=0.8;\n");
+            pw.println("ranksep=0.5;\n");
+            pw.println(graficar(dato));
+            pw.println("}\n");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\AVLTree.dot -o src\\Imagenes\\AVLTree.png");
+            Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+
+    public void insertDes(int dato) {
+        root = insertDes(root, dato);
+        report();
+        delete(dato);
+    }
+
+    private NodeAVL insertDes(NodeAVL node, int dato) {
+        if (node == null) {
+            System.out.println("SIEMPRE NULL");
+            return new NodeAVL(dato);
+        }
+
+        if (dato < node.getData()) {
+            node.setLeft(insert(node.getLeft(), dato));
+        } else {
+            node.setRight(insert(node.getRight(), dato));
+        }
+        node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())) + 1);
+        //node = setViolation(dato, node);
+
+        return node;
+    }
+
+    private String G(int dato){
+        return G(root, dato);
+    }
+    
+    
+    private String G(NodeAVL Raiz, int dato) {
+        String r =  Raiz.getData() + "[label=\" " + Raiz.getData() + " Altura: " + Raiz.getHeight() + "  \"  color =\"blue\"];\n";
+        if (Raiz == null) {
+            return "";
+        } else {
+            if (Raiz.getRight() != null) {
+                if(dato > Raiz.getData()   ){
+                    r += G(Raiz.getRight(), dato);
+                }
+            }
+            if (Raiz.getLeft() != null) {
+                if(dato < Raiz.getData()){
+                    r += G(Raiz.getLeft(), dato);
+                }
+            }
+            
+            
+        }
+        return r;
     }
 
 }

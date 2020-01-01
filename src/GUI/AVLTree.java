@@ -10,6 +10,7 @@ import EDD.NodeLD;
 import Object.User;
 import java.awt.Image;
 import java.net.URL;
+import java.security.Principal;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,31 +22,21 @@ import proyecto_2.Proyecto_2;
  *
  * @author Oscar C
  */
-public class AVLTree extends javax.swing.JFrame {
+public class AVLTree extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form AVLTree
      */
     User u;
     NodeLD as;
+    Thread hilo;
+    Hilos h1 = new Hilos();
 
     public AVLTree(User X) {
         initComponents();
         this.u = X;
         this.setLocationRelativeTo(null);
 
-        /*
-         String path = "C:/Users/Oscar C/Desktop/AVLTree.png";
-         URL url = this.getClass().getResource(path);
-         ImageIcon icon = new ImageIcon(url);
-
-        
-         jLabelImage.setIcon(icon);
-        
-         ImageIcon im = new ImageIcon(getClass().getResource("report\\AVLTree.png"));
-         ImageIcon icono = new ImageIcon(im.getImage().getScaledInstance(jLabelImage.getWidth(), jLabelImage.getHeight(), Image.SCALE_DEFAULT));
-         jLabelImage.setIcon(icono);
-         */
     }
 
     /**
@@ -64,12 +55,14 @@ public class AVLTree extends javax.swing.JFrame {
         jButtonInsert = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jTextFieldDelete = new javax.swing.JTextField();
-        jLabelImage = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         Cargar = new javax.swing.JButton();
         jCBTipo = new javax.swing.JComboBox();
         jLabel = new javax.swing.JLabel();
+        jLabelImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonBack.setText("Regresar");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {
@@ -77,25 +70,29 @@ public class AVLTree extends javax.swing.JFrame {
                 jButtonBackActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 22, 95, -1));
 
-        jSlider.setMajorTickSpacing(500);
-        jSlider.setMaximum(4000);
-        jSlider.setMinimum(1000);
+        jSlider.setMajorTickSpacing(1);
+        jSlider.setMaximum(10);
+        jSlider.setMinimum(1);
         jSlider.setPaintTicks(true);
-        jSlider.setValue(2000);
+        jSlider.setValue(5);
         jSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderStateChanged(evt);
             }
         });
+        getContentPane().add(jSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 187, 134, -1));
 
         jLabel1.setText("Velocidad: ");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(707, 153, -1, -1));
 
         jTextFieldInsert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldInsertActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 142, -1));
 
         jButtonInsert.setText("Insertar");
         jButtonInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -103,6 +100,7 @@ public class AVLTree extends javax.swing.JFrame {
                 jButtonInsertActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(576, 22, 88, -1));
 
         jButtonDelete.setText("Eliminar");
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -110,12 +108,22 @@ public class AVLTree extends javax.swing.JFrame {
                 jButtonDeleteActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 22, 88, -1));
 
         jTextFieldDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDeleteActionPerformed(evt);
             }
         });
+        getContentPane().add(jTextFieldDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 26, 103, -1));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 240, -1, -1));
 
         Cargar.setText("Carga");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,66 +131,14 @@ public class AVLTree extends javax.swing.JFrame {
                 CargarActionPerformed(evt);
             }
         });
+        getContentPane().add(Cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 88, -1));
 
         jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Automatico", "Manual" }));
+        getContentPane().add(jCBTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 91, -1, -1));
+        getContentPane().add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 244, 60, 20));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextFieldInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(Cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextFieldDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonBack, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel)))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBack)
-                    .addComponent(jTextFieldInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Cargar)
-                    .addComponent(jButtonDelete)
-                    .addComponent(jButtonInsert))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(jLabel))
-                    .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+        jLabelImage.setText("jLabel2");
+        getContentPane().add(jLabelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 570, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -211,6 +167,7 @@ public class AVLTree extends javax.swing.JFrame {
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
         Proyecto_2.avl.clear();
+        ImageIcon icono;
         Proyecto_2.listTree(jTextFieldInsert.getText());
         if (jCBTipo.getSelectedItem() == "Manual") {
             System.out.println("Manual");
@@ -218,20 +175,34 @@ public class AVLTree extends javax.swing.JFrame {
         } else if (jCBTipo.getSelectedItem() == "Automatico") {
             System.out.println("Automatico");
             NodeLD s = Proyecto_2.doble.getFirst();
+            hilo = new Thread(this);
+            //hilo.start();
+            h1.start();
             while (s != null) {
                 try {
-                    TimeUnit.MILLISECONDS.sleep(jSlider.getValue());
-                    //Thread.sleep(jSlider.getValue());
                     jLabel.setText("Insertando:  " + s.getDato());
                     Proyecto_2.avl.insert(s.getDato());
                     Proyecto_2.avl.report();
-                    jLabelImage.setIcon(new ImageIcon("report\\AVLTree.png"));
-                    s = s.getNext();
+                    icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+
+                    icono.getImage().flush();
+                    this.jLabelImage.setIcon(icono);
+                    this.jLabelImage.validate();
+                    this.jLabelImage.revalidate();
+                    jLabelImage.repaint();
+                    this.revalidate();
+                    this.validate();
+                    this.repaint();
+
+                    TimeUnit.SECONDS.sleep(jSlider.getValue());
                 } catch (InterruptedException ex) {
                     Logger.getLogger(AVLTree.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
+                s = s.getNext();
+
             }
+            h1.stop();
             JOptionPane.showMessageDialog(null, "Arbol terminado");
         }
     }//GEN-LAST:event_CargarActionPerformed
@@ -242,12 +213,26 @@ public class AVLTree extends javax.swing.JFrame {
             jLabel.setText("Insertando:  " + as.getDato());
             Proyecto_2.avl.insert(as.getDato());
             Proyecto_2.avl.report();
-            jLabelImage.setIcon(new ImageIcon("report\\AVLTree.png"));
+
+            ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+
+            icono.getImage().flush();
+            this.jLabelImage.setIcon(icono);
+            this.jLabelImage.validate();
+            this.jLabelImage.revalidate();
+            jLabelImage.repaint();
+            this.revalidate();
+            this.validate();
+            this.repaint();
             as = as.getNext();
         } else {
             JOptionPane.showMessageDialog(null, "Arbol terminado");
         }
     }//GEN-LAST:event_jButtonInsertActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        h1.start();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,14 +263,16 @@ public class AVLTree extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
 
+            public void run() {
+                // new AVLTree(this.u).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cargar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonInsert;
@@ -297,4 +284,26 @@ public class AVLTree extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldDelete;
     private javax.swing.JTextField jTextFieldInsert;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+
+        try {
+            ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+
+            icono.getImage().flush();
+            this.jLabelImage.setIcon(icono);
+            this.jLabelImage.validate();
+            this.jLabelImage.revalidate();
+            jLabelImage.repaint();
+            this.revalidate();
+            this.validate();
+            this.repaint();
+            Thread.sleep((jSlider.getValue() * 1000));
+        } catch (InterruptedException ex) {
+            Logger.getLogger(AVLTree.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
 }

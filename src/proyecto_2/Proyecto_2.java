@@ -5,6 +5,8 @@ import GUI.Login;
 import Object.User;
 import java.io.*;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -26,31 +28,70 @@ public class Proyecto_2 {
     //Estructuras para el graficado
     public static AVLTree avl = new AVLTree();
     public static BTree b = new BTree();
+    
     //Edd para llenar
     public static Linked_List doble = new Linked_List();
     
     
+    
 
     public static void main(String[] args) {
+        //Login log;
+        //log = new Login();
+        //log.setVisible(false);
         
         System.out.println("pruebas");
         AVLTree arbol = new AVLTree();
-        arbol.insert(1);
-        arbol.insert(2);
-        arbol.delete(1);
-        //arbol.report();
-
+        String nodos[]= {"A", "B", "C", "D", "E"};
+        Graph grafo = new Graph(nodos.length, nodos);
+        grafo.add("A","B");
+        grafo.add("A","C");
+        grafo.add("A","E");
+        grafo.add("E","B");
+        grafo.add("D","A");
+        grafo.add("D","C");
+        grafo.report();
+        
+        /*
+        
+        try {
+            
+            arbol.buscar(1);
+            Thread.sleep(3000);
+            
+            //EN el primero no debo insertar desbalancado
+            arbol.insert(1);
+            arbol.report();
+            
+            
+            arbol.buscar(2);
+            Thread.sleep(3000);
+            arbol.insertDes(2);
+            Thread.sleep(3000);
+            arbol.insert(2);
+            arbol.report();
+            
+            arbol.buscar(3);
+            Thread.sleep(3000);
+            arbol.insertDes(3);
+            Thread.sleep(3000);
+            arbol.insert(3);
+            arbol.report();
+            
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+*/
         BTree b = new BTree();
         b.Agregar(1, 1);
         b.Agregar(2, 2);
         b.Agregar(3, 3);
-
-
-        //b.report();
-        readUser("Usuarios.json");
-        Login log;
-        log = new Login();
-        log.setVisible(true);
+        b.report();
+        
+        //readUser("Usuarios.json");
+        
         //listTree("Arbols.json");
 
     }
