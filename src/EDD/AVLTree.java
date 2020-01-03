@@ -25,55 +25,47 @@ public class AVLTree {
 
         }
     }
-    
-     void borrar(int key) 
-    { 
-        root = deleteRec(root, key); 
-    } 
-  
-    /* A recursive function to insert a new key in BST */
-    NodeAVL deleteRec(NodeAVL root, int key) 
-    { 
-        /* Base Case: If the tree is empty */
-        if (root == null)  return root; 
-  
-        /* Otherwise, recur down the tree */
-        if (key < root.getData()) 
-            root.left = deleteRec(root.left, key); 
-        else if (key > root.getData()) 
-            root.right = deleteRec(root.right, key); 
-  
-        // if key is same as root's key, then This is the node 
-        // to be deleted 
-        else
-        { 
-            // node with only one child or no child 
-            if (root.left == null) 
-                return root.right; 
-            else if (root.right == null) 
-                return root.left; 
-  
-            // node with two children: Get the inorder successor (smallest 
-            // in the right subtree) 
-            root.setData( minValue(root.right)); 
-  
+
+    public void borrar(int key) {
+        root = deleteRec(root, key);
+
+    }
+
+    NodeAVL deleteRec(NodeAVL root, int key) {
+
+        if (root == null) {
+            return root;
+        }
+
+        if (key < root.getData()) {
+            root.left = deleteRec(root.left, key);
+        } else if (key > root.getData()) {
+            root.right = deleteRec(root.right, key);
+        } else {
+
+            if (root.left == null) {
+                return root.right;
+            } else if (root.right == null) {
+                return root.left;
+            }
+
+            root.setData(minValue(root.right));
+
             // Delete the inorder successor 
-            root.right = deleteRec(root.right, root.getData()); 
-        } 
-  
-        return root; 
-    } 
-    int minValue(NodeAVL root) 
-    { 
-        int minv = root.getData(); 
-        while (root.left != null) 
-        { 
-            minv = root.left.getData(); 
-            root = root.left; 
-        } 
-        return minv; 
-    } 
-  
+            root.right = deleteRec(root.right, root.getData());
+        }
+
+        return root;
+    }
+
+    int minValue(NodeAVL root) {
+        int minv = root.getData();
+        while (root.left != null) {
+            minv = root.left.getData();
+            root = root.left;
+        }
+        return minv;
+    }
 
     private void inOrderTraversal(NodeAVL node) {
         if (node.getLeft() != null) {
@@ -181,21 +173,16 @@ public class AVLTree {
 
     public void delete(int data) {
         if (root != null) {
-            deleteN(data, root);
+            deleteNode( root, data);
         }
 
     }
-    
- 
-    
+
     private NodeAVL deleteN(int data, NodeAVL node) {
-        if (data == node.getData() && node.getLeft() == null && node.getRight() == null) {
+        if (node == null) {
             return null;
         }
 
-        if (node == null) {
-            return node;
-        }
         if (data < node.getData()) {
             node.setLeft(deleteN(data, node.getLeft()));
         } else if (data > node.getData()) {
@@ -221,7 +208,9 @@ public class AVLTree {
             node.setLeft(deleteN(temp.getData(), node.getLeft()));
         }
         node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())));
+
         return setDeletion(node);
+
     }
 
     private NodeAVL getPredecessor(NodeAVL node) {
@@ -230,6 +219,13 @@ public class AVLTree {
             pre = pre.getRight();
         }
         return pre;
+    }
+
+    private NodeAVL pre(NodeAVL node) {
+        if (node.getRight() != null) {
+            return pre(node.getRight());
+        }
+        return node;
     }
 
     private NodeAVL setDeletion(NodeAVL node) {
@@ -321,6 +317,14 @@ public class AVLTree {
         }
     }
 
+    private String pinta(int dato) {
+        if (root == null) {
+            return "\n\n";
+        } else {
+            return "\n  \n" + Graph(root) + "\n" + P(dato) + "\n";
+        }
+    }
+
     public void buscar(int dato) {
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -333,6 +337,41 @@ public class AVLTree {
             pw.println("nodesep=0.8;\n");
             pw.println("ranksep=0.5;\n");
             pw.println(graficar(dato));
+            pw.println("}\n");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\AVLTree.dot -o src\\Imagenes\\AVLTree.png");
+            //Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+
+    public void pintar(int dato) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("src\\Imagenes\\AVLTree.dot");
+
+            pw = new PrintWriter(fichero);
+
+            pw.println("digraph G { \n");
+            pw.println("nodesep=0.8;\n");
+            pw.println("ranksep=0.5;\n");
+            pw.println(pinta(dato));
             pw.println("}\n");
 
         } catch (Exception e) {
@@ -390,6 +429,10 @@ public class AVLTree {
         return G(root, dato);
     }
 
+    private String P(int dato) {
+        return P(root, dato);
+    }
+
     private String G(NodeAVL Raiz, int dato) {
         String r = Raiz.getData() + "[label=\" " + Raiz.getData() + " H: " + Raiz.getHeight() + " FE:  " + this.getBalance(Raiz) + " \"  color =\"blue\"];\n";
         if (Raiz == null) {
@@ -408,6 +451,181 @@ public class AVLTree {
 
         }
         return r;
+    }
+
+    private String P(NodeAVL Raiz, int dato) {
+        String r = "";
+        if (Raiz == null) {
+            return "";
+        } else if (Raiz.getData() == dato) {
+            r = Raiz.getData() + "[label=\" " + Raiz.getData() + " H: " + Raiz.getHeight() + " FE:  " + this.getBalance(Raiz) + " \"  color =\"red\"];\n";
+        } else {
+            if (Raiz.getRight() != null) {
+                if (dato > Raiz.getData()) {
+                    r += P(Raiz.getRight(), dato);
+                }
+            }
+            if (Raiz.getLeft() != null) {
+                if (dato < Raiz.getData()) {
+                    r += P(Raiz.getLeft(), dato);
+                }
+            }
+
+        }
+        return r;
+    }
+
+    public boolean search(int dato) {
+        if (root == null) {
+            return false;
+        } else {
+            return buscar(root, dato);
+        }
+
+    }
+
+    public boolean buscar(NodeAVL raiz, int dato) {
+        if (raiz == null) {
+            //Entonces el arbol esta vacio
+            return false;
+            //else... es decir que por lo menos hay un nodo
+        } else if (raiz.getData() == dato) {
+
+            return true;
+        } else if (dato < raiz.getData()) {        //Si el nombre en asccii es mas pequeño, nos vamos por la izquierda
+
+            return buscar(raiz.getLeft(), dato);
+
+        } else if (dato > raiz.getData()) {        //Si el nombre en asccii es mas pequeño, nos vamos por la izquierda
+
+            return buscar(raiz.getRight(), dato);
+        } else {      //tal nodo no existe
+            return false;
+        }
+
+    }
+
+    private NodeAVL deleteNode(NodeAVL root, int value) {
+       
+
+        if (root == null) {
+            return root;
+        }
+
+        if (value < root.getData()) {
+            root.left = deleteNode(root.left, value);
+        } 
+        else if (value > root.getData()) {
+            root.right = deleteNode(root.right, value);
+        } 
+        else {
+            
+            if ((root.left == null) || (root.right == null)) {
+
+                NodeAVL temp;
+                if (root.left != null) {
+                    temp = root.getLeft();
+                } else {
+                    temp = root.getRight();
+                }
+
+              
+                if (temp == null) {
+                    temp = root;
+                    root = null;
+                } else 
+                {
+                    root = temp; 
+                }
+                temp = null;
+            } else {
+               
+                NodeAVL temp = minValueNode(root.right);
+
+                
+                root.setData(temp.getData());
+
+                
+                root.right = deleteNode(root.right, temp.getData());
+            }
+        }
+
+        
+        if (root == null) {
+            return root;
+        }
+
+
+        root.height = Math.max(height(root.left), height(root.right)) + 1;
+
+        
+        int balance = getBalance(root);
+
+        
+        // Caso LL
+        if (balance > 1 && getBalance(root.left) >= 0) {
+            return rightRotate(root);
+        }
+
+        // Caso LR
+        if (balance > 1 && getBalance(root.left) < 0) {
+            root.left = leftRotate(root.left);
+            return rightRotate(root);
+        }
+
+        // Caso RR
+        if (balance < -1 && getBalance(root.right) <= 0) {
+            return leftRotate(root);
+        }
+
+        //  Caso RL
+        if (balance < -1 && getBalance(root.right) > 0) {
+            root.right = rightRotate(root.right);
+            return leftRotate(root);
+        }
+
+        return root;
+    }
+
+    private NodeAVL minValueNode(NodeAVL node) {
+        NodeAVL current = node;
+        /* loop down to find the leftmost leaf */
+        while (current.getLeft() != null) {
+            current = current.left;
+        }
+        return current;
+    }
+
+    private NodeAVL rightRotate(NodeAVL y) {
+        NodeAVL x = y.left;
+        NodeAVL T2 = x.right;
+
+        
+        x.setRight(y);
+        y.setLeft(T2);
+
+        
+        y.setHeight(  Math.max(height(y.left), height(y.right)) + 1);
+        x.setHeight( Math.max(height(x.left), height(x.right)) + 1);
+
+        
+        return x;
+    }
+
+    private NodeAVL leftRotate(NodeAVL x) {
+        NodeAVL y = x.getRight();
+        NodeAVL T2 = y.getLeft();
+
+        
+        y.setLeft(x);
+        x.setRight( T2);
+
+        
+        x.setHeight( Math.max(height(x.left), height(x.right)) + 1);
+        y.setHeight ( Math.max(height(y.left), height(y.right)) + 1);
+
+        
+        return y;
     }
 
 }

@@ -5,24 +5,17 @@
  */
 package GUI;
 
-import EDD.NodeAVL;
 import EDD.NodeLD;
 import Hilos.AutoAVL;
+import Hilos.DeleteAVL;
 import Hilos.ManualAVL;
-import Hilos.Mostrar;
 import Object.User;
-import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.io.File;
-import java.net.URL;
-import java.security.Principal;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -69,6 +62,11 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         jLabelDesc = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButtonBack.setText("Regresar");
@@ -100,7 +98,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonInsertActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 88, -1));
+        getContentPane().add(jButtonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 88, -1));
 
         jButtonDelete.setText("Eliminar");
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -113,6 +111,11 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         jTextFieldDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDeleteActionPerformed(evt);
+            }
+        });
+        jTextFieldDelete.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextFieldDeleteKeyPressed(evt);
             }
         });
         getContentPane().add(jTextFieldDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 103, -1));
@@ -154,7 +157,24 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jTextFieldDeleteActionPerformed
 
     private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
-        // TODO add your handling code here:
+        ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+        icono.getImage().flush();
+        jLabelImage.setIcon(icono);
+        jLabelImage.revalidate();
+        jLabelImage.validate();
+        jLabelImage.repaint();
+        if (Proyecto_2.avl.search(Integer.parseInt(jTextFieldDelete.getText()))) {
+            DeleteAVL n = new DeleteAVL(jLabel, Integer.parseInt(jTextFieldDelete.getText()), jSlider.getValue(), jLabelDesc, jLabelImage);
+            n.start();
+        } else {
+            JOptionPane.showMessageDialog(null, "Dato no existe");
+        }
+        icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+        icono.getImage().flush();
+        jLabelImage.setIcon(icono);
+        jLabelImage.revalidate();
+        jLabelImage.validate();
+        jLabelImage.repaint();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
@@ -195,6 +215,30 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
     private void jCBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBTipoActionPerformed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        int KeyCode = evt.getKeyCode();
+        if (KeyCode == KeyEvent.VK_0) {
+            ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+            icono.getImage().flush();
+            jLabelImage.setIcon(icono);
+            jLabelImage.revalidate();
+            jLabelImage.validate();
+            jLabelImage.repaint();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void jTextFieldDeleteKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldDeleteKeyPressed
+        int KeyCode = evt.getKeyCode();
+        if (KeyCode == KeyEvent.VK_ENTER) {
+            ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+            icono.getImage().flush();
+            jLabelImage.setIcon(icono);
+            jLabelImage.revalidate();
+            jLabelImage.validate();
+            jLabelImage.repaint();
+        }
+    }//GEN-LAST:event_jTextFieldDeleteKeyPressed
 
     /**
      * @param args the command line arguments
@@ -249,13 +293,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
 
     @Override
     public void run() {
-        Thread ct = Thread.currentThread();
-        if (ct == actualizar) {
-
-        } else if (ct == mostrar) {
-
-        }
-
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -36,26 +36,11 @@ public class Proyecto_2 {
     public static Vertices v = new Vertices();
 
     public static void main(String[] args) {
-        //Login l = new Login();
-        //l.setVisible(true);
-
-        AVLTree a = new AVLTree();
-        a.insert(1);
-        a.insert(2);
-        a.insert(3);
-        a.insert(4);
-        a.insert(5);
-        a.insert(6);
-        a.insert(7);
-        a.delete(2);
-        a.insert(2);
-        a.delete(4);
-        a.report();
+        Login l = new Login();
+        l.setVisible(true);
         
-        
-        
-        
-
+        //a.delete(4);
+        //a.report();
         /*
          try {
          System.out.println("pruebas");

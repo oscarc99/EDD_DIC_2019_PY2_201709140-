@@ -36,26 +36,25 @@ public class AutoAVL extends Thread {
         mostrar();
     }
 
-    public boolean verificar() {
-        return as == null;
-    }
-
     @Override
     public void run() {
         mostrar();
         while (as != null) {
             mostrar();
             try {
-                jLabel.setText("Insertando:  " + as.getDato());
+                
                 mostrar();
                 Proyecto_2.avl.buscar(as.getDato());
+                jLabel.setText("Insertando:  " + as.getDato());
                 mostrar();
+                
+                TimeUnit.SECONDS.sleep(velocidad);
                 descip.setText("Busqueda posicion para insertar"); 
-                TimeUnit.SECONDS.sleep(velocidad);
                 Proyecto_2.avl.insertDes(as.getDato());
-                descip.setText("Inserta y calcula Factor de Equilibrio"); 
+                
                 mostrar();
                 TimeUnit.SECONDS.sleep(velocidad);
+                descip.setText("Inserta y calcula Factor de Equilibrio"); 
                 Proyecto_2.avl.insert(as.getDato());
                 Proyecto_2.avl.report();
                 descip.setText("Rotando"); 
