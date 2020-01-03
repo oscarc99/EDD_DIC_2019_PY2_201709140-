@@ -7,15 +7,22 @@ package GUI;
 
 import EDD.NodeAVL;
 import EDD.NodeLD;
+import Hilos.AutoAVL;
+import Hilos.ManualAVL;
+import Hilos.Mostrar;
 import Object.User;
 import java.awt.Image;
+import java.io.File;
 import java.net.URL;
 import java.security.Principal;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -29,8 +36,9 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
      */
     User u;
     NodeLD as;
-    Thread hilo;
-    Hilos h1 = new Hilos();
+    Thread actualizar;
+    Thread mostrar;
+    NodeLD first;
 
     public AVLTree(User X) {
         initComponents();
@@ -51,15 +59,14 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         jButtonBack = new javax.swing.JButton();
         jSlider = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldInsert = new javax.swing.JTextField();
         jButtonInsert = new javax.swing.JButton();
         jButtonDelete = new javax.swing.JButton();
         jTextFieldDelete = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
         Cargar = new javax.swing.JButton();
         jCBTipo = new javax.swing.JComboBox();
         jLabel = new javax.swing.JLabel();
         jLabelImage = new javax.swing.JLabel();
+        jLabelDesc = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -70,7 +77,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonBackActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 22, 95, -1));
+        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 95, -1));
 
         jSlider.setMajorTickSpacing(1);
         jSlider.setMaximum(10);
@@ -82,17 +89,10 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jSliderStateChanged(evt);
             }
         });
-        getContentPane().add(jSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 187, 134, -1));
+        getContentPane().add(jSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 40, 134, -1));
 
         jLabel1.setText("Velocidad: ");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(707, 153, -1, -1));
-
-        jTextFieldInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldInsertActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextFieldInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 142, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 20, -1, -1));
 
         jButtonInsert.setText("Insertar");
         jButtonInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +100,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonInsertActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(576, 22, 88, -1));
+        getContentPane().add(jButtonInsert, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 88, -1));
 
         jButtonDelete.setText("Eliminar");
         jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -108,22 +108,14 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 22, 88, -1));
+        getContentPane().add(jButtonDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 88, -1));
 
         jTextFieldDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextFieldDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(349, 26, 103, -1));
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 240, -1, -1));
+        getContentPane().add(jTextFieldDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 103, -1));
 
         Cargar.setText("Carga");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
@@ -131,14 +123,18 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 CargarActionPerformed(evt);
             }
         });
-        getContentPane().add(Cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, 88, -1));
+        getContentPane().add(Cargar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 88, -1));
 
         jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Automatico", "Manual" }));
-        getContentPane().add(jCBTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(682, 91, -1, -1));
-        getContentPane().add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 244, 60, 20));
-
-        jLabelImage.setText("jLabel2");
-        getContentPane().add(jLabelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 570, 600));
+        jCBTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBTipoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCBTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
+        getContentPane().add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, 190, 30));
+        getContentPane().add(jLabelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 630, 630));
+        getContentPane().add(jLabelDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 210, 90));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -161,78 +157,44 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
-    private void jTextFieldInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInsertActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldInsertActionPerformed
-
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
-        Proyecto_2.avl.clear();
-        ImageIcon icono;
-        Proyecto_2.listTree(jTextFieldInsert.getText());
-        if (jCBTipo.getSelectedItem() == "Manual") {
-            System.out.println("Manual");
-            as = Proyecto_2.doble.getFirst();
-        } else if (jCBTipo.getSelectedItem() == "Automatico") {
-            System.out.println("Automatico");
-            NodeLD s = Proyecto_2.doble.getFirst();
-            hilo = new Thread(this);
-            //hilo.start();
-            h1.start();
-            while (s != null) {
-                try {
-                    jLabel.setText("Insertando:  " + s.getDato());
-                    Proyecto_2.avl.insert(s.getDato());
-                    Proyecto_2.avl.report();
-                    icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+        JFileChooser jf = new JFileChooser();
+        jf.showOpenDialog(this);
+        File archivo = jf.getSelectedFile();
+        if (archivo != null) {
+            Proyecto_2.avl.clear();
 
-                    icono.getImage().flush();
-                    this.jLabelImage.setIcon(icono);
-                    this.jLabelImage.validate();
-                    this.jLabelImage.revalidate();
-                    jLabelImage.repaint();
-                    this.revalidate();
-                    this.validate();
-                    this.repaint();
+            Proyecto_2.listTree(archivo.getAbsolutePath());
+            if (jCBTipo.getSelectedItem() == "Manual") {
+                JOptionPane.showMessageDialog(null, "Datos cargados para insercion manual");
+                as = Proyecto_2.doble.getFirst();
+                first = Proyecto_2.doble.getFirst();
+            } else if (jCBTipo.getSelectedItem() == "Automatico") {
+                System.out.println("Automatico");
+                NodeLD s = Proyecto_2.doble.getFirst();
+                first = Proyecto_2.doble.getFirst();
 
-                    TimeUnit.SECONDS.sleep(jSlider.getValue());
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(AVLTree.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                s = s.getNext();
+                AutoAVL ac = new AutoAVL(jLabel, s, jSlider.getValue(), jLabelDesc, jLabelImage);
+                ac.start();
 
             }
-            h1.stop();
-            JOptionPane.showMessageDialog(null, "Arbol terminado");
         }
     }//GEN-LAST:event_CargarActionPerformed
 
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
         //Inserta de uno en uno
         if (as != null) {
-            jLabel.setText("Insertando:  " + as.getDato());
-            Proyecto_2.avl.insert(as.getDato());
-            Proyecto_2.avl.report();
-
-            ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
-
-            icono.getImage().flush();
-            this.jLabelImage.setIcon(icono);
-            this.jLabelImage.validate();
-            this.jLabelImage.revalidate();
-            jLabelImage.repaint();
-            this.revalidate();
-            this.validate();
-            this.repaint();
+            ManualAVL mavl = new ManualAVL(jLabel, as, jSlider.getValue(), jLabelDesc, jLabelImage);
+            mavl.start();
             as = as.getNext();
         } else {
             JOptionPane.showMessageDialog(null, "Arbol terminado");
         }
     }//GEN-LAST:event_jButtonInsertActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        h1.start();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jCBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,42 +228,32 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
 
             public void run() {
                 // new AVLTree(this.u).setVisible(true);
+
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cargar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonInsert;
     private javax.swing.JComboBox jCBTipo;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelDesc;
     private javax.swing.JLabel jLabelImage;
     private javax.swing.JSlider jSlider;
     private javax.swing.JTextField jTextFieldDelete;
-    private javax.swing.JTextField jTextFieldInsert;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void run() {
+        Thread ct = Thread.currentThread();
+        if (ct == actualizar) {
 
-        try {
-            ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+        } else if (ct == mostrar) {
 
-            icono.getImage().flush();
-            this.jLabelImage.setIcon(icono);
-            this.jLabelImage.validate();
-            this.jLabelImage.revalidate();
-            jLabelImage.repaint();
-            this.revalidate();
-            this.validate();
-            this.repaint();
-            Thread.sleep((jSlider.getValue() * 1000));
-        } catch (InterruptedException ex) {
-            Logger.getLogger(AVLTree.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

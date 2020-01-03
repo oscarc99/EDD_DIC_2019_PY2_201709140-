@@ -12,7 +12,7 @@ public class User {
     String Name;
     String Apellido;
     int carnet;
-    String pass;
+    
     String Password;  //encriptada
     int estado = 0;
     String motivo;
@@ -37,7 +37,7 @@ public class User {
         this.Name = Name;
         this.Apellido = Apellido;
         this.carnet = carnet;
-        this.pass = pass;
+        
         this.Password = convertirSHA256(pass);
     }
         public User(String Name, String Apellido, int carnet, String pass, String mot) {
@@ -45,7 +45,7 @@ public class User {
             this.Name = Name;
         this.Apellido = Apellido;
         this.carnet = carnet;
-        this.pass = pass;
+        
         this.Password = convertirSHA256(pass);
     }
 
@@ -61,9 +61,6 @@ public class User {
         return carnet;
     }
 
-    public String getPass() {
-        return pass;
-    }
 
     public String getPassword() {
         return Password;
@@ -82,11 +79,11 @@ public class User {
     }
 
     public void setPass(String pass) {
-        this.pass = pass;
+        
         this.Password = convertirSHA256(pass);
     }
 
-    public static String convertirSHA256(String password) {
+    public String convertirSHA256(String password) {
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("SHA-256");

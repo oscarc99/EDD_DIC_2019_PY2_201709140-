@@ -122,9 +122,9 @@ public class Login extends javax.swing.JFrame implements KeyListener {
             ventanA.setVisible(true);
             
             
-        }else if(Proyecto_2.usuarios.login( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
+        }else if(Proyecto_2.usuarios.ingreso( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
             
-            Usuario ventanA = new Usuario(Proyecto_2.usuarios.log(Integer.parseInt(this.jTextUser.getText())));
+            Usuario ventanA = new Usuario(Proyecto_2.usuarios.in(Integer.parseInt(this.jTextUser.getText())));
             this.setVisible(false);
             ventanA.setVisible(true);
         }else{
@@ -157,7 +157,7 @@ public class Login extends javax.swing.JFrame implements KeyListener {
             ventanA.setVisible(true);
             
             
-        }else if(Proyecto_2.usuarios.login( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
+        }else if(Proyecto_2.usuarios.ingreso( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
             
             Usuario ventanA = new Usuario(Proyecto_2.usuarios.log(Integer.parseInt(this.jTextUser.getText())));
             this.setVisible(false);
@@ -229,9 +229,9 @@ public class Login extends javax.swing.JFrame implements KeyListener {
             ventanA.setVisible(true);
             
             
-        }else if(Proyecto_2.usuarios.login( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
+        }else if(Proyecto_2.usuarios.ingreso( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
             
-            Usuario ventanA = new Usuario(Proyecto_2.usuarios.log(Integer.parseInt(this.jTextUser.getText())));
+            Usuario ventanA = new Usuario(Proyecto_2.usuarios.in(Integer.parseInt(this.jTextUser.getText())));
             this.setVisible(false);
             ventanA.setVisible(true);
         }else{

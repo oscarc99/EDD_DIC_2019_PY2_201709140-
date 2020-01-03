@@ -5,6 +5,8 @@ import GUI.Login;
 
 import Object.User;
 import java.io.*;
+import java.util.Iterator;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,36 +33,56 @@ public class Proyecto_2 {
     public static String nodos[];
     //Edd para llenar
     public static Linked_List doble = new Linked_List();
+    public static Vertices v = new Vertices();
 
     public static void main(String[] args) {
-        //Login log = new Login();
-        //log.setVisible(true);
-        try {
-            System.out.println("pruebas");
-            AVLTree arbol = new AVLTree();
-            String n[] = {"A", "B", "C", "D", "E"};
-            nodos = n;
-            grafo = new Graph(nodos.length, nodos);
-            grafo.add("A", "B");
-            grafo.report();
-            grafo.GrafoR();
-            Thread.sleep(3000);
-            grafo.add("E", "C");
-            grafo.report();
-            grafo.GrafoR();
-            Thread.sleep(3000);
-            grafo.add("A", "E");
-            grafo.report();
-            grafo.GrafoR();
-            Thread.sleep(3000);
-            grafo.add("E", "B");
-            grafo.report();
-            grafo.GrafoR();
+        //Login l = new Login();
+        //l.setVisible(true);
 
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        AVLTree a = new AVLTree();
+        a.insert(1);
+        a.insert(2);
+        a.insert(3);
+        a.insert(4);
+        a.insert(5);
+        a.insert(6);
+        a.insert(7);
+        a.delete(2);
+        a.insert(2);
+        a.delete(4);
+        a.report();
+        
+        
+        
+        
+
         /*
+         try {
+         System.out.println("pruebas");
+         AVLTree arbol = new AVLTree();
+         String n[] = {"A", "B", "C", "D", "E"};
+         nodos = n;
+         grafo = new Graph(nodos.length, nodos);
+         grafo.add("A", "B");
+         grafo.report();
+         grafo.GrafoR();
+         Thread.sleep(3000);
+         grafo.add("E", "C");
+         grafo.report();
+         grafo.GrafoR();
+         Thread.sleep(3000);
+         grafo.add("A", "E");
+         grafo.report();
+         grafo.GrafoR();
+         Thread.sleep(3000);
+         grafo.add("E", "B");
+         grafo.report();
+         grafo.GrafoR();
+
+         } catch (InterruptedException ex) {
+         Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
         
          try {
             
@@ -91,16 +113,69 @@ public class Proyecto_2 {
          Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
          }
        
+        
+         BTree b = new BTree();
+         b.Agregar(1, 1);
+         b.Agregar(2, 2);
+         b.Agregar(3, 3);
+         b.report();
+        
+         
          */
-        BTree b = new BTree();
-        b.Agregar(1, 1);
-        b.Agregar(2, 2);
-        b.Agregar(3, 3);
-        b.report();
-
-        readUser("Usuarios.json");
-
         //listTree("Arbols.json");
+        //listVertices("EjemploGrafo.json");
+        readUser(
+                "Usuarios.json");
+    }
+
+    public static void listVertices(String ruta) {
+        v.clear();
+        int c = 0;
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(ruta));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray jsonA = (JSONArray) jsonObject.get("Graph");
+
+            String num;
+            for (Object j : jsonA) {
+                c++;
+            }
+            String n[] = new String[c];
+            c = 0;
+            for (Object j : jsonA) {
+                jsonObject = (JSONObject) j;
+                num = (String) jsonObject.get("Node");
+                n[c] = num;
+                c++;
+            }
+            grafo = new Graph(n.length, n);
+            String S;
+            for (Object j : jsonA) {
+                jsonObject = (JSONObject) j;
+                num = (String) jsonObject.get("Node");
+                //System.out.println("---------------"+ num);
+
+                JSONArray json = (JSONArray) jsonObject.get("Adjacency");
+                for (Object nod : json) {
+                    jsonObject = (JSONObject) nod;
+
+                    S = (String) jsonObject.get("Node");
+                    v.add_last(num, S);
+                    System.out.println(num + " , " + S);
+                }
+
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void listTree(String ruta) {

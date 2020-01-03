@@ -182,14 +182,14 @@ public class UserAdmin extends javax.swing.JFrame {
         System.out.println(jListUser.getSelectedValue());
         userM = Proyecto_2.usuarios.log((int) jListUser.getSelectedValue());
         jTextFieldName.setText(userM.getName());
-        jTextFieldPass.setText(userM.getPass());
+        jTextFieldPass.setText(userM.getPassword());
         jTextFieldApellido.setText(userM.getApellido());
         
     }//GEN-LAST:event_jButtonSelectActionPerformed
 
     private void jButtonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModActionPerformed
         if ( jTextFieldPass.getText().length() >= 8  ){
-            Proyecto_2.usuarios.modificar(userM.getCarnet(),jTextFieldName.getText(),jTextFieldApellido.getText(), jTextFieldPass.getText());
+            Proyecto_2.usuarios.mod(userM.getCarnet(),jTextFieldName.getText(),jTextFieldApellido.getText(), jTextFieldPass.getText());
         JOptionPane.showMessageDialog(this, "Cambio realizado con exito");
         }else{
         JOptionPane.showMessageDialog(this, "No se realizo el ");    

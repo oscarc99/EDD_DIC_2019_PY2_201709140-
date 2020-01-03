@@ -3,6 +3,8 @@ package EDD;
 import Object.User;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -19,6 +21,141 @@ public class Hash {
         this.m = m;
     }
 
+    public String convertirSHA256(String password) {
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        byte[] hash = md.digest(password.getBytes());
+        StringBuffer sb = new StringBuffer();
+
+        for (byte b : hash) {
+            sb.append(String.format("%02x", b));
+        }
+
+        return sb.toString();
+    }
+
+    public boolean existe(int carnet) {
+        int indice = funcion(carnet, m);
+        int indiceTemp = indice;
+        int in = 1;
+        do {
+            if (tabla[indice] != null) {
+                if (tabla[indice].getCarnet() == carnet) {
+                    return true;
+                }
+
+            } else {
+                indice = (carnet % 7 + 1) * in;
+                if (m <= indice) {
+                    indice = indice - m;
+                }
+                in++;
+            }
+        } while (indice != indiceTemp);
+        return false;
+    }
+
+    public boolean ingreso(int user, String pass) {
+        int indice = funcion(user, m);
+        int indiceTemp = indice;
+        int in = 1;
+        do {
+            if (tabla[indice] != null && tabla[indice].getCarnet() == user && tabla[indice].getPassword().equals(convertirSHA256(pass))) {
+                return true;
+            } else {
+                indice = (user % 7 + 1) * in;
+                if (m <= indice) {
+                    indice = indice - m;
+                }
+                in++;
+            }
+        } while (indice != indiceTemp);
+
+        return false;
+    }
+
+    public User in(int carnet) {
+        int indice = funcion(carnet, m);
+        int indiceTemp = indice;
+        int in = 1;
+        do {
+            if (tabla[indice] != null) {
+                if (tabla[indice].getCarnet() == carnet) {
+                    return tabla[indice];
+                }
+
+            } else {
+                indice = (carnet % 7 + 1) * in;
+                if (m <= indice) {
+                    indice = indice - m;
+                }
+                in++;
+            }
+        } while (indice != indiceTemp);
+
+        return null;
+    }
+
+    public void mod(int carnet, String nam, String ap, String pass) {
+        int indice = funcion(carnet, m);
+        int indiceTemp = indice;
+        int in = 1;
+        do {
+            if (tabla[indice] != null) {
+                if (tabla[indice].getCarnet() == carnet) {
+                    tabla[indice].setName(nam);
+                    tabla[indice].setApellido(ap);
+                    tabla[indice].setPass(pass);
+                    break;
+                }
+            } else {
+                indice = (carnet % 7 + 1) * in;
+                if (m <= indice) {
+                    indice = indice - m;
+                }
+                in++;
+            }
+        } while (indice != indiceTemp);
+
+    }
+
+    public void delete(int carnet) {
+        int indice = funcion(carnet, m);
+        int indiceTemp = indice;
+        int in = 1;
+        do {
+            if (tabla[indice] != null) {
+                if (tabla[indice].getCarnet() == carnet) {
+                    tabla[indice] = null;
+                    User[] temporal = this.tabla;
+                    User[] nuevaTabla = new User[m];
+                    this.tabla = nuevaTabla;
+
+                    for (int i = 0; i < temporal.length; i++) {
+                        if (temporal[i] != null) {
+                            insertarHash(temporal[i].getCarnet(), temporal[i]);
+                        }
+
+                    }
+                    break;
+                }
+            } else {
+                indice = (carnet % 7 + 1) * in;
+                if (m <= indice) {
+                    indice = indice - m;
+                }
+                in++;
+            }
+        } while (indice != indiceTemp);
+
+    }
+
     private int funcion(int llave, int m) {
         return llave % m;
     }
@@ -28,43 +165,6 @@ public class Hash {
         User nueva = new User(Name, Apellido, carnet, pass);
         insertarHash(carnet, nueva);
 
-    }
-
-    public User log(int user) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (tabla[i] != null) {
-                if (this.tabla[i].getCarnet() == user) {
-                    return this.tabla[i];
-                }
-            }
-
-        }
-        return null;
-    }
-
-    public boolean login(int user, String pass) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (this.tabla[i] != null) {
-                if (this.tabla[i].getCarnet() == user && this.tabla[i].getPass().equals(pass)) {
-                    return true;
-                }
-            }
-
-        }
-
-        return false;
-    }
-
-    public boolean exist(int carnet) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (this.tabla[i] != null) {
-                if (this.tabla[i].getCarnet() == carnet) {
-                    return true;
-                }
-            }
-
-        }
-        return false;
     }
 
     private void insertarHash(int llave, User nueva) {
@@ -144,54 +244,6 @@ public class Hash {
         return primo;
     }
 
-    public void eliminar(int carnet) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (tabla[i] != null) {
-                if (this.tabla[i].getCarnet() == carnet) {
-                    this.tabla[i] = null;
-                }
-            }
-
-        }
-    }
-
-    public void modName(int carnet, String nam) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (this.tabla[i].getCarnet() == carnet) {
-                this.tabla[i].setName(nam);
-            }
-        }
-    }
-
-    public void modApellido(int carnet, String ap) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (this.tabla[i].getCarnet() == carnet) {
-                this.tabla[i].setApellido(ap);
-            }
-        }
-    }
-
-    public void modPass(int carnet, String pass) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (this.tabla[i].getCarnet() == carnet) {
-                this.tabla[i].setPass(pass);
-            }
-        }
-    }
-
-    public void modificar(int carnet, String nam, String ap, String pass) {
-        for (int i = 0; i < this.tabla.length; i++) {
-            if (tabla[i] != null) {
-                if (tabla[i].getCarnet() == carnet) {
-                    tabla[i].setName(nam);
-                    tabla[i].setApellido(ap);
-                    tabla[i].setPass(pass);
-                }
-            }
-
-        }
-    }
-
     private String reporte() {
         String r = "";
         for (int i = 0; i < this.tabla.length; i++) {
@@ -255,4 +307,40 @@ public class Hash {
 
     }
 
+    public void eliminar(int carnet) {
+        for (int i = 0; i < this.tabla.length; i++) {
+            if (tabla[i] != null) {
+                if (this.tabla[i].getCarnet() == carnet) {
+                    tabla[i] = null;
+                    
+                    break;
+                }
+            }
+
+        }
+    }
+
+    public boolean exist(int carnet) {
+        for (int i = 0; i < this.tabla.length; i++) {
+            if (this.tabla[i] != null) {
+                if (this.tabla[i].getCarnet() == carnet) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
+    }
+
+    public User log(int user) {
+        for (int i = 0; i < this.tabla.length; i++) {
+            if (tabla[i] != null) {
+                if (this.tabla[i].getCarnet() == user) {
+                    return this.tabla[i];
+                }
+            }
+
+        }
+        return null;
+    }
 }

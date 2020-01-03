@@ -25,6 +25,55 @@ public class AVLTree {
 
         }
     }
+    
+     void borrar(int key) 
+    { 
+        root = deleteRec(root, key); 
+    } 
+  
+    /* A recursive function to insert a new key in BST */
+    NodeAVL deleteRec(NodeAVL root, int key) 
+    { 
+        /* Base Case: If the tree is empty */
+        if (root == null)  return root; 
+  
+        /* Otherwise, recur down the tree */
+        if (key < root.getData()) 
+            root.left = deleteRec(root.left, key); 
+        else if (key > root.getData()) 
+            root.right = deleteRec(root.right, key); 
+  
+        // if key is same as root's key, then This is the node 
+        // to be deleted 
+        else
+        { 
+            // node with only one child or no child 
+            if (root.left == null) 
+                return root.right; 
+            else if (root.right == null) 
+                return root.left; 
+  
+            // node with two children: Get the inorder successor (smallest 
+            // in the right subtree) 
+            root.setData( minValue(root.right)); 
+  
+            // Delete the inorder successor 
+            root.right = deleteRec(root.right, root.getData()); 
+        } 
+  
+        return root; 
+    } 
+    int minValue(NodeAVL root) 
+    { 
+        int minv = root.getData(); 
+        while (root.left != null) 
+        { 
+            minv = root.left.getData(); 
+            root = root.left; 
+        } 
+        return minv; 
+    } 
+  
 
     private void inOrderTraversal(NodeAVL node) {
         if (node.getLeft() != null) {
@@ -89,7 +138,7 @@ public class AVLTree {
 
     private NodeAVL insert(NodeAVL node, int dato) {
         if (node == null) {
-            System.out.println("SIEMPRE NULL");
+
             return new NodeAVL(dato);
         }
 
@@ -136,12 +185,14 @@ public class AVLTree {
         }
 
     }
-
+    
+ 
+    
     private NodeAVL deleteN(int data, NodeAVL node) {
-        if (data == node.getData() && node.getLeft() == null && node.getRight()==null){
+        if (data == node.getData() && node.getLeft() == null && node.getRight() == null) {
             return null;
         }
-            
+
         if (node == null) {
             return node;
         }
@@ -214,7 +265,7 @@ public class AVLTree {
             Retorno += Graph(Raiz.getRight());
             Retorno += Raiz.getData() + "->" + Raiz.getRight().getData() + "; \n";
         }
-        return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + " Altura: " + Raiz.getHeight() + "\" ];\n";
+        return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + "   H: " + Raiz.getHeight() + " FE:  " + this.getBalance(Raiz) + " \"     ];\n";
 
     }
 
@@ -255,7 +306,7 @@ public class AVLTree {
         }
         try {
             Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\AVLTree.dot -o src\\Imagenes\\AVLTree.png");
-            Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
+//            Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
         } catch (Exception e2) {
             e2.printStackTrace();
         }
@@ -299,57 +350,62 @@ public class AVLTree {
         }
         try {
             Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\AVLTree.dot -o src\\Imagenes\\AVLTree.png");
-            Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
+            //Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
         } catch (Exception e2) {
             e2.printStackTrace();
         }
     }
 
     public void insertDes(int dato) {
-        root = insertDes(root, dato);
-        report();
-        delete(dato);
-    }
-
-    private NodeAVL insertDes(NodeAVL node, int dato) {
-        if (node == null) {
-            System.out.println("SIEMPRE NULL");
-            return new NodeAVL(dato);
-        }
-
-        if (dato < node.getData()) {
-            node.setLeft(insert(node.getLeft(), dato));
+        if (root == null) {
+            report();
         } else {
-            node.setRight(insert(node.getRight(), dato));
+            insertDes(root, dato);
+            report();
+            borrar(dato);
         }
-        node.setHeight(Math.max(height(node.getLeft()), height(node.getRight())) + 1);
-        //node = setViolation(dato, node);
 
-        return node;
     }
 
-    private String G(int dato){
+    private void insertDes(NodeAVL node, int dato) {
+        NodeAVL nuevo = new NodeAVL(dato);
+        if (dato < node.getData()) {
+            if (node.getLeft() != null) {
+                insertDes(node.getLeft(), dato);
+            } else {
+                node.setLeft(nuevo);
+            }
+
+        } else {
+            if (node.getRight() != null) {
+                insertDes(node.getRight(), dato);
+            } else {
+                node.setRight(nuevo);
+            }
+        }
+
+    }
+
+    private String G(int dato) {
         return G(root, dato);
     }
-    
-    
+
     private String G(NodeAVL Raiz, int dato) {
-        String r =  Raiz.getData() + "[label=\" " + Raiz.getData() + " Altura: " + Raiz.getHeight() + "  \"  color =\"blue\"];\n";
+        String r = Raiz.getData() + "[label=\" " + Raiz.getData() + " H: " + Raiz.getHeight() + " FE:  " + this.getBalance(Raiz) + " \"  color =\"blue\"];\n";
         if (Raiz == null) {
             return "";
         } else {
             if (Raiz.getRight() != null) {
-                if(dato > Raiz.getData()   ){
+                if (dato > Raiz.getData()) {
                     r += G(Raiz.getRight(), dato);
                 }
             }
             if (Raiz.getLeft() != null) {
-                if(dato < Raiz.getData()){
+                if (dato < Raiz.getData()) {
                     r += G(Raiz.getLeft(), dato);
                 }
             }
-            
-            
+
         }
         return r;
     }

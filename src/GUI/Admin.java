@@ -8,6 +8,8 @@ package GUI;
 import EDD.Node;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyecto_2.Proyecto_2;
@@ -32,7 +34,7 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
         jTable.setModel(md);
         Node temp = Proyecto_2.err.getFirst();
         while (temp != null) {
-            Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
+            Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPassword(), temp.getDato().getMotivo()};
             md.addRow(datos);
             temp = temp.getNext();
         }
@@ -49,7 +51,6 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
 
         jLabel1 = new javax.swing.JLabel();
         jButtonAdd = new javax.swing.JButton();
-        jTextFieldAdd = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jButtonCerrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -75,12 +76,6 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
         jButtonAdd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jButtonAddKeyPressed(evt);
-            }
-        });
-
-        jTextFieldAdd.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextFieldAddKeyPressed(evt);
             }
         });
 
@@ -156,12 +151,9 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addGap(119, 119, 119)
-                                        .addComponent(jTextFieldAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2)
                                     .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonAdd)
                                     .addComponent(jButtonCerrar))))
@@ -177,13 +169,12 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextFieldAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonAdd))
-                .addGap(40, 40, 40)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel3)
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,11 +193,15 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        JFileChooser  jf = new JFileChooser();
+        jf.showOpenDialog(this);
+        File archivo = jf.getSelectedFile();
+        if(archivo != null)
         try {
-            Proyecto_2.readUser(jTextFieldAdd.getText());
+            Proyecto_2.readUser(archivo.getAbsolutePath());
             Node temp = Proyecto_2.err.getFirst();
             while (temp != null) {
-                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
+                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPassword(), temp.getDato().getMotivo()};
                 md.addRow(datos);
                 temp = temp.getNext();
             }
@@ -229,32 +224,8 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jButtonAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAddKeyPressed
-        int KeyCode = evt.getKeyCode();
-        if (KeyCode == KeyEvent.VK_ENTER) {
-            Proyecto_2.readUser(jTextFieldAdd.getText());
-            Node temp = Proyecto_2.err.getFirst();
-            while (temp != null) {
-                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
-                md.addRow(datos);
-                temp = temp.getNext();
-            }
-            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
-        }
+      
     }//GEN-LAST:event_jButtonAddKeyPressed
-
-    private void jTextFieldAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldAddKeyPressed
-        int KeyCode = evt.getKeyCode();
-        if (KeyCode == KeyEvent.VK_ENTER) {
-            Proyecto_2.readUser(jTextFieldAdd.getText());
-            Node temp = Proyecto_2.err.getFirst();
-            while (temp != null) {
-                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
-                md.addRow(datos);
-                temp = temp.getNext();
-            }
-            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
-        }
-    }//GEN-LAST:event_jTextFieldAddKeyPressed
 
     /**
      * @param args the command line arguments
@@ -305,7 +276,6 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JMenuItem jMenuItemMod;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
-    private javax.swing.JTextField jTextFieldAdd;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -315,17 +285,7 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int KeyCode = e.getKeyCode();
-        if (KeyCode == KeyEvent.VK_ENTER) {
-            Proyecto_2.readUser(jTextFieldAdd.getText());
-            Node temp = Proyecto_2.err.getFirst();
-            while (temp != null) {
-                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPass(), temp.getDato().getMotivo()};
-                md.addRow(datos);
-                temp = temp.getNext();
-            }
-            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
-        }
+       
     }
 
     @Override
