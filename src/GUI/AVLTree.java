@@ -6,15 +6,15 @@
 package GUI;
 
 import EDD.NodeLD;
-import Hilos.AutoAVL;
-import Hilos.DeleteAVL;
-import Hilos.ManualAVL;
+import Hilos.*;
+
 import Object.User;
 import java.awt.event.KeyEvent;
 import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import proyecto_2.Proyecto_2;
 
@@ -60,6 +60,11 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         jLabel = new javax.swing.JLabel();
         jLabelImage = new javax.swing.JLabel();
         jLabelDesc = new javax.swing.JLabel();
+        jButtonInorden = new javax.swing.JButton();
+        jButtonPostorden = new javax.swing.JButton();
+        jButtonPreorden = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelRecorrido = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -135,9 +140,43 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             }
         });
         getContentPane().add(jCBTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        getContentPane().add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, 190, 30));
+        getContentPane().add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 310, 190, 30));
+
+        jLabelImage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabelImageMouseEntered(evt);
+            }
+        });
         getContentPane().add(jLabelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 630, 630));
-        getContentPane().add(jLabelDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 190, 210, 90));
+        getContentPane().add(jLabelDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 210, 90));
+
+        jButtonInorden.setText("Inorden");
+        jButtonInorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonInorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 110, 110, -1));
+
+        jButtonPostorden.setText("Postorden");
+        jButtonPostorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPostordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonPostorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 110, -1));
+
+        jButtonPreorden.setText("Preorden");
+        jButtonPreorden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPreordenActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButtonPreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, 110, -1));
+
+        jLabel2.setText("Recorrido");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, -1, -1));
+        getContentPane().add(jLabelRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, 250, 30));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -240,6 +279,28 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jTextFieldDeleteKeyPressed
 
+    private void jLabelImageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelImageMouseEntered
+        mostrar();
+    }//GEN-LAST:event_jLabelImageMouseEntered
+
+    private void jButtonInordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInordenActionPerformed
+        Recorrido ac = new Recorrido(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+
+        ac.start();
+    }//GEN-LAST:event_jButtonInordenActionPerformed
+
+    private void jButtonPostordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPostordenActionPerformed
+        Recorrido ac = new Recorrido(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+
+        ac.start();
+    }//GEN-LAST:event_jButtonPostordenActionPerformed
+
+    private void jButtonPreordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreordenActionPerformed
+        Recorrido ac = new Recorrido(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+
+        ac.start();
+    }//GEN-LAST:event_jButtonPreordenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -281,12 +342,17 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
     private javax.swing.JButton Cargar;
     private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonInorden;
     private javax.swing.JButton jButtonInsert;
+    private javax.swing.JButton jButtonPostorden;
+    private javax.swing.JButton jButtonPreorden;
     private javax.swing.JComboBox jCBTipo;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelDesc;
     private javax.swing.JLabel jLabelImage;
+    private javax.swing.JLabel jLabelRecorrido;
     private javax.swing.JSlider jSlider;
     private javax.swing.JTextField jTextFieldDelete;
     // End of variables declaration//GEN-END:variables
@@ -296,4 +362,12 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public void mostrar() {
+        ImageIcon icono = new ImageIcon("src\\Imagenes\\AVLTree.png");
+        icono.getImage().flush();
+        jLabelImage.setIcon(icono);
+        jLabelImage.revalidate();
+        jLabelImage.validate();
+        jLabelImage.repaint();
+    }
 }

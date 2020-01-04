@@ -6,11 +6,22 @@ package EDD;
  */
 public class NodeAVL {
 
+        private int data;
+    public NodeAVL left;
+    public NodeAVL right;
+    public int height;
+    public boolean visitado;
+    
     public NodeAVL(int data) {
         this.data = data;
         this.left = null;
         this.right = null;
+        this.visitado = false;
         
+    }
+
+    public void setVisitado(boolean visitado) {
+        this.visitado = visitado;
     }
 
     public int getData() {
@@ -44,10 +55,7 @@ public class NodeAVL {
     public void setHeight(int height) {
         this.height = height;
     }
-    private int data;
-    public NodeAVL left;
-    public NodeAVL right;
-    public int height;
+
     
     @Override
     public String toString(){

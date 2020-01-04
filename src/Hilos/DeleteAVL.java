@@ -40,8 +40,11 @@ public class DeleteAVL extends Thread {
             mostrar();
             TimeUnit.SECONDS.sleep(velocidad);
             jLabel.setText("Eliminando: " + delete);
+            mostrar();
             descip.setText("Nodo encontrado ");
+            mostrar();
             Proyecto_2.avl.delete(delete);
+            mostrar();
             Proyecto_2.avl.report();
 
             mostrar();

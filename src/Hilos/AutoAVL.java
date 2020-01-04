@@ -45,6 +45,7 @@ public class AutoAVL extends Thread {
                 
                 mostrar();
                 Proyecto_2.avl.buscar(as.getDato());
+                mostrar();
                 jLabel.setText("Insertando:  " + as.getDato());
                 mostrar();
                 

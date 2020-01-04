@@ -32,29 +32,22 @@ public class AVLTree {
     }
 
     NodeAVL deleteRec(NodeAVL root, int key) {
-
         if (root == null) {
             return root;
         }
-
         if (key < root.getData()) {
             root.left = deleteRec(root.left, key);
         } else if (key > root.getData()) {
             root.right = deleteRec(root.right, key);
         } else {
-
             if (root.left == null) {
                 return root.right;
             } else if (root.right == null) {
                 return root.left;
             }
-
             root.setData(minValue(root.right));
-
-            // Delete the inorder successor 
             root.right = deleteRec(root.right, root.getData());
         }
-
         return root;
     }
 
@@ -173,7 +166,7 @@ public class AVLTree {
 
     public void delete(int data) {
         if (root != null) {
-            deleteNode( root, data);
+            deleteNode(root, data);
         }
 
     }
@@ -261,7 +254,7 @@ public class AVLTree {
             Retorno += Graph(Raiz.getRight());
             Retorno += Raiz.getData() + "->" + Raiz.getRight().getData() + "; \n";
         }
-        return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + "   H: " + Raiz.getHeight() + " FE:  " + this.getBalance(Raiz) + " \"     ];\n";
+        return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + " FE: " + this.getBalance(Raiz) + " \"    xlabel= \""+Raiz.getHeight()+ "\"   ];\n";
 
     }
 
@@ -434,7 +427,7 @@ public class AVLTree {
     }
 
     private String G(NodeAVL Raiz, int dato) {
-        String r = Raiz.getData() + "[label=\" " + Raiz.getData() + " H: " + Raiz.getHeight() + " FE:  " + this.getBalance(Raiz) + " \"  color =\"blue\"];\n";
+        String r = Raiz.getData() + "[label=\" " + Raiz.getData() + " FE:  " + this.getBalance(Raiz) + " \"     xlabel= \""+Raiz.getHeight()+ "\"   style = filled  fillcolor =\"darkturquoise\"];\n";
         if (Raiz == null) {
             return "";
         } else {
@@ -458,7 +451,7 @@ public class AVLTree {
         if (Raiz == null) {
             return "";
         } else if (Raiz.getData() == dato) {
-            r = Raiz.getData() + "[label=\" " + Raiz.getData() + " H: " + Raiz.getHeight() + " FE:  " + this.getBalance(Raiz) + " \"  color =\"red\"];\n";
+            r = Raiz.getData() + "[label=\" " + Raiz.getData() + " FE:  " + this.getBalance(Raiz) + " \"   xlabel= \""+Raiz.getHeight()+ "\"    style = filled  fillcolor =\"firebrick1\"];\n";
         } else {
             if (Raiz.getRight() != null) {
                 if (dato > Raiz.getData()) {
@@ -506,7 +499,6 @@ public class AVLTree {
     }
 
     private NodeAVL deleteNode(NodeAVL root, int value) {
-       
 
         if (root == null) {
             return root;
@@ -514,12 +506,10 @@ public class AVLTree {
 
         if (value < root.getData()) {
             root.left = deleteNode(root.left, value);
-        } 
-        else if (value > root.getData()) {
+        } else if (value > root.getData()) {
             root.right = deleteNode(root.right, value);
-        } 
-        else {
-            
+        } else {
+
             if ((root.left == null) || (root.right == null)) {
 
                 NodeAVL temp;
@@ -529,39 +519,31 @@ public class AVLTree {
                     temp = root.getRight();
                 }
 
-              
                 if (temp == null) {
                     temp = root;
                     root = null;
-                } else 
-                {
-                    root = temp; 
+                } else {
+                    root = temp;
                 }
                 temp = null;
             } else {
-               
+
                 NodeAVL temp = minValueNode(root.right);
 
-                
                 root.setData(temp.getData());
 
-                
                 root.right = deleteNode(root.right, temp.getData());
             }
         }
 
-        
         if (root == null) {
             return root;
         }
 
-
         root.height = Math.max(height(root.left), height(root.right)) + 1;
 
-        
         int balance = getBalance(root);
 
-        
         // Caso LL
         if (balance > 1 && getBalance(root.left) >= 0) {
             return rightRotate(root);
@@ -600,15 +582,12 @@ public class AVLTree {
         NodeAVL x = y.left;
         NodeAVL T2 = x.right;
 
-        
         x.setRight(y);
         y.setLeft(T2);
 
-        
-        y.setHeight(  Math.max(height(y.left), height(y.right)) + 1);
-        x.setHeight( Math.max(height(x.left), height(x.right)) + 1);
+        y.setHeight(Math.max(height(y.left), height(y.right)) + 1);
+        x.setHeight(Math.max(height(x.left), height(x.right)) + 1);
 
-        
         return x;
     }
 
@@ -616,16 +595,275 @@ public class AVLTree {
         NodeAVL y = x.getRight();
         NodeAVL T2 = y.getLeft();
 
-        
         y.setLeft(x);
-        x.setRight( T2);
+        x.setRight(T2);
 
-        
-        x.setHeight( Math.max(height(x.left), height(x.right)) + 1);
-        y.setHeight ( Math.max(height(y.left), height(y.right)) + 1);
+        x.setHeight(Math.max(height(x.left), height(x.right)) + 1);
+        y.setHeight(Math.max(height(y.left), height(y.right)) + 1);
 
-        
         return y;
     }
+
+    public String inorden() {
+        if (root != null) {
+            return inorden(this.root);
+        } else {
+            return "";
+        }
+    }
+
+    private String inorden(NodeAVL tmp) {
+        if (tmp != null) {
+
+            return inorden(tmp.getLeft()) + tmp.getData() + "-" + inorden(tmp.getRight());
+        } else {
+            return "";
+        }
+    }
+
+    public int[] inordenM() {
+        String in = inorden();
+
+        String[] parts = in.split("-");
+        int inorden[] = new int[parts.length];
+        //Integer.parseInt
+        for (int i = 0; i < inorden.length; i++) {
+            inorden[i] = Integer.parseInt(parts[i]);
+        }
+        return inorden;
+    }
+
+    public String postorden() {
+        if (this.root != null) {
+            return postorden(this.root);
+        } else {
+            return "";
+        }
+
+    }
+
+    private String postorden(NodeAVL tmp) {
+        if (tmp != null) {
+
+            return postorden(tmp.getLeft()) + postorden(tmp.getRight()) + tmp.getData() + "-";
+        } else {
+            return "";
+        }
+    }
+
+    public int[] postordenM() {
+        String in = postorden();
+
+        String[] parts = in.split("-");
+        int post[] = new int[parts.length];
+
+        for (int i = 0; i < post.length; i++) {
+            post[i] = Integer.parseInt(parts[i]);
+        }
+        return post;
+    }
+
+    public String preorden() {
+        if (this.root != null) {
+            return preorden(this.root);
+        } else {
+            return "";
+        }
+
+    }
+
+    private String preorden(NodeAVL tmp) {
+        if (tmp != null) {
+
+            return tmp.getData() + "-" + preorden(tmp.getLeft()) + preorden(tmp.getRight());
+        } else {
+            return "";
+        }
+    }
+
+    public int[] preordenM() {
+        String in = preorden();
+
+        String[] parts = in.split("-");
+        int inorden[] = new int[parts.length];
+        //Integer.parseInt
+        for (int i = 0; i < inorden.length; i++) {
+            inorden[i] = Integer.parseInt(parts[i]);
+        }
+        return inorden;
+    }
+
+    //Pinta los visitados y los marca de visitados
+    public void visitar(int visit) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("src\\Imagenes\\AVLTree.dot");
+
+            pw = new PrintWriter(fichero);
+
+            pw.println("digraph G { \n");
+            pw.println("nodesep=0.8;\n");
+            pw.println("ranksep=0.5;\n");
+            pw.println(visit(visit));
+            pw.println("}\n");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\AVLTree.dot -o src\\Imagenes\\AVLTree.png");
+            //Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+
+    private String visit(int visit) {
+        if (root == null) {
+            return "\n\n";
+        } else {
+            return "\n  \n" + GraphV(root) + "\n" + v(visit) + "\n";
+        }
+    }
+
+    private String v(int visit) {
+         return v(root, visit);
+    }
+
+    private String v(NodeAVL Raiz, int visit) {
+         String r = "";
+        if (Raiz == null) {
+            return "";
+        } else if (Raiz.getData() == visit) {
+            r = Raiz.getData() + "[label=\" " + Raiz.getData() + " FE: " + this.getBalance(Raiz) + " \"    xlabel= \""+Raiz.getHeight()+ "\"    style = filled   fillcolor =\"chocolate1\"  ];\n";
+            Raiz.setVisitado(true); 
+            if(Raiz.visitado){
+                
+                System.out.println("Fue visitado "+ Raiz.getData());
+            }
+        } else {
+            if (Raiz.getRight() != null) {
+                if (visit > Raiz.getData()) {
+                    r += v(Raiz.getRight(), visit);
+                }
+            }
+            if (Raiz.getLeft() != null) {
+                if (visit < Raiz.getData()) {
+                    r += v(Raiz.getLeft(), visit);
+                }
+            }
+
+        }
+        return r;
+    }
+    
+    
+    public void reportVisit(){
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("src\\Imagenes\\AVLTree.dot");
+
+            pw = new PrintWriter(fichero);
+
+            pw.println("digraph G { \n");
+            pw.println("nodesep=0.8;\n");
+            pw.println("ranksep=0.5;\n");
+            pw.println(grafV());
+            pw.println("}\n");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Nuevamente aprovechamos el finally para 
+                // asegurarnos que se cierra el fichero.
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\AVLTree.dot -o src\\Imagenes\\AVLTree.png");
+            //Process pa = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\AVLTree.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+
+    private String grafV() {
+         if (root == null) {
+            return "\n\n";
+        } else {
+            return "\n  \n" + GraphV(root) + "\n";
+        }
+    }
+
+    private String GraphV(NodeAVL Raiz) {
+      String Retorno = "";
+        if (Raiz == null) {
+            return Retorno;
+        }
+
+        if (Raiz.getLeft() != null) {
+            Retorno += GraphV(Raiz.getLeft());
+            Retorno += Raiz.getData() + "->" + Raiz.getLeft().getData() + "; \n";
+        }
+        if (Raiz.getRight() != null) {
+            Retorno += GraphV(Raiz.getRight());
+            Retorno += Raiz.getData() + "->" + Raiz.getRight().getData() + "; \n";
+        }
+        if(Raiz.visitado){
+            System.out.println("");
+            return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + " FE: " + this.getBalance(Raiz) + " \"   xlabel= \""+Raiz.getHeight()+ "\"    style = filled   fillcolor =\"chartreuse2\"   ];\n";
+        }else{
+            return Retorno + Raiz.getData() + "[label=\" " + Raiz.getData() + " FE: " + this.getBalance(Raiz) + " \"   xlabel= \""+Raiz.getHeight()+ "\"  ];\n";
+        }
+        
+    }
+    
+    
+    public void noVisit(){
+        if(root != null){
+            noVisit(root);
+        }else{
+            System.out.println("No se puede esta facial");
+        }
+    }
+
+    private void noVisit(NodeAVL Raiz) {
+        
+        
+        if (Raiz == null) {
+            return;
+        }else{
+            Raiz.visitado = false;
+        }
+
+        if (Raiz.getLeft() != null) {
+            noVisit(Raiz.getLeft());
+            
+        }
+        if (Raiz.getRight() != null) {
+            noVisit(Raiz.getRight());
+            
+        }
+        
+    }
+    
+    
 
 }

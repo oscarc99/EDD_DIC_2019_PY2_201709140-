@@ -38,10 +38,79 @@ public class Proyecto_2 {
     public static void main(String[] args) {
         Login l = new Login();
         l.setVisible(true);
+        ArbolB btree = new ArbolB(5);
+        btree.insert(1);
+        btree.insert(3);
+        btree.eliminar(13);
+        
+        //System.out.println("TRAVERSE");
+        //btree.traverse();
+        /*
+       
+       try{
+        
+        avl.insert(1);
+        avl.insert(2);
+        avl.insert(3);
+        avl.insert(4);
+        avl.insert(5);
+        avl.insert(6);
+        avl.insert(7);
+        avl.insert(8);
+        avl.insert(9);
+        avl.insert(10);
+        avl.report();
+        
+        System.out.println("PREOORDEN");
+        System.out.println(avl.preorden());
+        for (int i = 0; i < avl.preordenM().length; i++) {
+            System.out.println(avl.preordenM()[i]);
+        }
+        System.out.println("Inorden");
+        System.out.println(avl.inorden());
+        for (int i = 0; i < avl.inordenM().length; i++) {
+            System.out.println(avl.inordenM()[i]);
+        }
+        
+        System.out.println("POSTORDEN");
+        System.out.println(avl.postorden());
+        for (int i = 0; i < avl.postordenM().length; i++) {
+            System.out.println(avl.postordenM()[i]);
+        }
+        Thread.sleep(3000);
+        avl.visitar(1);
+        Thread.sleep(3000);
+        avl.reportVisit();
+        Thread.sleep(3000);
+        avl.visitar(4);
+        Thread.sleep(3000);
+        avl.reportVisit();
+        Thread.sleep(3000);
+        avl.visitar(2);
+        Thread.sleep(3000);
+        avl.reportVisit();
+        Thread.sleep(3000);
+        avl.visitar(3);
+        Thread.sleep(3000);
+        avl.reportVisit();
+        Thread.sleep(3000);
+        avl.noVisit();
+        avl.reportVisit();
+        
+        
+        } catch (InterruptedException ex) {
+         Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+        
+        
+        
+         
+        
         
         //a.delete(4);
         //a.report();
-        /*
+        
          try {
          System.out.println("pruebas");
          AVLTree arbol = new AVLTree();
