@@ -32,6 +32,10 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
     Thread actualizar;
     Thread mostrar;
     NodeLD first;
+    int manualInorden = 0;
+    int manualPostorden = 0;
+    int manualPreorden = 0;
+    boolean flagInorden = true;
 
     public AVLTree(User X) {
         initComponents();
@@ -227,11 +231,11 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             if (jCBTipo.getSelectedItem() == "Manual") {
                 JOptionPane.showMessageDialog(null, "Datos cargados para insercion manual");
                 as = Proyecto_2.doble.getFirst();
-                first = Proyecto_2.doble.getFirst();
+                
             } else if (jCBTipo.getSelectedItem() == "Automatico") {
                 System.out.println("Automatico");
                 NodeLD s = Proyecto_2.doble.getFirst();
-                first = Proyecto_2.doble.getFirst();
+                
 
                 AutoAVL ac = new AutoAVL(jLabel, s, jSlider.getValue(), jLabelDesc, jLabelImage);
                 ac.start();
@@ -284,21 +288,93 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jLabelImageMouseEntered
 
     private void jButtonInordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInordenActionPerformed
-        Recorrido ac = new Recorrido(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+        if (jCBTipo.getSelectedItem() == "Manual") {
+            if (manualInorden < Proyecto_2.avl.inordenM().length) {
+                flagInorden = false;
+                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden);
+                ac.start();
+                manualInorden++;
+                if (manualInorden == Proyecto_2.avl.inordenM().length) {
+                    flagInorden = true;
+                }
 
-        ac.start();
+            } else {
+                Proyecto_2.avl.noVisit();
+                manualInorden = 0;
+                flagInorden = true;
+                JOptionPane.showMessageDialog(null, "Recorrido terminado");
+            }
+
+        }
+        if (jCBTipo.getSelectedItem() == "Automatico") {
+            if (!flagInorden) {
+                JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
+            } else {
+                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+                ac.start();
+                flagInorden = true;
+            }
+        }
     }//GEN-LAST:event_jButtonInordenActionPerformed
 
     private void jButtonPostordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPostordenActionPerformed
-        Recorrido ac = new Recorrido(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+        if (jCBTipo.getSelectedItem() == "Manual") {
+            if (manualInorden < Proyecto_2.avl.postordenM().length) {
+                flagInorden = false;
+                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden);
+                ac.start();
+                manualInorden++;
+                if (manualInorden == Proyecto_2.avl.postordenM().length) {
+                    flagInorden = true;
+                }
 
-        ac.start();
+            } else {
+                Proyecto_2.avl.noVisit();
+                manualInorden = 0;
+                flagInorden = true;
+                JOptionPane.showMessageDialog(null, "Recorrido terminado");
+            }
+
+        }
+        if (jCBTipo.getSelectedItem() == "Automatico") {
+            if (!flagInorden) {
+                JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
+            } else {
+                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+                ac.start();
+                flagInorden = true;
+            }
+        }
     }//GEN-LAST:event_jButtonPostordenActionPerformed
 
     private void jButtonPreordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreordenActionPerformed
-        Recorrido ac = new Recorrido(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+        if (jCBTipo.getSelectedItem() == "Manual") {
+            if (manualInorden < Proyecto_2.avl.preordenM().length) {
+                flagInorden = false;
+                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden);
+                ac.start();
+                manualInorden++;
+                if (manualInorden == Proyecto_2.avl.preordenM().length) {
+                    flagInorden = true;
+                }
 
-        ac.start();
+            } else {
+                Proyecto_2.avl.noVisit();
+                manualInorden = 0;
+                flagInorden = true;
+                JOptionPane.showMessageDialog(null, "Recorrido terminado");
+            }
+
+        }
+        if (jCBTipo.getSelectedItem() == "Automatico") {
+            if (!flagInorden) {
+                JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
+            } else {
+                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+                ac.start();
+                flagInorden = true;
+            }
+        }
     }//GEN-LAST:event_jButtonPreordenActionPerformed
 
     /**

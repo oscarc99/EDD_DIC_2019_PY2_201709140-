@@ -6,6 +6,9 @@
 package GUI;
 
 import EDD.Node;
+import EDD.NodeV;
+import Hilos.*;
+
 import Object.User;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -22,11 +25,15 @@ public class Grafos extends javax.swing.JFrame {
      * Creates new form Grafos
      */
     User u;
+    NodeV as;
+    int reco = 0;
+    boolean flag = true;
 
     public Grafos(User x) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.u = x;
+
     }
 
     /**
@@ -38,22 +45,24 @@ public class Grafos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextFieldInsert = new javax.swing.JTextField();
         jButtonInsert = new javax.swing.JButton();
         jButtonBack1 = new javax.swing.JButton();
         jSlider = new javax.swing.JSlider();
         jLabel1 = new javax.swing.JLabel();
-        jLabelImage = new javax.swing.JLabel();
         jButtonProf = new javax.swing.JButton();
         jButtonAnch = new javax.swing.JButton();
+        jButtonCargar = new javax.swing.JButton();
+        jLabelDesc = new javax.swing.JLabel();
+        jCBTipo = new javax.swing.JComboBox();
+        jLabelEDD = new javax.swing.JLabel();
+        jLabelRecorrido = new javax.swing.JLabel();
+        jTextFieldInicio = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabelImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextFieldInsert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldInsertActionPerformed(evt);
-            }
-        });
 
         jButtonInsert.setText("Insertar");
         jButtonInsert.addActionListener(new java.awt.event.ActionListener() {
@@ -69,11 +78,11 @@ public class Grafos extends javax.swing.JFrame {
             }
         });
 
-        jSlider.setMajorTickSpacing(500);
-        jSlider.setMaximum(4000);
-        jSlider.setMinimum(1000);
+        jSlider.setMajorTickSpacing(1);
+        jSlider.setMaximum(10);
+        jSlider.setMinimum(1);
         jSlider.setPaintTicks(true);
-        jSlider.setValue(2000);
+        jSlider.setValue(1);
         jSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderStateChanged(evt);
@@ -83,70 +92,170 @@ public class Grafos extends javax.swing.JFrame {
         jLabel1.setText("Velocidad:");
 
         jButtonProf.setText("Profundidad");
+        jButtonProf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProfActionPerformed(evt);
+            }
+        });
 
         jButtonAnch.setText("Anchura");
+        jButtonAnch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnchActionPerformed(evt);
+            }
+        });
+
+        jButtonCargar.setText("Cargar");
+        jButtonCargar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCargarActionPerformed(evt);
+            }
+        });
+
+        jCBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Automatico", "Manual" }));
+        jCBTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBTipoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Inicio:");
+
+        jLabel3.setText("Recorridos");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(154, 405, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jTextFieldInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(jButtonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(47, 47, 47)
-                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonProf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonAnch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(43, 43, 43)
-                .addComponent(jButtonBack1)
-                .addGap(48, 48, 48))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(409, Short.MAX_VALUE)
+                                .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39)
+                                .addComponent(jButtonCargar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38)
+                                .addComponent(jButtonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(57, 57, 57)
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(43, 43, 43))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(68, 68, 68)
+                                .addComponent(jLabel2)
+                                .addGap(92, 92, 92)
+                                .addComponent(jTextFieldInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(97, 97, 97)
+                                .addComponent(jButtonBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonProf)
+                                .addGap(40, 40, 40)
+                                .addComponent(jButtonAnch, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(15, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(95, 95, 95)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelRecorrido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelDesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(72, 72, 72))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabelEDD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jCBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonCargar)
+                        .addComponent(jButtonInsert)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGap(5, 5, 5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonBack1)
+                            .addComponent(jTextFieldInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jTextFieldInsert, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonInsert)
-                                .addComponent(jLabel1))
-                            .addComponent(jButtonBack1))
-                        .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonAnch)
-                        .addGap(18, 18, 18)))
-                .addComponent(jButtonProf)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jLabelImage, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonAnch)
+                                .addGap(54, 54, 54)
+                                .addComponent(jLabelRecorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabelDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonProf)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInsertActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldInsertActionPerformed
-
     private void jSliderStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSliderStateChanged
         System.out.println(jSlider.getValue());
     }//GEN-LAST:event_jSliderStateChanged
-
+//Insert step by step
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
+        if (as != null) {
+            ManualGrafo ac = new ManualGrafo(as, jSlider.getValue(), jLabelDesc, jLabelImage);
+            ac.start();
+            as = as.getNext();
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Arbol terminado");
+        }
+
+    }//GEN-LAST:event_jButtonInsertActionPerformed
+//Back to menu user
+    private void jButtonBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBack1ActionPerformed
+        Usuario ventanA = new Usuario(this.u);
+        this.setVisible(false);
+        ventanA.setVisible(true);
+    }//GEN-LAST:event_jButtonBack1ActionPerformed
+    //Update graf
+    private void jButtonCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCargarActionPerformed
         JFileChooser jf = new JFileChooser();
         jf.showOpenDialog(this);
         File archivo = jf.getSelectedFile();
@@ -154,20 +263,96 @@ public class Grafos extends javax.swing.JFrame {
             try {
 
                 Proyecto_2.listVertices(archivo.getAbsolutePath());
-                JOptionPane.showMessageDialog(null, "Carga realizada con exito");
+                if (jCBTipo.getSelectedItem() == "Manual") {
+                    JOptionPane.showMessageDialog(null, "Datos cargados para insercion manual");
+                    as = Proyecto_2.v.getFirst();
+
+                } else if (jCBTipo.getSelectedItem() == "Automatico") {
+
+                    NodeV s = Proyecto_2.v.getFirst();
+
+                    AutoGrafo ac = new AutoGrafo(s, jSlider.getValue(), jLabelDesc, jLabelImage);
+                    ac.start();
+
+                }
             } catch (Exception e) {
                 System.out.println("ERROR EN CARGA" + e);
             }
         }
+    }//GEN-LAST:event_jButtonCargarActionPerformed
+
+    private void jCBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBTipoActionPerformed
+//Botton BFS (anchura)
+    private void jButtonAnchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnchActionPerformed
+        //Anchura
+        String begin = jTextFieldInicio.getText();
+        if (begin.length() != 0) {
+            if (jCBTipo.getSelectedItem() == "Manual") {
+                if (reco < Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
+                    flag = false;
+                    ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.BFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD,"Anchura");
+                    ac.start();
+                    reco++;
+                    if (reco == Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
+                        flag = true;
+
+                    }
+
+                } else {
+                    Proyecto_2.grafo.NonVisit();
+                    reco = 0;
+                    flag = true;
+                    JOptionPane.showMessageDialog(null, "Recorrido terminado");
+                }
+
+            } else if (jCBTipo.getSelectedItem() == "Automatico") {
+                if (!flag) {
+                    JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
+                } else {
+                    String arr[] = Proyecto_2.grafo.BFS(begin);
+                    int vel = jSlider.getValue();
+                    AutoRecorridoG ac = new AutoRecorridoG(arr, jLabelImage, vel, jLabelDesc, jLabelRecorrido, jLabelEDD,"Anchura");
+                    ac.start();
+                    flag = true;
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Inserte inicio");
+        }
 
 
-    }//GEN-LAST:event_jButtonInsertActionPerformed
+    }//GEN-LAST:event_jButtonAnchActionPerformed
+//Botton DFS (profundidad)
+    private void jButtonProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfActionPerformed
+        if (jCBTipo.getSelectedItem() == "Manual") {
+            if (reco < Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
+                flag = false;
+                ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD,"Profundidad");
+                ac.start();
+                reco++;
+                if (reco == Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
+                    flag = true;
+                }
 
-    private void jButtonBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBack1ActionPerformed
-        Usuario ventanA = new Usuario(this.u);
-        this.setVisible(false);
-        ventanA.setVisible(true);
-    }//GEN-LAST:event_jButtonBack1ActionPerformed
+            } else {
+                Proyecto_2.avl.noVisit();
+                reco = 0;
+                flag = true;
+                JOptionPane.showMessageDialog(null, "Recorrido terminado");
+            }
+
+        } else if (jCBTipo.getSelectedItem() == "Automatico") {
+            if (!flag) {
+                JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
+            } else {
+                AutoRecorridoG ac = new AutoRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jLabelEDD, "Profundidad");
+                ac.start();
+                flag = true;
+            }
+        }
+    }//GEN-LAST:event_jButtonProfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,11 +392,19 @@ public class Grafos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAnch;
     private javax.swing.JButton jButtonBack1;
+    private javax.swing.JButton jButtonCargar;
     private javax.swing.JButton jButtonInsert;
     private javax.swing.JButton jButtonProf;
+    private javax.swing.JComboBox jCBTipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelDesc;
+    private javax.swing.JLabel jLabelEDD;
     private javax.swing.JLabel jLabelImage;
+    private javax.swing.JLabel jLabelRecorrido;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider;
-    private javax.swing.JTextField jTextFieldInsert;
+    private javax.swing.JTextField jTextFieldInicio;
     // End of variables declaration//GEN-END:variables
 }

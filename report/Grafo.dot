@@ -1,39 +1,4 @@
  digraph G{ 
  node [shape=rectangle]; 
-node0 [label=" A" ];
-node0B [label="B" ];
-node0B [label="B" ];
-node0E [label="E" ];
-node1 [label=" B" ];
-node1A [label="A" ];
-node1A [label="A" ];
-node1E [label="E" ];
-node2 [label=" C" ];
-node2E [label="E" ];
-node4 [label=" E" ];
-node4C [label="C" ];
-node4C [label="C" ];
-node4A [label="A" ];
-node4B [label="B" ];
-node0-> node0B 
-node0B -> node0E
-node1-> node0 [penwidth=2, arrowhead=none];
-node1-> node1A 
-node1A -> node1E
-node2-> node1 [penwidth=2, arrowhead=none];
-node2-> node2E 
-node4-> node2 [penwidth=2, arrowhead=none];
-node4-> node4C 
-node4C -> node4A
-node4A -> node4B
-{rank= same;  node0; node0B;} 
-{rank= same;  node0; node0B;node0E; } 
-{rank= same;  node1; node1A;} 
-{rank= same;  node1; node1A;node1E; } 
-{rank= same;  node2; node2E;} 
-{rank= same;  } 
-{rank= same;  } 
-{rank= same;  node4; node4C;} 
-{rank= same;  node4; node4C;node4; node4A;node4B; } 
-
+a->g [penwidth=2, arrowhead=none]
 }

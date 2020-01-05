@@ -2,13 +2,14 @@ package proyecto_2;
 
 import EDD.*;
 import GUI.Login;
+import Hilos.AutoAVL;
 
 import Object.User;
 import java.io.*;
-import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -36,80 +37,45 @@ public class Proyecto_2 {
     public static Vertices v = new Vertices();
 
     public static void main(String[] args) {
+        
+        
         Login l = new Login();
         l.setVisible(true);
-        ArbolB btree = new ArbolB(5);
-        btree.insert(1);
-        btree.insert(3);
-        btree.eliminar(13);
+        readUser("Usuarios.json");
+        //Pruebas recorrido profundidad
+        /*
+        listVertices("EjemploGrafo.json");
+        NodeV temp = v.getFirst();
+        while(temp != null){
+            grafo.add(temp.getV1(), temp.getV2());
+           
+            
+            temp = temp.getNext();
+        }
+         grafo.GrafoR();
+         grafo.report();
+         System.out.println("Metodo Arreglo");
+         System.out.println(grafo.profundidad("a"));
+         System.out.println("Metodo repetido");
+         grafo.Stack("a");
+         System.out.println("");
+         System.out.println("Metodo me");
+         grafo.prof("a");
+         
+       */
         
+        /*
+         String n[] ={"a","g","f", "b", "e", "c" };
+         grafo = new Graph(n.length, n);
+         grafo.grafIn("a", "g");
+        
+        
+         */
+        //listVertices("EjemploGrafo.json");
         //System.out.println("TRAVERSE");
         //btree.traverse();
         /*
-       
-       try{
-        
-        avl.insert(1);
-        avl.insert(2);
-        avl.insert(3);
-        avl.insert(4);
-        avl.insert(5);
-        avl.insert(6);
-        avl.insert(7);
-        avl.insert(8);
-        avl.insert(9);
-        avl.insert(10);
-        avl.report();
-        
-        System.out.println("PREOORDEN");
-        System.out.println(avl.preorden());
-        for (int i = 0; i < avl.preordenM().length; i++) {
-            System.out.println(avl.preordenM()[i]);
-        }
-        System.out.println("Inorden");
-        System.out.println(avl.inorden());
-        for (int i = 0; i < avl.inordenM().length; i++) {
-            System.out.println(avl.inordenM()[i]);
-        }
-        
-        System.out.println("POSTORDEN");
-        System.out.println(avl.postorden());
-        for (int i = 0; i < avl.postordenM().length; i++) {
-            System.out.println(avl.postordenM()[i]);
-        }
-        Thread.sleep(3000);
-        avl.visitar(1);
-        Thread.sleep(3000);
-        avl.reportVisit();
-        Thread.sleep(3000);
-        avl.visitar(4);
-        Thread.sleep(3000);
-        avl.reportVisit();
-        Thread.sleep(3000);
-        avl.visitar(2);
-        Thread.sleep(3000);
-        avl.reportVisit();
-        Thread.sleep(3000);
-        avl.visitar(3);
-        Thread.sleep(3000);
-        avl.reportVisit();
-        Thread.sleep(3000);
-        avl.noVisit();
-        avl.reportVisit();
-        
-        
-        } catch (InterruptedException ex) {
-         Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
-         }
-        
-        
-        
-        
          
-        
-        
-        //a.delete(4);
-        //a.report();
         
          try {
          System.out.println("pruebas");
@@ -117,25 +83,124 @@ public class Proyecto_2 {
          String n[] = {"A", "B", "C", "D", "E"};
          nodos = n;
          grafo = new Graph(nodos.length, nodos);
+         grafo.grafIn("A", "B");
+         Thread.sleep(3000);
          grafo.add("A", "B");
          grafo.report();
          grafo.GrafoR();
          Thread.sleep(3000);
-         grafo.add("E", "C");
+         grafo.grafIn("E", "B");
+         Thread.sleep(3000);
+         grafo.add("E", "B");
          grafo.report();
          grafo.GrafoR();
+         Thread.sleep(3000);
+         grafo.grafIn("A", "E");
          Thread.sleep(3000);
          grafo.add("A", "E");
          grafo.report();
          grafo.GrafoR();
          Thread.sleep(3000);
-         grafo.add("E", "B");
-         grafo.report();
-         grafo.GrafoR();
+         
 
          } catch (InterruptedException ex) {
          Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
          }
+        
+         try{
+        
+         avl.insert(1);
+         avl.insert(2);
+         avl.insert(3);
+         avl.insert(4);
+         avl.insert(5);
+         avl.insert(6);
+         avl.insert(7);
+         avl.insert(8);
+         avl.insert(9);
+         avl.insert(10);
+         avl.report();
+        
+         System.out.println("PREOORDEN");
+         System.out.println(avl.preorden());
+         for (int i = 0; i < avl.preordenM().length; i++) {
+         System.out.println(avl.preordenM()[i]);
+         }
+         System.out.println("Inorden");
+         System.out.println(avl.inorden());
+         for (int i = 0; i < avl.inordenM().length; i++) {
+         System.out.println(avl.inordenM()[i]);
+         }
+        
+         System.out.println("POSTORDEN");
+         System.out.println(avl.postorden());
+         for (int i = 0; i < avl.postordenM().length; i++) {
+         System.out.println(avl.postordenM()[i]);
+         }
+         Thread.sleep(3000);
+         avl.visitar(1);
+         Thread.sleep(3000);
+         avl.reportVisit();
+         Thread.sleep(3000);
+         avl.visitar(4);
+         Thread.sleep(3000);
+         avl.reportVisit();
+         Thread.sleep(3000);
+         avl.visitar(2);
+         Thread.sleep(3000);
+         avl.reportVisit();
+         Thread.sleep(3000);
+         avl.visitar(3);
+         Thread.sleep(3000);
+         avl.reportVisit();
+         Thread.sleep(3000);
+         avl.noVisit();
+         avl.reportVisit();
+        
+        
+         } catch (InterruptedException ex) {
+         Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
+        
+        
+         String n[] = {"a", "f", "g", "b", "e", "c"};
+         
+         grafo = new Graph(n.length, n);
+         grafo.add("a", "g");
+         grafo.add("a", "f");
+        
+         grafo.add("g", "b");
+         grafo.add("g", "c");
+         grafo.add("g", "f");
+         grafo.add("g", "a");
+        
+         grafo.add("f", "a");
+         grafo.add("f", "g");
+         grafo.add("f", "b");
+         grafo.add("f", "c");
+        
+         grafo.add("b", "g");
+         grafo.add("b", "f");
+         grafo.add("b", "c");
+         grafo.add("b", "e");
+        
+         grafo.add("c", "g");
+         grafo.add("c", "f");
+         grafo.add("c", "b");
+         grafo.add("c", "e");
+        
+         grafo.add("e", "b");
+         grafo.add("e", "c");
+        
+         grafo.report();
+         
+        
+        
+         //a.delete(4);
+         //a.report();
+        
+        
         
         
          try {
@@ -178,8 +243,6 @@ public class Proyecto_2 {
          */
         //listTree("Arbols.json");
         //listVertices("EjemploGrafo.json");
-        readUser(
-                "Usuarios.json");
     }
 
     public static void listVertices(String ruta) {
@@ -216,7 +279,7 @@ public class Proyecto_2 {
 
                     S = (String) jsonObject.get("Node");
                     v.add_last(num, S);
-                    System.out.println(num + " , " + S);
+                    System.out.println(num + "," + S);
                 }
 
             }
@@ -229,6 +292,15 @@ public class Proyecto_2 {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        NodeV n = v.getFirst();
+        while (n != null) {
+
+            System.out.println(n.getV1() + ", " + n.getV2());
+
+            n = n.getNext();
+
         }
     }
 
@@ -321,5 +393,7 @@ public class Proyecto_2 {
         }
         return (int) value;
     }
+    
+    
 
 }

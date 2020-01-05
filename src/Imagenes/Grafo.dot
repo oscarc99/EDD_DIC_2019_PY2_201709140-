@@ -1,0 +1,82 @@
+ digraph G{ 
+ node [shape=rectangle]; 
+node0 [label=" a" ];
+node0g [label="g" ];
+node0g [label="g" ];
+node0f [label="f" ];
+node1 [label=" g" ];
+node1a [label="a" ];
+node1a [label="a" ];
+node1b [label="b" ];
+node1c [label="c" ];
+node1f [label="f" ];
+node2 [label=" f" ];
+node2a [label="a" ];
+node2a [label="a" ];
+node2g [label="g" ];
+node2b [label="b" ];
+node2h [label="h" ];
+node2c [label="c" ];
+node3 [label=" b" ];
+node3g [label="g" ];
+node3g [label="g" ];
+node3f [label="f" ];
+node3c [label="c" ];
+node3e [label="e" ];
+node4 [label=" c" ];
+node4g [label="g" ];
+node4g [label="g" ];
+node4f [label="f" ];
+node4b [label="b" ];
+node4e [label="e" ];
+node5 [label=" e" ];
+node5b [label="b" ];
+node5b [label="b" ];
+node5c [label="c" ];
+node6 [label=" h" ];
+node6f [label="f" ];
+node6f [label="f" ];
+node0-> node0g 
+node0g -> node0f
+node1-> node0 [penwidth=2, arrowhead=none];
+node1-> node1a 
+node1a -> node1b
+node1b -> node1c
+node1c -> node1f
+node2-> node1 [penwidth=2, arrowhead=none];
+node2-> node2a 
+node2a -> node2g
+node2g -> node2b
+node2b -> node2h
+node2h -> node2c
+node3-> node2 [penwidth=2, arrowhead=none];
+node3-> node3g 
+node3g -> node3f
+node3f -> node3c
+node3c -> node3e
+node4-> node3 [penwidth=2, arrowhead=none];
+node4-> node4g 
+node4g -> node4f
+node4f -> node4b
+node4b -> node4e
+node5-> node4 [penwidth=2, arrowhead=none];
+node5-> node5b 
+node5b -> node5c
+node6-> node5 [penwidth=2, arrowhead=none];
+node6-> node6f 
+{rank= same;  node0; node0g;} 
+{rank= same;  node0; node0g;node0f; } 
+{rank= same;  node1; node1a;} 
+{rank= same;  node1; node1a;node1; node1b;node1; node1c;node1f; } 
+{rank= same;  node2; node2a;} 
+{rank= same;  node2; node2a;node2; node2g;node2; node2b;node2; node2h;node2c; } 
+{rank= same;  node3; node3g;} 
+{rank= same;  node3; node3g;node3; node3f;node3; node3c;node3e; } 
+{rank= same;  node4; node4g;} 
+{rank= same;  node4; node4g;node4; node4f;node4; node4b;node4e; } 
+{rank= same;  node5; node5b;} 
+{rank= same;  node5; node5b;node5c; } 
+{rank= same;  node6; node6f;} 
+{rank= same;  node6f; } 
+
+}
