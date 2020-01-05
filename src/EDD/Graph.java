@@ -372,6 +372,7 @@ public class Graph {
 
     //Recorrido por anchura
     private String anchura(String inicio) {
+        
         String a = "";
         boolean visited[] = new boolean[indice.length];
         Cola queue = new Cola();
@@ -415,9 +416,12 @@ public class Graph {
     }
 
     public String[] BFS(String a) {
+        this.TreeBFS(a);
+        TreeBFS(a);
         String bfs = anchura(a);
         String[] parts = bfs.split("-");
         cola = 0;
+        
         return parts;
 
     }
@@ -445,12 +449,13 @@ public class Graph {
 
     public String profundidad(String v) {
         boolean visited[] = new boolean[V];
+
         return DFS(v, visited);
     }
 
     public String[] DFS(String a) {
         String bfs = profundidad(a);
-        Stack(a);
+        TreeDFS(a);
         String[] parts = bfs.split("-");
         pila = 0;
         return parts;
@@ -596,101 +601,129 @@ public class Graph {
         }
         return g;
     }
+    //Profundidad
 
-    public void Stack(String s) {
-        // Initially mark all vertices as not visited 
-        Boolean[] visited = new Boolean[V];
-        for (int i = 0; i < V; i++) {
-            visited[i] = false;
-        }
+//Arbol de profundidad
+    public void TreeDFS(String vertice) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("src\\Imagenes\\Profundidad.dot");
 
-        // Create a stack for DFS 
-        Pila sta = new Pila();
-        pila = 1;
-        // Push the current source node 
-        sta.push(s);
-        //sta.report(s,0);
-        while (sta.empty() == false) {
+            pw = new PrintWriter(fichero);
+            pw.println("digraph G { \n nodesep=0.8;\n" + "ranksep=0.5;");
+            pw.println(prof(vertice));
+            pw.println("} \n");
 
-            // Pop a vertex from stack and print it 
-            s = sta.peek();
-            sta.pop();
-
-            // Stack may contain same vertex twice. So 
-            // we need to print the popped item only 
-            // if it is not visited. 
-            if (visited[posicion(s)] == false) {
-                System.out.print(s + "-");
-
-                pila++;
-
-                visited[posicion(s)] = true;
-            }
-
-            Nodo itr = adjList[posicion(s)].getFirst();
-
-            while (itr != null) {
-
-                if (!visited[posicion(itr.getDato())]) {
-                    sta.push(itr.getDato());
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fichero) {
+                    fichero.close();
                 }
-                itr = itr.getNext();
+            } catch (Exception e2) {
+                e2.printStackTrace();
             }
-
         }
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\Profundidad.dot -o src\\Imagenes\\Profundidad.png");
+            //Process ap = Runtime.getRuntime().exec("cmd /c  src\\Imagenes\\Grafo.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+
     }
 
-    public void prof(String vertice) {
-        pila = 1;
-        Boolean[] visited = new Boolean[V];
-        for (int i = 0; i < V; i++) {
-            visited[i] = false;
-        }
+    private String prof(String v) {
+        boolean visited[] = new boolean[V];
+        return profu(v, visited);
+    }
 
-        Pila pilaEDD = new Pila();
-        pilaEDD.push(vertice);
-        pilaEDD.report(vertice,0); 
-        while (pilaEDD.empty() == false) {
-            
-            vertice = pilaEDD.peek();
-            
-            //Vertice no ha sido visitado
-            if (!visited[posicion(vertice)]) {
-                pilaEDD.report(vertice,pila); 
-                visited[posicion(vertice)] = true;
-                Nodo itr = adjList[posicion(vertice)].getFirst();
-                while (itr != null) {
-                    if (!visited[posicion(itr.getDato())]) {
-                        pila =0;
-                        pilaEDD.push(itr.getDato());
-                        break;
-                    }
+    private String profu(String v, boolean[] visited) {
+        String as = "";
+        visited[posicion(v)] = true;
 
-                    itr = itr.getNext();
-                }
-                pila++;
-            } else {
-                pilaEDD.report(vertice,pila); 
-                boolean addStack = false;
-                Nodo itr = adjList[posicion(vertice)].getFirst();
-                while (itr != null) {
-                    if (!visited[posicion(itr.getDato())]) {
-                        pilaEDD.push(itr.getDato());
-                        addStack = true;
-                        break;
-                    }
+        //System.out.println("Visito: "+v);
+        // Recur for all the vertices adjacent to this vertex 
+        Nodo temp = adjList[posicion(v)].getFirst();
+        while (temp != null) {
 
-                    itr = itr.getNext();
-                }
-                if (!addStack) {
-                    pilaEDD.pop();
-                    addStack = false;
-                }
-                pila++;
-                
+            if (!visited[posicion(temp.getDato())]) {
+                as += v + " -> " + temp.getDato() + " \n";
+                as += profu(temp.getDato(), visited);
+
             }
-            
+            temp = temp.getNext();
         }
+        return as;
+    }
+
+    //Arbol de profundidad
+    public void TreeBFS(String vertice) {
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try {
+            fichero = new FileWriter("src\\Imagenes\\Anchura.dot");
+
+            pw = new PrintWriter(fichero);
+            pw.println("digraph G { \n nodesep=0.8;\n" + "ranksep=0.5;");
+            pw.println(Anch(vertice));
+            pw.println("} \n");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != fichero) {
+                    fichero.close();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        try {
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\Anchura.dot -o src\\Imagenes\\Anchura.png");
+            //Process ap = Runtime.getRuntime().exec("cmd /c  src\\Imagenes\\Grafo.png");
+        } catch (Exception e2) {
+            e2.printStackTrace();
+        }
+
+    }
+
+    private String Anch(String inicio) {
+
+        String a = "";
+        boolean visited[] = new boolean[indice.length];
+        Cola queue = new Cola();
+        if (posicion(inicio) <= indice.length) {
+            visited[posicion(inicio)] = true;
+        }
+
+        queue.enqueque(inicio);
+
+        //Mientras no este vacia la cola
+        while (!queue.empty()) {
+            queue.report(cola);
+
+            //Saco valor y lo obtengo para saber cuales adyacencia debo de meter
+            inicio = queue.dequeque();
+            
+
+            //Busco adyacentes 
+            Nodo temp = adjList[posicion(inicio)].getFirst();
+            while (temp != null) {
+
+                if (!visited[posicion(temp.getDato())]) {
+                    a += inicio+" ->" + temp.getDato()+ " \n";
+                    visited[posicion(temp.getDato())] = true;
+                    queue.enqueque(indice[posicion(temp.getDato())]);
+                }
+                temp = temp.getNext();
+            }
+            cola++;
+        }
+        return a;
 
     }
 

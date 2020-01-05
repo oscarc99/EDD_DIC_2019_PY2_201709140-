@@ -1,8 +1,8 @@
 digraph G { 
   node [shape = name]; 
   2[label=  <<table border= "1 " cellspacing= " 0 "><tr> 
-<td> h</td> </tr> 
+<td> a</td> </tr> 
 <tr> 
-<td> e</td> </tr> 
+<td> h</td> </tr> 
 </table>>  shape = none ]; 
  }

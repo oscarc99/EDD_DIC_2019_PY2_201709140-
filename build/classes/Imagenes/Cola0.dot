@@ -1,6 +1,6 @@
 digraph G { 
   node [shape = name]; 
   2[label=  <<table border= "1 " cellspacing= " 0 "><tr> 
-<td> a</td> </tr> 
+<td> c</td> </tr> 
 </table>>  shape = none ]; 
  }

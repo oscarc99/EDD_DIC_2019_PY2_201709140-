@@ -42,6 +42,10 @@ public class Proyecto_2 {
         Login l = new Login();
         l.setVisible(true);
         readUser("Usuarios.json");
+        
+         
+    
+         
         //Pruebas recorrido profundidad
         /*
         listVertices("EjemploGrafo.json");

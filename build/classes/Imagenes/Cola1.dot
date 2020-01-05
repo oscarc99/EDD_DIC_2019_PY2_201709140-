@@ -4,5 +4,9 @@ digraph G {
 <td> g</td> </tr> 
 <tr> 
 <td> f</td> </tr> 
+<tr> 
+<td> b</td> </tr> 
+<tr> 
+<td> e</td> </tr> 
 </table>>  shape = none ]; 
  }

@@ -19,11 +19,12 @@ public class AutoRecorridoG extends Thread {
     int velocidad;
     JLabel descripcion;
     JLabel recorido;
-    String recorrid;
+    String recorrid = "";
     JLabel edd;
     String type;
+    JLabel visitados;
 
-    public AutoRecorridoG(String[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, JLabel edd, String tipo) {
+    public AutoRecorridoG(String[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, JLabel edd, String tipo, JLabel jLabelVisitados) {
         this.dato = dato;
         this.edd = edd;
         this.imagen = imagen;
@@ -31,6 +32,7 @@ public class AutoRecorridoG extends Thread {
         this.descripcion = descripcion;
         this.recorido = recorido;
         this.type = tipo;
+        this.visitados = jLabelVisitados;
     }
 
     @Override
@@ -40,10 +42,13 @@ public class AutoRecorridoG extends Thread {
             try {
                 for (int i = 0; i < dato.length; i++) {
                     mostrarA(i);
-                    recorrid += dato[i] + ", ";
+                    if (dato[i] != null) {
+                        recorrid += dato[i] + ", ";
+                    }
                     mostrarA(i);
                     Proyecto_2.grafo.GrafoRPintado(dato[i]);
                     descripcion.setText("Vistando " + dato[i]);
+                    visitados.setText(recorrid);
                     mostrarA(i);
                     TimeUnit.SECONDS.sleep(velocidad);
                     mostrarA(i);
@@ -59,6 +64,7 @@ public class AutoRecorridoG extends Thread {
             }
             JOptionPane.showMessageDialog(null, "Recorrido terminado");
 
+            mostrarArbolA();
             Proyecto_2.grafo.NonVisit();
         } else {
             //Profundidad
@@ -66,10 +72,13 @@ public class AutoRecorridoG extends Thread {
             try {
                 for (int i = 0; i < dato.length; i++) {
                     mostrarP(dato[i]);
-                    recorrid += dato[i] + ", ";
+                    if (dato[i] != null) {
+                        recorrid += dato[i] + ", ";
+                    }
                     mostrarP(dato[i]);
                     Proyecto_2.grafo.GrafoRPintado(dato[i]);
                     descripcion.setText("Vistando " + dato[i]);
+                    visitados.setText(recorrid);
                     mostrarP(dato[i]);
                     TimeUnit.SECONDS.sleep(velocidad);
                     mostrarP(dato[i]);
@@ -78,6 +87,7 @@ public class AutoRecorridoG extends Thread {
                     mostrarP(dato[i]);
                     recorido.setText(recorrid);
                     mostrarP(dato[i]);
+                    TimeUnit.SECONDS.sleep(velocidad + 1);
                 }
 
             } catch (InterruptedException ex) {
@@ -86,8 +96,10 @@ public class AutoRecorridoG extends Thread {
             JOptionPane.showMessageDialog(null, "Recorrido terminado");
 
             Proyecto_2.grafo.NonVisit();
-
+            mostrarArbolP();
         }
+
+        
 
     }
 
@@ -118,13 +130,33 @@ public class AutoRecorridoG extends Thread {
         imagen.validate();
         imagen.repaint();
 
-        ImageIcon ic = new ImageIcon("src\\Imagenes\\" + pos + "1.png");
+        ImageIcon ic = new ImageIcon("src\\Imagenes\\" + pos + "0.png");
         ic.getImage().flush();
         edd.setIcon(ic);
         edd.revalidate();
         edd.validate();
         edd.repaint();
 
+    }
+
+    public void mostrarArbolP() {
+        //MAnera de mostrar la anchura
+        ImageIcon icono = new ImageIcon("src\\Imagenes\\Profundidad.png");
+        icono.getImage().flush();
+        imagen.setIcon(icono);
+        imagen.revalidate();
+        imagen.validate();
+        imagen.repaint();
+    }
+
+    public void mostrarArbolA() {
+        //MAnera de mostrar la anchura
+        ImageIcon icono = new ImageIcon("src\\Imagenes\\Anchura.png");
+        icono.getImage().flush();
+        imagen.setIcon(icono);
+        imagen.revalidate();
+        imagen.validate();
+        imagen.repaint();
     }
 
 }

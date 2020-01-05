@@ -23,10 +23,13 @@ public class ManualRecorridoG extends Thread {
     String recorrid;
     JLabel edd;
     String Type;
+    JLabel visitados;
+    
 
-    public ManualRecorridoG(String[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, int posicion, JLabel edd, String tipo) {
+    public ManualRecorridoG(String[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, int posicion, JLabel edd, String tipo,JLabel jLabelVisitados) {
         this.recorrid = "Recorrido: ";
         for (int i = 0; i < posicion; i++) {
+            if(dato[posicion] != null)
             recorrid += dato[i] + ", ";
         }
 
@@ -38,16 +41,19 @@ public class ManualRecorridoG extends Thread {
         this.posicion = posicion;
         this.edd = edd;
         this.Type = tipo;
+        this.visitados = jLabelVisitados;
     }
 
     @Override
     public void run() {
         if (Type.endsWith("Anchura")) {
             try {
+                if(dato[posicion] != null)
                 recorrid += dato[posicion] + ", ";
                 mostrar();
                 Proyecto_2.grafo.GrafoRPintado(dato[posicion]);
                 descripcion.setText("Vistando " + dato[posicion]);
+                visitados.setText(recorrid);
                 mostrar();
                 TimeUnit.SECONDS.sleep(velocidad);
                 mostrar();
@@ -55,19 +61,24 @@ public class ManualRecorridoG extends Thread {
                 descripcion.setText("Agrega " + dato[posicion]);
                 mostrar();
                 recorido.setText(recorrid);
-
                 mostrar();
+
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(AutoAVL.class.getName()).log(Level.SEVERE, null, ex);
             }
             JOptionPane.showMessageDialog(null, "Visitado");
 
         } else {
+            //Profundidad
         try {
+                if(dato[posicion] != null)
                 recorrid += dato[posicion] + ", ";
                 mostrar(dato[posicion]);
                 Proyecto_2.grafo.GrafoRPintado(dato[posicion]);
                 descripcion.setText("Vistando " + dato[posicion]);
+                mostrar(dato[posicion]);
+                visitados.setText(recorrid);
                 mostrar(dato[posicion]);
                 TimeUnit.SECONDS.sleep(velocidad);
                 mostrar(dato[posicion]);
@@ -77,6 +88,7 @@ public class ManualRecorridoG extends Thread {
                 recorido.setText(recorrid);
 
                 mostrar(dato[posicion]);
+                
             } catch (InterruptedException ex) {
                 Logger.getLogger(AutoAVL.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -110,7 +122,7 @@ public class ManualRecorridoG extends Thread {
         imagen.revalidate();
         imagen.validate();
         imagen.repaint();
-        ImageIcon ic = new ImageIcon("src\\Imagenes\\" + p + "1.png");
+        ImageIcon ic = new ImageIcon("src\\Imagenes\\" + p + "0.png");
         ic.getImage().flush();
         edd.setIcon(ic);
         edd.revalidate();
@@ -118,5 +130,6 @@ public class ManualRecorridoG extends Thread {
         edd.repaint();
 
     }
+
 
 }

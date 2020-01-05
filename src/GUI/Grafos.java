@@ -5,12 +5,12 @@
  */
 package GUI;
 
-import EDD.Node;
 import EDD.NodeV;
 import Hilos.*;
 
 import Object.User;
 import java.io.File;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import proyecto_2.Proyecto_2;
@@ -61,6 +61,10 @@ public class Grafos extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabelImage = new javax.swing.JLabel();
+        jLabelVisitados = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,6 +143,12 @@ public class Grafos extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel4.setText("Recorrido:");
+
+        jLabel5.setText("Descripcion");
+
+        jLabel6.setText("Visitados");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,7 +158,7 @@ public class Grafos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(409, Short.MAX_VALUE)
+                                .addContainerGap(452, Short.MAX_VALUE)
                                 .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(46, 46, 46)
@@ -159,38 +169,43 @@ public class Grafos extends javax.swing.JFrame {
                                 .addComponent(jButtonInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(57, 57, 57)
                                 .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 113, Short.MAX_VALUE)))
                         .addGap(43, 43, 43))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(68, 68, 68)
-                                .addComponent(jLabel2)
-                                .addGap(92, 92, 92)
-                                .addComponent(jTextFieldInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(97, 97, 97)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jButtonProf))
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonAnch, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addGap(92, 92, 92)
+                                        .addComponent(jTextFieldInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(52, 52, 52)
                                 .addComponent(jButtonBack1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonProf)
-                                .addGap(40, 40, 40)
-                                .addComponent(jButtonAnch, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(15, Short.MAX_VALUE))
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabelDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                                    .addComponent(jLabelRecorrido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelVisitados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelRecorrido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabelDesc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(72, 72, 72))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addComponent(jLabelEDD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,25 +224,32 @@ public class Grafos extends javax.swing.JFrame {
                             .addComponent(jTextFieldInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButtonAnch)
-                                .addGap(54, 54, 54)
-                                .addComponent(jLabelRecorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(jLabelDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonProf)))
+                            .addComponent(jButtonAnch)
+                            .addComponent(jButtonProf))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelRecorrido, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelDesc, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelVisitados, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -292,7 +314,7 @@ public class Grafos extends javax.swing.JFrame {
             if (jCBTipo.getSelectedItem() == "Manual") {
                 if (reco < Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
                     flag = false;
-                    ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.BFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD,"Anchura");
+                    ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.BFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Anchura", jLabelVisitados);
                     ac.start();
                     reco++;
                     if (reco == Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
@@ -304,6 +326,14 @@ public class Grafos extends javax.swing.JFrame {
                     Proyecto_2.grafo.NonVisit();
                     reco = 0;
                     flag = true;
+                    //MAnera de mostrar la anchura
+                    ImageIcon icono = new ImageIcon("src\\Imagenes\\Anchura.png");
+                    icono.getImage().flush();
+                    jLabelImage.setIcon(icono);
+                    jLabelImage.revalidate();
+                    jLabelImage.validate();
+                    jLabelImage.repaint();
+
                     JOptionPane.showMessageDialog(null, "Recorrido terminado");
                 }
 
@@ -313,7 +343,7 @@ public class Grafos extends javax.swing.JFrame {
                 } else {
                     String arr[] = Proyecto_2.grafo.BFS(begin);
                     int vel = jSlider.getValue();
-                    AutoRecorridoG ac = new AutoRecorridoG(arr, jLabelImage, vel, jLabelDesc, jLabelRecorrido, jLabelEDD,"Anchura");
+                    AutoRecorridoG ac = new AutoRecorridoG(arr, jLabelImage, vel, jLabelDesc, jLabelRecorrido, jLabelEDD, "Anchura", jLabelVisitados);
                     ac.start();
                     flag = true;
                 }
@@ -329,7 +359,7 @@ public class Grafos extends javax.swing.JFrame {
         if (jCBTipo.getSelectedItem() == "Manual") {
             if (reco < Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
                 flag = false;
-                ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD,"Profundidad");
+                ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Profundidad", jLabelVisitados);
                 ac.start();
                 reco++;
                 if (reco == Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
@@ -341,13 +371,20 @@ public class Grafos extends javax.swing.JFrame {
                 reco = 0;
                 flag = true;
                 JOptionPane.showMessageDialog(null, "Recorrido terminado");
+                ImageIcon icono = new ImageIcon("src\\Imagenes\\Profundidad.png");
+                icono.getImage().flush();
+                jLabelImage.setIcon(icono);
+                jLabelImage.revalidate();
+                jLabelImage.validate();
+                jLabelImage.repaint();
+
             }
 
         } else if (jCBTipo.getSelectedItem() == "Automatico") {
             if (!flag) {
                 JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
             } else {
-                AutoRecorridoG ac = new AutoRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jLabelEDD, "Profundidad");
+                AutoRecorridoG ac = new AutoRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jLabelEDD, "Profundidad", jLabelVisitados);
                 ac.start();
                 flag = true;
             }
@@ -399,10 +436,14 @@ public class Grafos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelDesc;
     private javax.swing.JLabel jLabelEDD;
     private javax.swing.JLabel jLabelImage;
     private javax.swing.JLabel jLabelRecorrido;
+    private javax.swing.JLabel jLabelVisitados;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider;
     private javax.swing.JTextField jTextFieldInicio;
