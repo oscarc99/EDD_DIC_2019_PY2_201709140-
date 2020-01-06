@@ -60,6 +60,7 @@ public class UserAdmin extends javax.swing.JFrame {
         jButtonMod = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Edit User");
 
         jButtonBack.setText("Regresar");
         jButtonBack.addActionListener(new java.awt.event.ActionListener() {

@@ -215,7 +215,7 @@ public class BTree {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter("report\\BTree.dot");
+            fichero = new FileWriter("src\\Imagenes\\BTree.dot");
 
             pw = new PrintWriter(fichero);
 
@@ -233,7 +233,7 @@ public class BTree {
             }
         }
         try {
-            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng report\\BTree.dot -o report\\BTree.png");
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\BTree.dot -o src\\Imagenes\\BTree.png");
         } catch (Exception e2) {
             e2.printStackTrace();
         }

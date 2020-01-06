@@ -29,7 +29,7 @@ public class Proyecto_2 {
     public static ListaUNG err = new ListaUNG();
     //Estructuras para el graficado
     public static AVLTree avl = new AVLTree();
-    public static BTree b = new BTree();
+
     public static Graph grafo;
     public static String nodos[];
     //Edd para llenar
@@ -37,25 +37,53 @@ public class Proyecto_2 {
     public static Vertices v = new Vertices();
 
     public static void main(String[] args) {
-        
-        
+
         Login l = new Login();
         l.setVisible(true);
         readUser("Usuarios.json");
+        //usuarios.report();
         
-         
-    
-         
+        
+        //Pruebas tabla hash
+        /*
+        int prueba=50793421 ;
+        System.out.println("Existe");
+        System.out.println(usuarios.exist(50793421));
+        System.out.println("Credenciales correctas");
+        System.out.println(usuarios.ingreso(50793421, "admin123"));
+        System.out.println("Usuario seleccionado");
+        User in = usuarios.in(50793421);
+        System.out.println(in.getName());
+        System.out.println(in.getApellido());
+        System.out.println(in.getPassword());
+        */
+        
+        //Btree solo me servira para graficar
+        
+        //Pruebas arbol b
+        /*
+         BTree b = new BTree();
+         ArbolB btre = new ArbolB(5);
+         //EDD verdadera almacena datos
+         listTree("Arbols.json");
+         NodeLD temp = doble.getFirst();
+         while (temp != null) {
+         System.out.println(temp.getDato());
+         btre.insert(temp.getDato());
+         b.Agregar(temp.getDato(), temp.getDato());
+         temp = temp.getNext();
+         }
+         System.out.println(btre.traverse());
+         b.report();
+         */
         //Pruebas recorrido profundidad
         /*
-        listVertices("EjemploGrafo.json");
-        NodeV temp = v.getFirst();
-        while(temp != null){
-            grafo.add(temp.getV1(), temp.getV2());
-           
-            
-            temp = temp.getNext();
-        }
+         listVertices("EjemploGrafo.json");
+         NodeV temp = v.getFirst();
+         while(temp != null){
+         grafo.add(temp.getV1(), temp.getV2());
+         temp = temp.getNext();
+         }
          grafo.GrafoR();
          grafo.report();
          System.out.println("Metodo Arreglo");
@@ -65,22 +93,16 @@ public class Proyecto_2 {
          System.out.println("");
          System.out.println("Metodo me");
          grafo.prof("a");
-         
-       */
-        
+         */
         /*
          String n[] ={"a","g","f", "b", "e", "c" };
          grafo = new Graph(n.length, n);
          grafo.grafIn("a", "g");
-        
-        
          */
         //listVertices("EjemploGrafo.json");
         //System.out.println("TRAVERSE");
         //btree.traverse();
         /*
-         
-        
          try {
          System.out.println("pruebas");
          AVLTree arbol = new AVLTree();
@@ -105,14 +127,10 @@ public class Proyecto_2 {
          grafo.report();
          grafo.GrafoR();
          Thread.sleep(3000);
-         
-
          } catch (InterruptedException ex) {
          Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
          }
-        
          try{
-        
          avl.insert(1);
          avl.insert(2);
          avl.insert(3);
@@ -124,7 +142,6 @@ public class Proyecto_2 {
          avl.insert(9);
          avl.insert(10);
          avl.report();
-        
          System.out.println("PREOORDEN");
          System.out.println(avl.preorden());
          for (int i = 0; i < avl.preordenM().length; i++) {
@@ -135,7 +152,6 @@ public class Proyecto_2 {
          for (int i = 0; i < avl.inordenM().length; i++) {
          System.out.println(avl.inordenM()[i]);
          }
-        
          System.out.println("POSTORDEN");
          System.out.println(avl.postorden());
          for (int i = 0; i < avl.postordenM().length; i++) {
@@ -160,93 +176,99 @@ public class Proyecto_2 {
          Thread.sleep(3000);
          avl.noVisit();
          avl.reportVisit();
-        
-        
          } catch (InterruptedException ex) {
          Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
          }
-        
-        
-        
          String n[] = {"a", "f", "g", "b", "e", "c"};
-         
          grafo = new Graph(n.length, n);
          grafo.add("a", "g");
          grafo.add("a", "f");
-        
          grafo.add("g", "b");
          grafo.add("g", "c");
          grafo.add("g", "f");
          grafo.add("g", "a");
-        
          grafo.add("f", "a");
          grafo.add("f", "g");
          grafo.add("f", "b");
          grafo.add("f", "c");
-        
          grafo.add("b", "g");
          grafo.add("b", "f");
          grafo.add("b", "c");
          grafo.add("b", "e");
-        
          grafo.add("c", "g");
          grafo.add("c", "f");
          grafo.add("c", "b");
          grafo.add("c", "e");
-        
          grafo.add("e", "b");
          grafo.add("e", "c");
-        
          grafo.report();
-         
-        
-        
          //a.delete(4);
          //a.report();
-        
-        
-        
-        
          try {
-            
          arbol.buscar(1);
          Thread.sleep(3000);
-            
          //EN el primero no debo insertar desbalancado
          arbol.insert(1);
          arbol.report();
-            
-            
          arbol.buscar(2);
          Thread.sleep(3000);
          arbol.insertDes(2);
          Thread.sleep(3000);
          arbol.insert(2);
          arbol.report();
-            
          arbol.buscar(3);
          Thread.sleep(3000);
          arbol.insertDes(3);
          Thread.sleep(3000);
          arbol.insert(3);
          arbol.report();
-            
          Thread.sleep(3000);
          } catch (InterruptedException ex) {
          Logger.getLogger(Proyecto_2.class.getName()).log(Level.SEVERE, null, ex);
          }
-       
-        
          BTree b = new BTree();
          b.Agregar(1, 1);
          b.Agregar(2, 2);
          b.Agregar(3, 3);
          b.report();
-        
-         
          */
         //listTree("Arbols.json");
         //listVertices("EjemploGrafo.json");
+    }
+
+    public static int[] numeros(String json) {
+        int contador = 0;
+        int arreglo[] = null;
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(json));
+            JSONObject jsonObject = (JSONObject) obj;
+            JSONArray jsonA = (JSONArray) jsonObject.get("Array");
+
+            int num;
+
+            for (Object j : jsonA) {
+
+                contador++;
+            }
+            arreglo = new int[contador];
+            contador = 0;
+            for (Object j : jsonA) {
+                jsonObject = (JSONObject) j;
+                num = toIntExact((long) jsonObject.get("num"));
+                arreglo[contador] = num;
+                contador++;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return arreglo;
     }
 
     public static void listVertices(String ruta) {
@@ -367,7 +389,7 @@ public class Proyecto_2 {
 
             }
             Node n = err.getFirst();
-            System.out.println(n.getDato().getMotivo());
+            //System.out.println(n.getDato().getMotivo());
             err.report();
 
         } catch (FileNotFoundException e) {
@@ -397,7 +419,5 @@ public class Proyecto_2 {
         }
         return (int) value;
     }
-    
-    
 
 }

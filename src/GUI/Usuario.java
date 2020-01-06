@@ -6,6 +6,7 @@
 package GUI;
 
 import Object.User;
+import javax.swing.UIManager;
 
 /**
  *
@@ -45,6 +46,7 @@ public class Usuario extends javax.swing.JFrame {
         jButtonOrden = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu User");
 
         jLabel1.setText("Usuario: ");
 
@@ -147,7 +149,7 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAVLActionPerformed
 
     private void jButtonBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBActionPerformed
-        BTree ventanA = new BTree(this.u);
+        GBTree ventanA = new GBTree(this.u);
         this.setVisible(false);
         ventanA.setVisible(true);
     }//GEN-LAST:event_jButtonBActionPerformed
@@ -174,12 +176,8 @@ public class Usuario extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+            
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

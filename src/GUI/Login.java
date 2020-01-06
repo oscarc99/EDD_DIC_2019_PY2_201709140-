@@ -57,6 +57,7 @@ public class Login extends javax.swing.JFrame implements KeyListener {
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LOGIN");
         setIconImage(getIconImage());
         setIconImages(getIconImages());
         setUndecorated(true);
@@ -122,7 +123,7 @@ public class Login extends javax.swing.JFrame implements KeyListener {
             ventanA.setVisible(true);
             
             
-        }else if(Proyecto_2.usuarios.ingreso( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
+        }else if(Proyecto_2.usuarios.in( Integer.parseInt(this.jTextUser.getText()), this.jPassword.getText())){
             
             Usuario ventanA = new Usuario(Proyecto_2.usuarios.in(Integer.parseInt(this.jTextUser.getText())));
             this.setVisible(false);

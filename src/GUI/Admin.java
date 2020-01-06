@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import proyecto_2.Proyecto_2;
 
@@ -62,8 +63,10 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
         jMenuItemDelete = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admin Module");
 
         jLabel1.setText("Bienvenido usuario administrador");
 
@@ -132,6 +135,15 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Información");
+
+        jMenuItem1.setText("Report User");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -193,21 +205,22 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jMenuItemDeleteActionPerformed
 
     private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
-        JFileChooser  jf = new JFileChooser();
+        JFileChooser jf = new JFileChooser();
         jf.showOpenDialog(this);
         File archivo = jf.getSelectedFile();
-        if(archivo != null)
-        try {
-            Proyecto_2.readUser(archivo.getAbsolutePath());
-            Node temp = Proyecto_2.err.getFirst();
-            while (temp != null) {
-                Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPassword(), temp.getDato().getMotivo()};
-                md.addRow(datos);
-                temp = temp.getNext();
+        if (archivo != null) {
+            try {
+                Proyecto_2.readUser(archivo.getAbsolutePath());
+                Node temp = Proyecto_2.err.getFirst();
+                while (temp != null) {
+                    Object datos[] = {temp.getDato().getCarnet(), temp.getDato().getName(), temp.getDato().getApellido(), temp.getDato().getPassword(), temp.getDato().getMotivo()};
+                    md.addRow(datos);
+                    temp = temp.getNext();
+                }
+                JOptionPane.showMessageDialog(null, "Carga realizada con exito");
+            } catch (Exception e) {
+                System.out.println("ERROR EN CARGA" + e);
             }
-            JOptionPane.showMessageDialog(null, "Carga realizada con exito");
-        } catch (Exception e) {
-            System.out.println("ERROR EN CARGA" + e);
         }
 
 
@@ -224,8 +237,18 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_jButtonCerrarActionPerformed
 
     private void jButtonAddKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButtonAddKeyPressed
-      
+
     }//GEN-LAST:event_jButtonAddKeyPressed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if(!Proyecto_2.usuarios.empty()){
+            HashR a = new HashR();
+        a.setVisible(true);
+        this.setVisible(false);
+        }else{
+            JOptionPane.showMessageDialog(null, "Cargue usuarios para generar reportes");
+        }
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,12 +260,7 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
+            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -271,6 +289,7 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemDelete;
     private javax.swing.JMenuItem jMenuItemMod;
@@ -285,7 +304,7 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-       
+
     }
 
     @Override

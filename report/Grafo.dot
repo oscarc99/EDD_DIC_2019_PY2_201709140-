@@ -1,4 +1,0 @@
- digraph G{ 
- node [shape=rectangle]; 
-a->g [penwidth=2, arrowhead=none]
-}

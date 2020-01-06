@@ -13,12 +13,16 @@ import java.security.NoSuchAlgorithmException;
 public class Hash {
 
     public User[] tabla;
-    int m;
-    double cantidad;
+    int m; //Tamaño de tabla
+    double cantidad;//Usuarios que llevo guardado
 
-    public Hash(int m) {
-        this.tabla = new User[m];
-        this.m = m;
+    public Hash(int size) {
+        this.tabla = new User[size];
+        this.m = size;
+    }
+
+    public boolean empty() {
+        return cantidad == 0;
     }
 
     public String convertirSHA256(String password) {
@@ -68,6 +72,7 @@ public class Hash {
         do {
             if (tabla[indice] != null && tabla[indice].getCarnet() == user && tabla[indice].getPassword().equals(convertirSHA256(pass))) {
                 return true;
+
             } else {
                 indice = (user % 7 + 1) * in;
                 if (m <= indice) {
@@ -175,7 +180,6 @@ public class Hash {
             if (tabla[indice] == null) {
                 tabla[indice] = nueva;
                 cantidad++;
-
                 break;
             } else {
 
@@ -195,7 +199,7 @@ public class Hash {
     }
 
     private void redimensionar() {
-        int temp = m;
+
         m = siguientePrimo(m);
         User[] temporal = this.tabla;
         User[] nuevaTabla = new User[m];
@@ -273,7 +277,7 @@ public class Hash {
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
-            fichero = new FileWriter("report\\User.dot");
+            fichero = new FileWriter("src\\Imagenes\\UserR.dot");
 
             pw = new PrintWriter(fichero);
 
@@ -299,8 +303,8 @@ public class Hash {
             }
         }
         try {
-            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng report\\User.dot -o report\\User.png");
-            Process p2 = Runtime.getRuntime().exec("cmd /c report\\User.png");
+            Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\UserR.dot -o src\\Imagenes\\UserR.png");
+            Process p2 = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\UserR.png");
         } catch (Exception e2) {
             e2.printStackTrace();
         }
@@ -312,7 +316,7 @@ public class Hash {
             if (tabla[i] != null) {
                 if (this.tabla[i].getCarnet() == carnet) {
                     tabla[i] = null;
-                    
+
                     break;
                 }
             }
@@ -342,5 +346,17 @@ public class Hash {
 
         }
         return null;
+    }
+
+    public boolean in(int user, String pass) {
+        for (int i = 0; i < tabla.length; i++) {
+            if (tabla[i] != null) {
+                if (this.tabla[i].getCarnet() == user) {
+                    return true;
+                }
+            }
+
+        }
+        return false;
     }
 }
