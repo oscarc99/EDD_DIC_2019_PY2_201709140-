@@ -7,6 +7,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -20,13 +21,15 @@ public class DeleteAVL extends Thread {
     int velocidad = 1;
     JLabel descip;
     JLabel image;
+    JScrollPane jScrollPane;
 
-    public DeleteAVL(JLabel jLanel, int eli, int v, JLabel d, JLabel ima) {
+    public DeleteAVL(JLabel jLanel, int eli, int v, JLabel d, JLabel ima, JScrollPane scroll) {
         this.jLabel = jLanel;
         this.delete = eli;
         this.velocidad = v;
         this.descip = d;
         this.image = ima;
+        this.jScrollPane = scroll;
         mostrar();
     }
 
@@ -70,6 +73,9 @@ public class DeleteAVL extends Thread {
         image.revalidate();
         image.validate();
         image.repaint();
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
 
     }
 

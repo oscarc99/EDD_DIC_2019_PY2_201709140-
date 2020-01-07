@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -24,13 +25,14 @@ public class ManualRecorridoG extends Thread {
     JLabel edd;
     String Type;
     JLabel visitados;
-    
+    JScrollPane jScrollPane;
 
-    public ManualRecorridoG(String[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, int posicion, JLabel edd, String tipo,JLabel jLabelVisitados) {
+    public ManualRecorridoG(String[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, int posicion, JLabel edd, String tipo, JLabel jLabelVisitados, JScrollPane scroll) {
         this.recorrid = "Recorrido: ";
         for (int i = 0; i < posicion; i++) {
-            if(dato[posicion] != null)
-            recorrid += dato[i] + ", ";
+            if (dato[posicion] != null) {
+                recorrid += dato[i] + ", ";
+            }
         }
 
         this.dato = dato;
@@ -48,8 +50,9 @@ public class ManualRecorridoG extends Thread {
     public void run() {
         if (Type.endsWith("Anchura")) {
             try {
-                if(dato[posicion] != null)
-                recorrid += dato[posicion] + ", ";
+                if (dato[posicion] != null) {
+                    recorrid += dato[posicion] + ", ";
+                }
                 mostrar();
                 Proyecto_2.grafo.GrafoRPintado(dato[posicion]);
                 descripcion.setText("Vistando " + dato[posicion]);
@@ -63,7 +66,6 @@ public class ManualRecorridoG extends Thread {
                 recorido.setText(recorrid);
                 mostrar();
 
-                
             } catch (InterruptedException ex) {
                 Logger.getLogger(AutoAVL.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -71,9 +73,10 @@ public class ManualRecorridoG extends Thread {
 
         } else {
             //Profundidad
-        try {
-                if(dato[posicion] != null)
-                recorrid += dato[posicion] + ", ";
+            try {
+                if (dato[posicion] != null) {
+                    recorrid += dato[posicion] + ", ";
+                }
                 mostrar(dato[posicion]);
                 Proyecto_2.grafo.GrafoRPintado(dato[posicion]);
                 descripcion.setText("Vistando " + dato[posicion]);
@@ -88,7 +91,7 @@ public class ManualRecorridoG extends Thread {
                 recorido.setText(recorrid);
 
                 mostrar(dato[posicion]);
-                
+
             } catch (InterruptedException ex) {
                 Logger.getLogger(AutoAVL.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -113,8 +116,8 @@ public class ManualRecorridoG extends Thread {
         edd.repaint();
 
     }
-    
-        public void mostrar(String p) {
+
+    public void mostrar(String p) {
 
         ImageIcon icono = new ImageIcon("src\\Imagenes\\GrafoNodos.png");
         icono.getImage().flush();
@@ -129,7 +132,9 @@ public class ManualRecorridoG extends Thread {
         edd.validate();
         edd.repaint();
 
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
     }
-
 
 }

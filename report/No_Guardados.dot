@@ -12,8 +12,7 @@ node2[label = " 961531768 , Contraseña menor a 8 "]
 node3[label = " 473423160 , Contraseña menor a 8 "]  
 node4[label = " 392606317 , Contraseña menor a 8 "]  
 node5[label = " 770697285 , Contraseña menor a 8 "]  
-node6[label = " 314056742 , Usuario ya existe "]  
- node0 ->  node1 ->  node2 ->  node3 ->  node4 ->  node5 ->  node6 [dir=both]; 
+ node0 ->  node1 ->  node2 ->  node3 ->  node4 ->  node5 [dir=both]; 
 
 }
 

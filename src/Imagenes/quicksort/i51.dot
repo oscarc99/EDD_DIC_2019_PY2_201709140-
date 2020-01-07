@@ -1,5 +1,5 @@
 digraph G{ node [shape = record ];
- rankdir=LR;puntDer[label="↑60↑" xlabel="Puntero derecho" pos = "12,0!"]
-puntIzq[label="↑50↑" xlabel="Puntero izquierdo" pos = "8,0!"]
-pivote[label="↓40↓" xlabel ="Pivote" pos = "10,2!"]
-X[label="{ 1|2|3|15|40|50|69|60|100}" pos = "10,1!" ]}
+ rankdir=LR;puntDer[label="↑300↑" xlabel="Puntero derecho" pos = "12,0!"]
+puntIzq[label="↑2↑" xlabel="Puntero izquierdo" pos = "8,0!"]
+pivote[label="↓20↓" xlabel ="Pivote" pos = "10,2!"]
+X[label="{ 20|9|8|7|6|5|4|1|2|3|300|200|100|30|50|100}" pos = "10,1!" ]}

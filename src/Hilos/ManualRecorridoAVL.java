@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -21,14 +22,14 @@ public class ManualRecorridoAVL extends Thread {
     JLabel recorido;
     String recorrid;
     int posicion;
+    JScrollPane jScrollPane;
 
-    public ManualRecorridoAVL(int[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, int posicion) {
-        this.recorrid= "Recorrido: ";
+    public ManualRecorridoAVL(int[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, int posicion, JScrollPane scroll) {
+        this.recorrid = "";
         for (int i = 0; i < posicion; i++) {
-            recorrid+=  dato[i]+", ";
+            recorrid += dato[i] + ", ";
         }
-        
-        
+
         this.dato = dato;
         this.imagen = imagen;
         this.velocidad = velocidad;
@@ -36,6 +37,8 @@ public class ManualRecorridoAVL extends Thread {
         this.recorido = recorido;
         this.recorido = recorido;
         this.posicion = posicion;
+        this.jScrollPane = scroll;
+
     }
 
     @Override
@@ -57,7 +60,7 @@ public class ManualRecorridoAVL extends Thread {
             recorido.setText(recorrid);
 
             mostrar();
-            
+
         } catch (InterruptedException ex) {
             Logger.getLogger(AutoAVL.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,6 +76,10 @@ public class ManualRecorridoAVL extends Thread {
         imagen.revalidate();
         imagen.validate();
         imagen.repaint();
+
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
 
     }
 }

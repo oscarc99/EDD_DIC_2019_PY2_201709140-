@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -20,14 +21,16 @@ public class AutoRecorridoAVL extends Thread {
     JLabel descripcion;
     JLabel recorido;
     String recorrid;
-
-    public AutoRecorridoAVL(int[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido) {
-        this.recorrid= "Recorrido: ";
+    JScrollPane jScrollPane;
+    
+    public AutoRecorridoAVL(int[] dato, JLabel imagen, int velocidad, JLabel descripcion, JLabel recorido, JScrollPane scroll) {
+        this.recorrid= "";
         this.dato = dato;
         this.imagen = imagen;
         this.velocidad = velocidad;
         this.descripcion = descripcion;
         this.recorido = recorido;
+        this.jScrollPane = scroll;
     }
 
     @Override
@@ -66,6 +69,11 @@ public class AutoRecorridoAVL extends Thread {
         imagen.revalidate();
         imagen.validate();
         imagen.repaint();
+        
+        
+                jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
 
     }
 

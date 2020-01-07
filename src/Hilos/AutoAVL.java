@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -26,13 +27,15 @@ public class AutoAVL extends Thread {
     int velocidad = 1;
     JLabel descip;
     JLabel image;
+    JScrollPane jScrollPane;
 
-    public AutoAVL(JLabel jLanel, NodeLD as, int v, JLabel d, JLabel ima) {
+    public AutoAVL(JLabel jLanel, NodeLD as, int v, JLabel d, JLabel ima, JScrollPane scroll) {
         this.jLabel = jLanel;
         this.as = as;
         this.velocidad = v;
         this.descip = d;
         this.image = ima;
+        this.jScrollPane = scroll;
         mostrar();
     }
 
@@ -82,6 +85,10 @@ public class AutoAVL extends Thread {
         image.revalidate();
         image.validate();
         image.repaint();
+        
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
 
     }
 

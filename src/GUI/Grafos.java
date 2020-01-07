@@ -59,12 +59,12 @@ public class Grafos extends javax.swing.JFrame {
         jTextFieldInicio = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabelImage = new javax.swing.JLabel();
         jLabelVisitados = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jScrollPane = new javax.swing.JScrollPane();
+        jLabelImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Graph Module");
@@ -87,7 +87,7 @@ public class Grafos extends javax.swing.JFrame {
         jSlider.setMaximum(10);
         jSlider.setMinimum(1);
         jSlider.setPaintTicks(true);
-        jSlider.setValue(1);
+        jSlider.setValue(5);
         jSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSliderStateChanged(evt);
@@ -128,27 +128,13 @@ public class Grafos extends javax.swing.JFrame {
 
         jLabel3.setText("Recorridos");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         jLabel4.setText("Recorrido:");
 
         jLabel5.setText("Descripcion");
 
         jLabel6.setText("Visitados");
+
+        jScrollPane.setViewportView(jLabelImage);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,9 +158,10 @@ public class Grafos extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addGap(0, 113, Short.MAX_VALUE)))
                         .addGap(43, 43, 43))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 628, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
@@ -203,10 +190,8 @@ public class Grafos extends javax.swing.JFrame {
                                     .addComponent(jLabelDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                                     .addComponent(jLabelRecorrido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabelVisitados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                    .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,8 +233,8 @@ public class Grafos extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -262,7 +247,7 @@ public class Grafos extends javax.swing.JFrame {
 //Insert step by step
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
         if (as != null) {
-            ManualGrafo ac = new ManualGrafo(as, jSlider.getValue(), jLabelDesc, jLabelImage);
+            ManualGrafo ac = new ManualGrafo(as, jSlider.getValue(), jLabelDesc, jLabelImage,jScrollPane);
             ac.start();
             as = as.getNext();
 
@@ -294,7 +279,7 @@ public class Grafos extends javax.swing.JFrame {
 
                     NodeV s = Proyecto_2.v.getFirst();
 
-                    AutoGrafo ac = new AutoGrafo(s, jSlider.getValue(), jLabelDesc, jLabelImage);
+                    AutoGrafo ac = new AutoGrafo(s, jSlider.getValue(), jLabelDesc, jLabelImage, jScrollPane);
                     ac.start();
 
                 }
@@ -315,7 +300,7 @@ public class Grafos extends javax.swing.JFrame {
             if (jCBTipo.getSelectedItem() == "Manual") {
                 if (reco < Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
                     flag = false;
-                    ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.BFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Anchura", jLabelVisitados);
+                    ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.BFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Anchura", jLabelVisitados,jScrollPane);
                     ac.start();
                     reco++;
                     if (reco == Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
@@ -360,7 +345,7 @@ public class Grafos extends javax.swing.JFrame {
         if (jCBTipo.getSelectedItem() == "Manual") {
             if (reco < Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
                 flag = false;
-                ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Profundidad", jLabelVisitados);
+                ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Profundidad", jLabelVisitados, jScrollPane);
                 ac.start();
                 reco++;
                 if (reco == Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
@@ -445,7 +430,7 @@ public class Grafos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelImage;
     private javax.swing.JLabel jLabelRecorrido;
     private javax.swing.JLabel jLabelVisitados;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSlider jSlider;
     private javax.swing.JTextField jTextFieldInicio;
     // End of variables declaration//GEN-END:variables

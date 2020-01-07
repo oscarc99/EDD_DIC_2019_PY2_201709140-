@@ -68,6 +68,7 @@ public class Ordenamiento extends javax.swing.JFrame {
                         // Logger.getLogger(Interfaz.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
+                JOptionPane.showMessageDialog(null,"Recorrido terminado");
             }
         };
         x = new Thread();
@@ -146,7 +147,8 @@ public class Ordenamiento extends javax.swing.JFrame {
             }
         });
 
-        jSlider.setMaximum(5);
+        jSlider.setMajorTickSpacing(1);
+        jSlider.setMaximum(3);
         jSlider.setMinimum(1);
         jSlider.setValue(2);
 
@@ -180,14 +182,15 @@ public class Ordenamiento extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 11, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7)))
+                        .addComponent(jButton7)
+                        .addGap(68, 68, 68)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -209,19 +212,19 @@ public class Ordenamiento extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton5)
-                            .addComponent(jButton6)
-                            .addComponent(jButton7))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(90, 90, 90))))
+                        .addComponent(jLabel2)
+                        .addGap(90, 90, 90))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton5)
+                                .addComponent(jButton6))
+                            .addComponent(jButton7)
+                            .addComponent(jSlider, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -236,8 +239,8 @@ public class Ordenamiento extends javax.swing.JFrame {
             aux[i] = a[i];
         }
         this.quickSort(aux, 0, a.length - 1, nImagenes);
-        System.out.println(a);
-        System.out.println("Awevooo ");
+
+        JOptionPane.showMessageDialog(null, "Ordenamiento preparado");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -248,6 +251,7 @@ public class Ordenamiento extends javax.swing.JFrame {
             aux[i] = a[i];
         }
         this.insercionOrdenada(aux);
+        JOptionPane.showMessageDialog(null, "Ordenamiento preparado");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -307,13 +311,14 @@ public class Ordenamiento extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
- JFileChooser jf = new JFileChooser();
+        JFileChooser jf = new JFileChooser();
         jf.showOpenDialog(this);
         File archivo = jf.getSelectedFile();
         if (archivo != null) {
-            this.a= numeros(archivo.getAbsolutePath());
+            this.a = numeros(archivo.getAbsolutePath());
+            JOptionPane.showMessageDialog(null, "Datos cargados");
         }
-     
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -324,10 +329,11 @@ public class Ordenamiento extends javax.swing.JFrame {
             aux[i] = a[i];
         }
         this.graficarOrdenamientoBurbuja(aux);
+        JOptionPane.showMessageDialog(null, "Ordenamiento preparado");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-         Usuario ventanA = new Usuario(this.u);
+        Usuario ventanA = new Usuario(this.u);
         this.setVisible(false);
         ventanA.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed

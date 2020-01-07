@@ -240,6 +240,7 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
 
     }//GEN-LAST:event_jButtonAddKeyPressed
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        Proyecto_2.usuarios.report();
         if(!Proyecto_2.usuarios.empty()){
             HashR a = new HashR();
         a.setVisible(true);
@@ -260,7 +261,12 @@ public class Admin extends javax.swing.JFrame implements KeyListener {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.acryl.AcrylLookAndFeel");
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

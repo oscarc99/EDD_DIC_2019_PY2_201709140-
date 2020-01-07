@@ -6,6 +6,7 @@
 package GUI;
 
 import javax.swing.ImageIcon;
+import proyecto_2.Proyecto_2;
 
 /**
  *
@@ -18,12 +19,23 @@ public class HashR extends javax.swing.JFrame {
      */
     public HashR() {
         initComponents();
-        ImageIcon icono = new ImageIcon("src\\imagenes\\UserR.dot");
+        this.setLocationRelativeTo(null);
+        ImageIcon icono = new ImageIcon("src\\imagenes\\UserR.png");
         icono.getImage().flush();
         jLabelImage.setIcon(icono);
         jLabelImage.revalidate();
         jLabelImage.validate();
         jLabelImage.repaint();
+
+        jScrollPane1.revalidate();
+        jScrollPane1.validate();
+        jScrollPane1.repaint();
+        
+        
+        
+        jLabelTamaño.setText(""+Proyecto_2.usuarios.getSize());
+        jLabelUser.setText(""+ Proyecto_2.usuarios.getOcupados());
+        jLabelFactor.setText(""+Proyecto_2.usuarios.calcularPorcentaje());
     }
 
     /**
@@ -36,8 +48,15 @@ public class HashR extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
         jLabelImage = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelUser = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelTamaño = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabelFactor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("User Report");
@@ -49,41 +68,65 @@ public class HashR extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelImage, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jButton2.setText("Visualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(jLabelImage);
+
+        jLabel1.setText("Cantidad Usuarios: ");
+
+        jLabel2.setText("Tamaño: ");
+
+        jLabel3.setText("Factor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jButton2)
+                .addGap(107, 107, 107)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jLabel2)
+                .addGap(28, 28, 28)
+                .addComponent(jLabelTamaño, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
+                .addComponent(jLabel3)
+                .addGap(34, 34, 34)
+                .addComponent(jLabelFactor, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1019, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabelUser, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)
+                        .addComponent(jLabelTamaño, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3))
+                    .addComponent(jLabelFactor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,7 +136,28 @@ public class HashR extends javax.swing.JFrame {
         Admin ventanA = new Admin();
         this.setVisible(false);
         ventanA.setVisible(true);
+        
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ImageIcon icono = new ImageIcon("src\\imagenes\\UserR.png");
+        icono.getImage().flush();
+        jLabelImage.setIcon(icono);
+        jLabelImage.revalidate();
+        jLabelImage.validate();
+        jLabelImage.repaint();
+        
+        jScrollPane1.revalidate();
+        jScrollPane1.validate();
+        jScrollPane1.repaint();
+        
+        
+        jLabelTamaño.setText(""+Proyecto_2.usuarios.getSize());
+        jLabelUser.setText(""+ Proyecto_2.usuarios.getOcupados());
+        jLabelFactor.setText(""+Proyecto_2.usuarios.calcularPorcentaje());
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,7 +196,14 @@ public class HashR extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelFactor;
     private javax.swing.JLabel jLabelImage;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabelTamaño;
+    private javax.swing.JLabel jLabelUser;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

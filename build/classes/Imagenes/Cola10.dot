@@ -1,12 +1,10 @@
 digraph G { 
   node [shape = name]; 
   2[label=  <<table border= "1 " cellspacing= " 0 "><tr> 
-<td> b</td> </tr> 
+<td> c</td> </tr> 
+<tr> 
+<td> f</td> </tr> 
 <tr> 
 <td> e</td> </tr> 
-<tr> 
-<td> a</td> </tr> 
-<tr> 
-<td> h</td> </tr> 
 </table>>  shape = none ]; 
  }

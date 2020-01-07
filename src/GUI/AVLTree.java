@@ -62,13 +62,16 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         Cargar = new javax.swing.JButton();
         jCBTipo = new javax.swing.JComboBox();
         jLabel = new javax.swing.JLabel();
-        jLabelImage = new javax.swing.JLabel();
         jLabelDesc = new javax.swing.JLabel();
         jButtonInorden = new javax.swing.JButton();
         jButtonPostorden = new javax.swing.JButton();
         jButtonPreorden = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabelRecorrido = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane = new javax.swing.JScrollPane();
+        jLabelImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("AVL Tree Module");
@@ -85,12 +88,12 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonBackActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 95, -1));
+        getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 30, 95, -1));
 
         jSlider.setMajorTickSpacing(1);
-        jSlider.setMaximum(10);
         jSlider.setMinimum(1);
         jSlider.setPaintTicks(true);
+        jSlider.setToolTipText("");
         jSlider.setValue(5);
         jSlider.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -145,15 +148,8 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             }
         });
         getContentPane().add(jCBTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, -1, -1));
-        getContentPane().add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 310, 190, 30));
-
-        jLabelImage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                jLabelImageMouseEntered(evt);
-            }
-        });
-        getContentPane().add(jLabelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 630, 630));
-        getContentPane().add(jLabelDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 390, 210, 90));
+        getContentPane().add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 400, 170, 30));
+        getContentPane().add(jLabelDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 450, 210, 90));
 
         jButtonInorden.setText("Inorden");
         jButtonInorden.addActionListener(new java.awt.event.ActionListener() {
@@ -161,7 +157,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonInordenActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonInorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 110, 110, -1));
+        getContentPane().add(jButtonInorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 10, 110, -1));
 
         jButtonPostorden.setText("Postorden");
         jButtonPostorden.addActionListener(new java.awt.event.ActionListener() {
@@ -169,7 +165,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonPostordenActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPostorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 150, 110, -1));
+        getContentPane().add(jButtonPostorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 10, 110, -1));
 
         jButtonPreorden.setText("Preorden");
         jButtonPreorden.addActionListener(new java.awt.event.ActionListener() {
@@ -177,11 +173,21 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
                 jButtonPreordenActionPerformed(evt);
             }
         });
-        getContentPane().add(jButtonPreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 190, 110, -1));
+        getContentPane().add(jButtonPreorden, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 50, 110, -1));
 
         jLabel2.setText("Recorrido");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 80, -1, -1));
-        getContentPane().add(jLabelRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, 250, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 40, -1, -1));
+        getContentPane().add(jLabelRecorrido, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 230, 280, 40));
+
+        jLabel3.setText("Recorrido:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 200, -1, -1));
+
+        jLabel4.setText("Descripcion");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 360, -1, -1));
+
+        jScrollPane.setViewportView(jLabelImage);
+
+        getContentPane().add(jScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 890, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -207,8 +213,13 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         jLabelImage.revalidate();
         jLabelImage.validate();
         jLabelImage.repaint();
+
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
+
         if (Proyecto_2.avl.search(Integer.parseInt(jTextFieldDelete.getText()))) {
-            DeleteAVL n = new DeleteAVL(jLabel, Integer.parseInt(jTextFieldDelete.getText()), jSlider.getValue(), jLabelDesc, jLabelImage);
+            DeleteAVL n = new DeleteAVL(jLabel, Integer.parseInt(jTextFieldDelete.getText()), jSlider.getValue(), jLabelDesc, jLabelImage, jScrollPane);
             n.start();
         } else {
             JOptionPane.showMessageDialog(null, "Dato no existe");
@@ -219,6 +230,10 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         jLabelImage.revalidate();
         jLabelImage.validate();
         jLabelImage.repaint();
+
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void CargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CargarActionPerformed
@@ -232,13 +247,12 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             if (jCBTipo.getSelectedItem() == "Manual") {
                 JOptionPane.showMessageDialog(null, "Datos cargados para insercion manual");
                 as = Proyecto_2.doble.getFirst();
-                
+
             } else if (jCBTipo.getSelectedItem() == "Automatico") {
                 System.out.println("Automatico");
                 NodeLD s = Proyecto_2.doble.getFirst();
-                
 
-                AutoAVL ac = new AutoAVL(jLabel, s, jSlider.getValue(), jLabelDesc, jLabelImage);
+                AutoAVL ac = new AutoAVL(jLabel, s, jSlider.getValue(), jLabelDesc, jLabelImage, jScrollPane);
                 ac.start();
 
             }
@@ -248,7 +262,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
         //Inserta de uno en uno
         if (as != null) {
-            ManualAVL mavl = new ManualAVL(jLabel, as, jSlider.getValue(), jLabelDesc, jLabelImage);
+            ManualAVL mavl = new ManualAVL(jLabel, as, jSlider.getValue(), jLabelDesc, jLabelImage, jScrollPane);
             mavl.start();
             as = as.getNext();
         } else {
@@ -269,6 +283,10 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             jLabelImage.revalidate();
             jLabelImage.validate();
             jLabelImage.repaint();
+
+            jScrollPane.revalidate();
+            jScrollPane.validate();
+            jScrollPane.repaint();
         }
     }//GEN-LAST:event_formKeyPressed
 
@@ -281,18 +299,18 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             jLabelImage.revalidate();
             jLabelImage.validate();
             jLabelImage.repaint();
+
+            jScrollPane.revalidate();
+            jScrollPane.validate();
+            jScrollPane.repaint();
         }
     }//GEN-LAST:event_jTextFieldDeleteKeyPressed
-
-    private void jLabelImageMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelImageMouseEntered
-        mostrar();
-    }//GEN-LAST:event_jLabelImageMouseEntered
 
     private void jButtonInordenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInordenActionPerformed
         if (jCBTipo.getSelectedItem() == "Manual") {
             if (manualInorden < Proyecto_2.avl.inordenM().length) {
                 flagInorden = false;
-                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden);
+                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden, jScrollPane);
                 ac.start();
                 manualInorden++;
                 if (manualInorden == Proyecto_2.avl.inordenM().length) {
@@ -311,7 +329,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             if (!flagInorden) {
                 JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
             } else {
-                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.inordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jScrollPane);
                 ac.start();
                 flagInorden = true;
             }
@@ -322,7 +340,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         if (jCBTipo.getSelectedItem() == "Manual") {
             if (manualInorden < Proyecto_2.avl.postordenM().length) {
                 flagInorden = false;
-                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden);
+                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden, jScrollPane);
                 ac.start();
                 manualInorden++;
                 if (manualInorden == Proyecto_2.avl.postordenM().length) {
@@ -341,7 +359,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             if (!flagInorden) {
                 JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
             } else {
-                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.postordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jScrollPane);
                 ac.start();
                 flagInorden = true;
             }
@@ -352,7 +370,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         if (jCBTipo.getSelectedItem() == "Manual") {
             if (manualInorden < Proyecto_2.avl.preordenM().length) {
                 flagInorden = false;
-                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden);
+                ManualRecorridoAVL ac = new ManualRecorridoAVL(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, manualInorden, jScrollPane);
                 ac.start();
                 manualInorden++;
                 if (manualInorden == Proyecto_2.avl.preordenM().length) {
@@ -371,7 +389,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
             if (!flagInorden) {
                 JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
             } else {
-                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido);
+                AutoRecorridoAVL ac = new AutoRecorridoAVL(Proyecto_2.avl.preordenM(), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jScrollPane);
                 ac.start();
                 flagInorden = true;
             }
@@ -427,9 +445,12 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelDesc;
     private javax.swing.JLabel jLabelImage;
     private javax.swing.JLabel jLabelRecorrido;
+    private javax.swing.JScrollPane jScrollPane;
     private javax.swing.JSlider jSlider;
     private javax.swing.JTextField jTextFieldDelete;
     // End of variables declaration//GEN-END:variables
@@ -446,5 +467,9 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         jLabelImage.revalidate();
         jLabelImage.validate();
         jLabelImage.repaint();
+
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
     }
 }

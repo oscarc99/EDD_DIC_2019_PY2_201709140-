@@ -1,12 +1,12 @@
 digraph G { 
  nodesep=0.8;
 ranksep=0.5;
-c -> g 
-g -> a 
-a -> f 
-f -> b 
-b -> e 
+a -> g 
+g -> b 
+b -> f 
 f -> h 
+f -> c 
+c -> e 
 
 } 
 

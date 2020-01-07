@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import proyecto_2.Proyecto_2;
 
 /**
@@ -20,12 +21,14 @@ public class AutoGrafo extends Thread {
     int velocidad = 1;
     JLabel descip;
     JLabel image;
+    JScrollPane jScrollPane;
 
-    public AutoGrafo(NodeV as, int velocidad, JLabel descip, JLabel image) {
+    public AutoGrafo(NodeV as, int velocidad, JLabel descip, JLabel image, JScrollPane scroll) {
         this.as = as;
         this.velocidad = velocidad;
         this.descip = descip;
         this.image = image;
+        this.jScrollPane = scroll;
     }
 
     @Override
@@ -63,6 +66,9 @@ public class AutoGrafo extends Thread {
         image.validate();
         image.repaint();
 
+        jScrollPane.revalidate();
+        jScrollPane.validate();
+        jScrollPane.repaint();
     }
 
 }

@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
  * @author Oscar C
  */
 public class Hash {
-
+    //HASH MALA
     public User[] tabla;
     int m; //Tamaño de tabla
     double cantidad;//Usuarios que llevo guardado
@@ -43,123 +43,124 @@ public class Hash {
 
         return sb.toString();
     }
+    /*
+     public boolean existe(int carnet) {
+     int indice = funcion(carnet, m);
+     int indiceTemp = indice;
+     int in = 1;
+     do {
+     if (tabla[indice] != null) {
+     if (tabla[indice].getCarnet() == carnet) {
+     return true;
+     }
 
-    public boolean existe(int carnet) {
-        int indice = funcion(carnet, m);
-        int indiceTemp = indice;
-        int in = 1;
-        do {
-            if (tabla[indice] != null) {
-                if (tabla[indice].getCarnet() == carnet) {
-                    return true;
-                }
+     } else {
+     indice = (carnet % 7 + 1) * in;
+     if (m <= indice) {
+     indice = indice - m;
+     }
+     in++;
+     }
+     } while (indice != indiceTemp);
+     return false;
+     }
 
-            } else {
-                indice = (carnet % 7 + 1) * in;
-                if (m <= indice) {
-                    indice = indice - m;
-                }
-                in++;
-            }
-        } while (indice != indiceTemp);
-        return false;
-    }
+     public boolean ingreso(int user, String pass) {
+     int indice = funcion(user, m);
+     int indiceTemp = indice;
+     int in = 1;
+     do {
+     if (tabla[indice] != null && tabla[indice].getCarnet() == user && tabla[indice].getPassword().equals(convertirSHA256(pass))) {
+     return true;
 
-    public boolean ingreso(int user, String pass) {
-        int indice = funcion(user, m);
-        int indiceTemp = indice;
-        int in = 1;
-        do {
-            if (tabla[indice] != null && tabla[indice].getCarnet() == user && tabla[indice].getPassword().equals(convertirSHA256(pass))) {
-                return true;
+     } else {
+     indice = (user % 7 + 1) * in;
+     if (m <= indice) {
+     indice = indice - m;
+     }
+     in++;
+     }
+     } while (indice != indiceTemp);
 
-            } else {
-                indice = (user % 7 + 1) * in;
-                if (m <= indice) {
-                    indice = indice - m;
-                }
-                in++;
-            }
-        } while (indice != indiceTemp);
+     return false;
+     }
 
-        return false;
-    }
+     public User in(int carnet) {
+     int indice = funcion(carnet, m);
+     int indiceTemp = indice;
+     int in = 1;
+     do {
+     if (tabla[indice] != null) {
+     if (tabla[indice].getCarnet() == carnet) {
+     return tabla[indice];
+     }
 
-    public User in(int carnet) {
-        int indice = funcion(carnet, m);
-        int indiceTemp = indice;
-        int in = 1;
-        do {
-            if (tabla[indice] != null) {
-                if (tabla[indice].getCarnet() == carnet) {
-                    return tabla[indice];
-                }
+     } else {
+     indice = (carnet % 7 + 1) * in;
+     if (m <= indice) {
+     indice = indice - m;
+     }
+     in++;
+     }
+     } while (indice != indiceTemp);
 
-            } else {
-                indice = (carnet % 7 + 1) * in;
-                if (m <= indice) {
-                    indice = indice - m;
-                }
-                in++;
-            }
-        } while (indice != indiceTemp);
+     return null;
+     }
 
-        return null;
-    }
+     public void mod(int carnet, String nam, String ap, String pass) {
+     int indice = funcion(carnet, m);
+     int indiceTemp = indice;
+     int in = 1;
+     do {
+     if (tabla[indice] != null) {
+     if (tabla[indice].getCarnet() == carnet) {
+     tabla[indice].setName(nam);
+     tabla[indice].setApellido(ap);
+     tabla[indice].setPass(pass);
+     break;
+     }
+     } else {
+     indice = (carnet % 7 + 1) * in;
+     if (m <= indice) {
+     indice = indice - m;
+     }
+     in++;
+     }
+     } while (indice != indiceTemp);
 
-    public void mod(int carnet, String nam, String ap, String pass) {
-        int indice = funcion(carnet, m);
-        int indiceTemp = indice;
-        int in = 1;
-        do {
-            if (tabla[indice] != null) {
-                if (tabla[indice].getCarnet() == carnet) {
-                    tabla[indice].setName(nam);
-                    tabla[indice].setApellido(ap);
-                    tabla[indice].setPass(pass);
-                    break;
-                }
-            } else {
-                indice = (carnet % 7 + 1) * in;
-                if (m <= indice) {
-                    indice = indice - m;
-                }
-                in++;
-            }
-        } while (indice != indiceTemp);
+     }
 
-    }
+     public void delete(int carnet) {
+     int indice = funcion(carnet, m);
+     int indiceTemp = indice;
+     int in = 1;
+     do {
+     if (tabla[indice] != null) {
+     if (tabla[indice].getCarnet() == carnet) {
+     tabla[indice] = null;
+     User[] temporal = this.tabla;
+     User[] nuevaTabla = new User[m];
+     this.tabla = nuevaTabla;
 
-    public void delete(int carnet) {
-        int indice = funcion(carnet, m);
-        int indiceTemp = indice;
-        int in = 1;
-        do {
-            if (tabla[indice] != null) {
-                if (tabla[indice].getCarnet() == carnet) {
-                    tabla[indice] = null;
-                    User[] temporal = this.tabla;
-                    User[] nuevaTabla = new User[m];
-                    this.tabla = nuevaTabla;
+     for (int i = 0; i < temporal.length; i++) {
+     if (temporal[i] != null) {
+     insertarHash(temporal[i].getCarnet(), temporal[i]);
+     }
 
-                    for (int i = 0; i < temporal.length; i++) {
-                        if (temporal[i] != null) {
-                            insertarHash(temporal[i].getCarnet(), temporal[i]);
-                        }
+     }
+     break;
+     }
+     } else {
+     indice = (carnet % 7 + 1) * in;
+     if (m <= indice) {
+     indice = indice - m;
+     }
+     in++;
+     }
+     } while (indice != indiceTemp);
 
-                    }
-                    break;
-                }
-            } else {
-                indice = (carnet % 7 + 1) * in;
-                if (m <= indice) {
-                    indice = indice - m;
-                }
-                in++;
-            }
-        } while (indice != indiceTemp);
-
-    }
+     }
+     */
 
     private int funcion(int llave, int m) {
         return llave % m;
@@ -168,7 +169,13 @@ public class Hash {
     public void insertarHash(String Name, String Apellido, int carnet, String pass) {
 
         User nueva = new User(Name, Apellido, carnet, pass);
-        insertarHash(carnet, nueva);
+
+        if (desbordamiento()) {
+            redimensionar();
+            insertarHash(carnet, nueva);
+        } else {
+            insertarHash(carnet, nueva);
+        }
 
     }
 
@@ -183,18 +190,16 @@ public class Hash {
                 break;
             } else {
 
-                indice = (llave % 7 + 1) * in;
-                if (m <= indice) {
+                indice = (llave % m + 1) * in;
+                while (indice >= m) {
+
                     indice = indice - m;
+
                 }
                 in++;
 
             }
         } while (indice != indiceTemp);
-
-        if (desbordamiento()) {
-            redimensionar();
-        }
 
     }
 
@@ -204,7 +209,7 @@ public class Hash {
         User[] temporal = this.tabla;
         User[] nuevaTabla = new User[m];
         this.tabla = nuevaTabla;
-
+        this.cantidad = 0;
         for (int i = 0; i < temporal.length; i++) {
             if (temporal[i] != null) {
                 insertarHash(temporal[i].getCarnet(), temporal[i]);
@@ -221,10 +226,8 @@ public class Hash {
     }
 
     private boolean desbordamiento() {
-        double s;
-        s = cantidad / m;
-        System.out.println(s);
-        return cantidad / m > 0.55;
+
+        return (cantidad / m) * 100 > 55;
 
     }
 
@@ -252,7 +255,7 @@ public class Hash {
         String r = "";
         for (int i = 0; i < this.tabla.length; i++) {
             if (this.tabla[i] != null) {
-                r = r + "<tr> <td> Nombre y apellido:  " + this.tabla[i].getName() + " " + this.tabla[i].getApellido() + " Carnet: " + this.tabla[i].getCarnet() + " Password:  " + this.tabla[i].getPassword() + "</td> </tr> \n";
+                r = r + "<tr> <td> " + (i + 1) + " Nombre: " + this.tabla[i].getName() + " " + this.tabla[i].getApellido() + " Carnet: " + this.tabla[i].getCarnet() + "</td> </tr> \n";
             } else {
                 r = r + "<tr> <td> NULL </td></tr>; \n";
             }
@@ -274,6 +277,8 @@ public class Hash {
     }
 
     public void report() {
+        System.out.println("Tamaño HASH: " + m);
+        System.out.println("Guardados HASH: " + cantidad);
         FileWriter fichero = null;
         PrintWriter pw = null;
         try {
@@ -304,7 +309,7 @@ public class Hash {
         }
         try {
             Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\UserR.dot -o src\\Imagenes\\UserR.png");
-            Process p2 = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\UserR.png");
+            //Process p2 = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\UserR.png");
         } catch (Exception e2) {
             e2.printStackTrace();
         }
@@ -322,6 +327,18 @@ public class Hash {
             }
 
         }
+
+        User[] temporal = this.tabla;
+        
+        this.tabla = new User[m];
+        this.cantidad = 0;
+        for (int i = 0; i < temporal.length; i++) {
+            if (temporal[i] != null) {
+                insertarHash(temporal[i].getCarnet(), temporal[i]);
+            }
+
+        }
+
     }
 
     public boolean exist(int carnet) {
@@ -351,12 +368,26 @@ public class Hash {
     public boolean in(int user, String pass) {
         for (int i = 0; i < tabla.length; i++) {
             if (tabla[i] != null) {
-                if (this.tabla[i].getCarnet() == user) {
+                if (tabla[i].getCarnet() == user && tabla[i].getPassword().equals(convertirSHA256(pass))) {
                     return true;
                 }
             }
 
         }
         return false;
+    }
+
+    public void modificar(int carnet, String nam, String ap, String pass) {
+        for (int i = 0; i < tabla.length; i++) {
+            if (tabla[i] != null) {
+                if (tabla[i].getCarnet() == carnet) {
+                    tabla[i].setName(nam);
+                    tabla[i].setApellido(ap);
+                    tabla[i].setPass(pass);
+                }
+            }
+
+        }
+
     }
 }
