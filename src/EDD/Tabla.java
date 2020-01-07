@@ -382,7 +382,7 @@ public class Tabla {
         }
         try {
             Process p = Runtime.getRuntime().exec("cmd /c dot.exe -Tpng src\\Imagenes\\UserR.dot -o src\\Imagenes\\UserR.png");
-            Process p2 = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\UserR.png");
+            //Process p2 = Runtime.getRuntime().exec("cmd /c src\\Imagenes\\UserR.png");
         } catch (Exception e2) {
             e2.printStackTrace();
         }

@@ -1,11 +1,5 @@
  digraph G{ 
  node [shape=circle]; 
-a[label ="a" style = filled  fillcolor ="darkturquoise"] 
-g[label ="g" style = filled  fillcolor ="darkturquoise"] 
-f[label ="f" style = filled  fillcolor ="darkturquoise"] 
-b[label ="b" style = filled  fillcolor ="darkturquoise"] 
-c[label ="c" style = filled  fillcolor ="darkturquoise"] 
-e[label ="e" style = filled  fillcolor ="darkturquoise"] 
 h[label ="h" style = filled  fillcolor ="darkturquoise"] 
 a -> g[penwidth=2, arrowhead=none] ; 
 a -> f[penwidth=2, arrowhead=none] ; 

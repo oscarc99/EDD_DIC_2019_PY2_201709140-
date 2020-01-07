@@ -3,10 +3,6 @@ digraph G {
   2[label=  <<table border= "1 " cellspacing= " 0 "><tr> 
 <td> f</td> </tr> 
 <tr> 
-<td> b</td> </tr> 
-<tr> 
-<td> g</td> </tr> 
-<tr> 
-<td> a</td> </tr> 
+<td> h</td> </tr> 
 </table>>  shape = none ]; 
  }

@@ -5,12 +5,14 @@ digraph G {
 <tr> 
 <td> c</td> </tr> 
 <tr> 
-<td> f</td> </tr> 
-<tr> 
 <td> b</td> </tr> 
 <tr> 
 <td> g</td> </tr> 
 <tr> 
 <td> a</td> </tr> 
+<tr> 
+<td> f</td> </tr> 
+<tr> 
+<td> h</td> </tr> 
 </table>>  shape = none ]; 
  }

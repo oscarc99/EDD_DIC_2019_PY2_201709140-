@@ -91,6 +91,7 @@ public class AVLTree extends javax.swing.JFrame implements Runnable {
         getContentPane().add(jButtonBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 30, 95, -1));
 
         jSlider.setMajorTickSpacing(1);
+        jSlider.setMaximum(10);
         jSlider.setMinimum(1);
         jSlider.setPaintTicks(true);
         jSlider.setToolTipText("");

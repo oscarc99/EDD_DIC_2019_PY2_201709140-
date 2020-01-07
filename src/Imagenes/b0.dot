@@ -6,5 +6,9 @@ digraph G {
 <td> g</td> </tr> 
 <tr> 
 <td> a</td> </tr> 
+<tr> 
+<td> f</td> </tr> 
+<tr> 
+<td> h</td> </tr> 
 </table>>  shape = none ]; 
  }

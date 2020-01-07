@@ -48,7 +48,7 @@ public class ManualRecorridoG extends Thread {
 
     @Override
     public void run() {
-        if (Type.endsWith("Anchura")) {
+        if (Type.equals("Anchura")) {
             try {
                 if (dato[posicion] != null) {
                     recorrid += dato[posicion] + ", ";
@@ -71,7 +71,7 @@ public class ManualRecorridoG extends Thread {
             }
             JOptionPane.showMessageDialog(null, "Visitado");
 
-        } else {
+        } else  {
             //Profundidad
             try {
                 if (dato[posicion] != null) {
@@ -108,12 +108,14 @@ public class ManualRecorridoG extends Thread {
         imagen.revalidate();
         imagen.validate();
         imagen.repaint();
+
         ImageIcon ic = new ImageIcon("src\\Imagenes\\Cola" + posicion + ".png");
         ic.getImage().flush();
         edd.setIcon(ic);
         edd.revalidate();
         edd.validate();
         edd.repaint();
+
 
     }
 
@@ -125,6 +127,8 @@ public class ManualRecorridoG extends Thread {
         imagen.revalidate();
         imagen.validate();
         imagen.repaint();
+
+
         ImageIcon ic = new ImageIcon("src\\Imagenes\\" + p + "0.png");
         ic.getImage().flush();
         edd.setIcon(ic);
@@ -132,9 +136,7 @@ public class ManualRecorridoG extends Thread {
         edd.validate();
         edd.repaint();
 
-        jScrollPane.revalidate();
-        jScrollPane.validate();
-        jScrollPane.repaint();
+
     }
 
 }

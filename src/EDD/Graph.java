@@ -636,11 +636,14 @@ public class Graph {
     }
 
     private String prof(String v) {
+        pro(v);
         boolean visited[] = new boolean[V];
         return profu(v, visited);
+        
     }
 
     private String profu(String v, boolean[] visited) {
+        
         String as = "";
         visited[posicion(v)] = true;
 
@@ -659,7 +662,61 @@ public class Graph {
         return as;
     }
 
-    //Arbol de profundidad
+     public void pro(String vertice) {
+        
+        Boolean[] visited = new Boolean[V];
+        for (int i = 0; i < V; i++) {
+            visited[i] = false;
+        }
+
+        Pila pilaEDD = new Pila();
+        pilaEDD.push(vertice);
+        pilaEDD.report(vertice, 0);
+        while (pilaEDD.empty() == false) {
+
+            vertice = pilaEDD.peek();
+
+            //Vertice no ha sido visitado
+            if (!visited[posicion(vertice)]) {
+                pilaEDD.report(vertice, 0);
+                visited[posicion(vertice)] = true;
+                Nodo itr = adjList[posicion(vertice)].getFirst();
+                while (itr != null) {
+                    if (!visited[posicion(itr.getDato())]) {
+                        
+                        pilaEDD.push(itr.getDato());
+                        break;
+                    }
+
+                    itr = itr.getNext();
+                }
+                
+            } else {
+                pilaEDD.report(vertice, 0);
+                boolean addStack = false;
+                Nodo itr = adjList[posicion(vertice)].getFirst();
+                while (itr != null) {
+                    if (!visited[posicion(itr.getDato())]) {
+                        pilaEDD.push(itr.getDato());
+                        addStack = true;
+                        break;
+                    }
+
+                    itr = itr.getNext();
+                }
+                if (!addStack) {
+                    pilaEDD.pop();
+                    addStack = false;
+                }
+                
+
+            }
+
+        }
+
+    } 
+    
+    //Arbol de anchura
     public void TreeBFS(String vertice) {
         FileWriter fichero = null;
         PrintWriter pw = null;
@@ -727,4 +784,6 @@ public class Graph {
 
     }
 
+    
+    
 }

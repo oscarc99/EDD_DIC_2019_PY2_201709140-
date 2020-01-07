@@ -5,46 +5,42 @@ node [shape = none];
 2[label=  <<table border= "1 " cellspacing= " 0 ">;
 
 <tr> <td> NULL </td></tr>; 
-<tr> <td> 1.  Nombre:  7Kora Schenfisch Carnet: 71323021</td> </tr> 
-<tr> <td> 2.  Nombre:  10Bette Maurice Carnet: 105477694</td> </tr> 
-<tr> <td> 3.  Nombre:  Bette Maurice Carnet: 835477694</td> </tr> 
-<tr> <td> 4.  Nombre:  13Sukey Lammenga Carnet: 130937276</td> </tr> 
-<tr> <td> 5.  Nombre:  9Babbie Ledrun Carnet: 94677370</td> </tr> 
-<tr> <td> 6.  Nombre:  Lucine Paulet Carnet: 941606366</td> </tr> 
-<tr> <td> 7.  Nombre:  12Alexandre Lamlin Carnet: 124236440</td> </tr> 
-<tr> <td> 8.  Nombre:  Alexandre Lamlin Carnet: 394236440</td> </tr> 
-<tr> <td> 9.  Nombre:  3Alameda Penketh Carnet: 31325485</td> </tr> 
+<tr> <td> 1.  Nombre:  Nariko Spykins Carnet: 50793421</td> </tr> 
+<tr> <td> 2.  Nombre:  Alameda Penketh Carnet: 931325485</td> </tr> 
+<tr> <td> 3.  Nombre:  Axe Nelhams Carnet: 525353936</td> </tr> 
+<tr> <td> 4.  Nombre:  Suzie Fawke Carnet: 472374927</td> </tr> 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> 6.  Nombre:  Babbie Ledrun Carnet: 624677370</td> </tr> 
+<tr> <td> 7.  Nombre:  Simonette Knutton Carnet: 50459597</td> </tr> 
+<tr> <td> 8.  Nombre:  Bette Maurice Carnet: 835477694</td> </tr> 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> 14.  Nombre:  Essie Danilovitch Carnet: 314056742</td> </tr> 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> NULL </td></tr>; 
+<tr> <td> 19.  Nombre:  Karel Barwise Carnet: 29588327</td> </tr> 
 <tr> <td> NULL </td></tr>; 
 <tr> <td> NULL </td></tr>; 
 <tr> <td> NULL </td></tr>; 
 <tr> <td> NULL </td></tr>; 
 <tr> <td> NULL </td></tr>; 
 <tr> <td> NULL </td></tr>; 
+<tr> <td> 26.  Nombre:  Lucine Paulet Carnet: 941606366</td> </tr> 
 <tr> <td> NULL </td></tr>; 
-<tr> <td> 17.  Nombre:  Babbie Ledrun Carnet: 624677370</td> </tr> 
-<tr> <td> NULL </td></tr>; 
-<tr> <td> NULL </td></tr>; 
-<tr> <td> 20.  Nombre:  Bertrando Janny Carnet: 203677073</td> </tr> 
-<tr> <td> 21.  Nombre:  Karel Barwise Carnet: 29588327</td> </tr> 
-<tr> <td> 22.  Nombre:  Essie Danilovitch Carnet: 314056742</td> </tr> 
-<tr> <td> 23.  Nombre:  11Nariko Spykins Carnet: 110793421</td> </tr> 
+<tr> <td> 28.  Nombre:  Bertrando Janny Carnet: 203677073</td> </tr> 
 <tr> <td> NULL </td></tr>; 
 <tr> <td> NULL </td></tr>; 
-<tr> <td> 26.  Nombre:  Axe Nelhams Carnet: 525353936</td> </tr> 
 <tr> <td> NULL </td></tr>; 
-<tr> <td> 28.  Nombre:  Suzie Fawke Carnet: 472374927</td> </tr> 
 <tr> <td> NULL </td></tr>; 
-<tr> <td> 30.  Nombre:  Alameda Penketh Carnet: 931325485</td> </tr> 
-<tr> <td> NULL </td></tr>; 
-<tr> <td> 32.  Nombre:  14Karel Barwise Carnet: 149588327</td> </tr> 
 <tr> <td> 33.  Nombre:  Sukey Lammenga Carnet: 670937276</td> </tr> 
+<tr> <td> 34.  Nombre:  Alexandre Lamlin Carnet: 394236440</td> </tr> 
 <tr> <td> NULL </td></tr>; 
-<tr> <td> 35.  Nombre:  Kora Schenfisch Carnet: 321323021</td> </tr> 
-<tr> <td> 36.  Nombre:  Simonette Knutton Carnet: 50459597</td> </tr> 
-<tr> <td> NULL </td></tr>; 
-<tr> <td> 38.  Nombre:  Nariko Spykins Carnet: 50793421</td> </tr> 
-<tr> <td> NULL </td></tr>; 
-<tr> <td> NULL </td></tr>; 
+<tr> <td> 36.  Nombre:  Kora Schenfisch Carnet: 321323021</td> </tr> 
 
 </table>>];
 

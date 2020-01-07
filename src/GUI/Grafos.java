@@ -190,7 +190,9 @@ public class Grafos extends javax.swing.JFrame {
                                     .addComponent(jLabelDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                                     .addComponent(jLabelRecorrido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabelVisitados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                    .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -211,7 +213,7 @@ public class Grafos extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButtonAnch)
@@ -228,14 +230,14 @@ public class Grafos extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabelVisitados, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabelEDD, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(jScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -247,7 +249,7 @@ public class Grafos extends javax.swing.JFrame {
 //Insert step by step
     private void jButtonInsertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInsertActionPerformed
         if (as != null) {
-            ManualGrafo ac = new ManualGrafo(as, jSlider.getValue(), jLabelDesc, jLabelImage,jScrollPane);
+            ManualGrafo ac = new ManualGrafo(as, jSlider.getValue(), jLabelDesc, jLabelImage, jScrollPane);
             ac.start();
             as = as.getNext();
 
@@ -296,14 +298,15 @@ public class Grafos extends javax.swing.JFrame {
     private void jButtonAnchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnchActionPerformed
         //Anchura
         String begin = jTextFieldInicio.getText();
+        String anchura[]= Proyecto_2.grafo.BFS(begin);
         if (begin.length() != 0) {
             if (jCBTipo.getSelectedItem() == "Manual") {
-                if (reco < Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
+                if (reco < anchura.length) {
                     flag = false;
-                    ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.BFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Anchura", jLabelVisitados,jScrollPane);
+                    ManualRecorridoG ac = new ManualRecorridoG(anchura, jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Anchura", jLabelVisitados, jScrollPane);
                     ac.start();
                     reco++;
-                    if (reco == Proyecto_2.grafo.BFS(jTextFieldInicio.getText()).length) {
+                    if (reco == anchura.length) {
                         flag = true;
 
                     }
@@ -321,15 +324,16 @@ public class Grafos extends javax.swing.JFrame {
                     jLabelImage.repaint();
 
                     JOptionPane.showMessageDialog(null, "Recorrido terminado");
+                    Proyecto_2.grafo.NonVisit();
                 }
 
             } else if (jCBTipo.getSelectedItem() == "Automatico") {
                 if (!flag) {
                     JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
                 } else {
-                    String arr[] = Proyecto_2.grafo.BFS(begin);
+                    
                     int vel = jSlider.getValue();
-                    AutoRecorridoG ac = new AutoRecorridoG(arr, jLabelImage, vel, jLabelDesc, jLabelRecorrido, jLabelEDD, "Anchura", jLabelVisitados);
+                    AutoRecorridoG ac = new AutoRecorridoG(anchura, jLabelImage, vel, jLabelDesc, jLabelRecorrido, jLabelEDD, "Anchura", jLabelVisitados);
                     ac.start();
                     flag = true;
                 }
@@ -342,38 +346,45 @@ public class Grafos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAnchActionPerformed
 //Botton DFS (profundidad)
     private void jButtonProfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProfActionPerformed
-        if (jCBTipo.getSelectedItem() == "Manual") {
-            if (reco < Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
-                flag = false;
-                ManualRecorridoG ac = new ManualRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Profundidad", jLabelVisitados, jScrollPane);
-                ac.start();
-                reco++;
-                if (reco == Proyecto_2.grafo.DFS(jTextFieldInicio.getText()).length) {
+        String begin = jTextFieldInicio.getText();
+        String grafo[]=Proyecto_2.grafo.DFS(begin);
+        if (begin.length() != 0) {
+            if (jCBTipo.getSelectedItem() == "Manual") {
+                
+                if (reco < grafo.length) {
+                    flag = false;
+                    ManualRecorridoG ac = new ManualRecorridoG(grafo, jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, reco, jLabelEDD, "Profundidad", jLabelVisitados, jScrollPane);
+                    ac.start();
+                    reco++;
+                    if (reco == grafo.length) {
+                        flag = true;
+                    }
+
+                } else {
+                    Proyecto_2.avl.noVisit();
+                    reco = 0;
                     flag = true;
+                    JOptionPane.showMessageDialog(null, "Recorrido terminado");
+                    ImageIcon icono = new ImageIcon("src\\Imagenes\\Profundidad.png");
+                    icono.getImage().flush();
+                    jLabelImage.setIcon(icono);
+                    jLabelImage.revalidate();
+                    jLabelImage.validate();
+                    jLabelImage.repaint();
+
                 }
 
-            } else {
-                Proyecto_2.avl.noVisit();
-                reco = 0;
-                flag = true;
-                JOptionPane.showMessageDialog(null, "Recorrido terminado");
-                ImageIcon icono = new ImageIcon("src\\Imagenes\\Profundidad.png");
-                icono.getImage().flush();
-                jLabelImage.setIcon(icono);
-                jLabelImage.revalidate();
-                jLabelImage.validate();
-                jLabelImage.repaint();
-
+            } else if (jCBTipo.getSelectedItem() == "Automatico") {
+                if (!flag) {
+                    JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
+                } else {
+                    AutoRecorridoG ac = new AutoRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jLabelEDD, "Profundidad", jLabelVisitados);
+                    ac.start();
+                    flag = true;
+                }
             }
-
-        } else if (jCBTipo.getSelectedItem() == "Automatico") {
-            if (!flag) {
-                JOptionPane.showMessageDialog(null, "Termine de recorrer manualmente");
-            } else {
-                AutoRecorridoG ac = new AutoRecorridoG(Proyecto_2.grafo.DFS(jTextFieldInicio.getText()), jLabelImage, jSlider.getValue(), jLabelDesc, jLabelRecorrido, jLabelEDD, "Profundidad", jLabelVisitados);
-                ac.start();
-                flag = true;
-            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Inserte inicio");
         }
     }//GEN-LAST:event_jButtonProfActionPerformed
 

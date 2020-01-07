@@ -1,0 +1,22 @@
+ digraph G{ 
+ node [shape=circle]; 
+a[label ="a" style = filled  fillcolor ="darkturquoise"] 
+g[label ="g" style = filled  fillcolor ="darkturquoise"] 
+f[label ="f" style = filled  fillcolor ="darkturquoise"] 
+b[label ="b" style = filled  fillcolor ="darkturquoise"] 
+c[label ="c" style = filled  fillcolor ="darkturquoise"] 
+e[label ="e" style = filled  fillcolor ="darkturquoise"] 
+h[label ="h" style = filled  fillcolor ="darkturquoise"] 
+a -> g[penwidth=2, arrowhead=none] ; 
+a -> f[penwidth=2, arrowhead=none] ; 
+g -> b[penwidth=2, arrowhead=none] ; 
+g -> c[penwidth=2, arrowhead=none] ; 
+g -> f[penwidth=2, arrowhead=none] ; 
+f -> b[penwidth=2, arrowhead=none] ; 
+f -> h[penwidth=2, arrowhead=none] ; 
+f -> c[penwidth=2, arrowhead=none] ; 
+b -> c[penwidth=2, arrowhead=none] ; 
+b -> e[penwidth=2, arrowhead=none] ; 
+c -> e[penwidth=2, arrowhead=none] ; 
+
+}
